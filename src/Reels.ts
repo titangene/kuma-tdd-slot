@@ -30,9 +30,13 @@ export class Reels {
     for (let i = 0; i < this.reels.length; i++) {
       const reel = this.reels[i];
       const index = this.index;
-      rawScreen.push(reel.symbols.slice(index, index + 3));
+      rawScreen.push(this.getScreenColumn(reel, index));
     }
     return new Screen(rawScreen);
+  }
+
+  private getScreenColumn(reel: Reel, index: number) {
+    return reel.symbols.slice(index, index + 3);
   }
 
   static create(nextIndex: number, rawReels: string[][]): Reels {
