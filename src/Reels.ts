@@ -11,11 +11,7 @@ export class Reels {
   }
 
   isRowHit(row: number): boolean {
-    const screen: string[][] = [];
-
-    for (let i = 0; i < this.reels.length; i++) {
-      screen.push(this.reels[i].slice(this.index, this.index + 3));
-    }
+    const screen = this.getScreen();
 
     const uniqueElements = new Set<string>();
 
@@ -25,6 +21,15 @@ export class Reels {
     }
 
     return uniqueElements.size === 1;
+  }
+
+  private getScreen(): string[][] {
+    const screen: string[][] = [];
+
+    for (let i = 0; i < this.reels.length; i++) {
+      screen.push(this.reels[i].slice(this.index, this.index + 3));
+    }
+    return screen;
   }
 
   static create(nextIndex: number, rawReels: string[][]): Reels {
