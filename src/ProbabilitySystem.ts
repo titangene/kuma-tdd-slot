@@ -10,6 +10,14 @@ export class ProbabilitySystem {
   ]);
 
   spin(betLine: string): number {
+    const isRow1Hit = this.isRow1Hit();
+    if (isRow1Hit && betLine === 'L1') {
+      return 20;
+    }
+    return 0;
+  }
+
+  private isRow1Hit() {
     const firstElementsSet = new Set<string>();
 
     for (let i = 0; i < this.reels.reels.length; i++) {
@@ -18,9 +26,6 @@ export class ProbabilitySystem {
     }
 
     const isRow1Hit = firstElementsSet.size === 1;
-    if (isRow1Hit && betLine === 'L1') {
-      return 20;
-    }
-    return 0;
+    return isRow1Hit;
   }
 }
