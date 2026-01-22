@@ -1,5 +1,9 @@
+class Reels {
+  constructor(public reels: Array<Array<string>>) {}
+}
+
 export class ProbabilitySystem {
-  reels: Array<Array<string>> = [
+  oldReels: Array<Array<string>> = [
     ['A', 'Q', 'K'],
     ['A', 'Q', 'K'],
     ['A', 'Q', 'K'],
@@ -7,11 +11,13 @@ export class ProbabilitySystem {
     ['A', '10', 'J']
   ];
 
+  reels: Reels = new Reels(this.oldReels);
+
   spin(betLine: string): number {
     const firstElementsSet = new Set<string>();
 
-    for (let i = 0; i < this.reels.length; i++) {
-      const reel = this.reels[i];
+    for (let i = 0; i < this.reels.reels.length; i++) {
+      const reel = this.reels.reels[i];
       firstElementsSet.add(reel[0]);
     }
 
