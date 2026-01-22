@@ -28,7 +28,9 @@ export class Reels {
     const rawScreen: string[][] = [];
 
     for (let i = 0; i < this.reels.length; i++) {
-      rawScreen.push(this.reels[i].symbols.slice(this.index, this.index + 3));
+      const reel = this.reels[i];
+      const index = this.index;
+      rawScreen.push(reel.symbols.slice(index, index + 3));
     }
     return new Screen(rawScreen);
   }
