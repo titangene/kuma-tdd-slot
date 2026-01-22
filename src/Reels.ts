@@ -1,12 +1,19 @@
 import { Screen } from './Screen.ts';
 
+class Reel {
+  constructor(public symbols: string[]) {}
+}
+
 export class Reels {
   private index: number = 0;
+  private reels: Reel[];
 
   private constructor(
-    private reels: string[][],
+    reels: string[][],
     private nextIndex: number
-  ) {}
+  ) {
+    this.reels = reels.map(reel => new Reel(reel));
+  }
 
   spin() {
     this.index = this.nextIndex;
@@ -21,7 +28,7 @@ export class Reels {
     const rawScreen: string[][] = [];
 
     for (let i = 0; i < this.reels.length; i++) {
-      rawScreen.push(this.reels[i].slice(this.index, this.index + 3));
+      rawScreen.push(this.reels[i].symbols.slice(this.index, this.index + 3));
     }
     return new Screen(rawScreen);
   }
