@@ -1,7 +1,7 @@
 import { Reels } from './Reels.ts';
 
 export class ProbabilitySystem {
-  constructor(private reels: Reels) {}
+  private constructor(private reels: Reels) {}
 
   spin(betLine: string): number {
     if (this.reels.isRowHit(0) && betLine === 'L1') {
@@ -13,5 +13,9 @@ export class ProbabilitySystem {
     }
 
     return 0;
+  }
+
+  static create(reels: Reels): ProbabilitySystem {
+    return new ProbabilitySystem(reels);
   }
 }
