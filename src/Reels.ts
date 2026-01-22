@@ -1,7 +1,11 @@
 import { Screen } from './Screen.ts';
 
 class Reel {
-  constructor(public symbols: string[]) {}
+  constructor(private symbols: string[]) {}
+
+  getScreenColumn(index: number) {
+    return this.symbols.slice(index, index + 3);
+  }
 }
 
 export class Reels {
@@ -30,13 +34,9 @@ export class Reels {
     for (let i = 0; i < this.reels.length; i++) {
       const reel = this.reels[i];
       const index = this.index;
-      rawScreen.push(this.getScreenColumn(reel, index));
+      rawScreen.push(reel.getScreenColumn(index));
     }
     return new Screen(rawScreen);
-  }
-
-  private getScreenColumn(reel: Reel, index: number) {
-    return reel.symbols.slice(index, index + 3);
   }
 
   static create(nextIndex: number, rawReels: string[][]): Reels {
