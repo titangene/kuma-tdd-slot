@@ -1,6 +1,4 @@
-class Reels {
-  constructor(public reels: Array<Array<string>>) {}
-}
+import { Reels } from './Reels.ts';
 
 export class ProbabilitySystem {
   reels: Reels = new Reels([
