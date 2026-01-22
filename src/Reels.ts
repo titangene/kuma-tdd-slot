@@ -9,7 +9,7 @@ export class Reels {
     reels: string[][],
     private nextIndex: number
   ) {
-    this.reels = reels.map(reel => new Reel(reel));
+    this.reels = reels.map(reel => Reel.from(reel));
   }
 
   spin() {
