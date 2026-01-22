@@ -1,3 +1,7 @@
+class Screen {
+  constructor(public rawScreen: string[][]) {}
+}
+
 export class Reels {
   private index: number = 0;
 
@@ -15,20 +19,20 @@ export class Reels {
     return this.isScreenRowHit(screen, row);
   }
 
-  private getScreen(): string[][] {
-    const screen: string[][] = [];
+  private getScreen(): Screen {
+    const rawScreen: string[][] = [];
 
     for (let i = 0; i < this.reels.length; i++) {
-      screen.push(this.reels[i].slice(this.index, this.index + 3));
+      rawScreen.push(this.reels[i].slice(this.index, this.index + 3));
     }
-    return screen;
+    return new Screen(rawScreen);
   }
 
-  private isScreenRowHit(screen: string[][], row: number): boolean {
+  private isScreenRowHit(screen: Screen, row: number): boolean {
     const uniqueElements = new Set<string>();
 
-    for (let i = 0; i < screen.length; i++) {
-      const screenReel: string[] = screen[i];
+    for (let i = 0; i < screen.rawScreen.length; i++) {
+      const screenReel: string[] = screen.rawScreen[i];
       uniqueElements.add(screenReel[row]);
     }
 
