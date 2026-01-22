@@ -68,4 +68,17 @@ describe('probability system', () => {
     );
     expect(sut.spin('L3')).toBe(20);
   });
+
+  // test('Each Reel spins independently', () => {
+  //   const sut = ProbabilitySystem.create(
+  //     Reels.create(new RandomNumberGenerator(0, 1, 2, 3, 4), [
+  //       ['A', 'Q', 'K'],
+  //       ['9', 'A', 'Q', 'K'],
+  //       ['8', '9', 'A', 'Q', 'K'],
+  //       ['7', '8', '9', 'A', 'Q', 'K'],
+  //       ['6', '7', '8', '9', 'A', '10', 'J']
+  //     ])
+  //   );
+  //   expect(sut.spin('L1')).toBe(20);
+  // });
 });
