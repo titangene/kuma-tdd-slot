@@ -29,12 +29,9 @@ export class Reels {
   }
 
   private getScreen(): Screen {
-    const rawScreen: string[][] = [];
-
-    for (let i = 0; i < this.reels.length; i++) {
-      const reel = this.reels[i];
-      rawScreen.push(reel.getScreenColumn(this.index));
-    }
+    const rawScreen: string[][] = this.reels.map(reel =>
+      reel.getScreenColumn(this.index)
+    );
     return new Screen(rawScreen);
   }
 
