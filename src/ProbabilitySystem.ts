@@ -1,5 +1,5 @@
 export class ProbabilitySystem {
-  spin(): number {
+  spin(betLine: string): number {
     return 0;
   }
 }
