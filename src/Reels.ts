@@ -33,8 +33,7 @@ export class Reels {
 
     for (let i = 0; i < this.reels.length; i++) {
       const reel = this.reels[i];
-      const index = this.index;
-      rawScreen.push(reel.getScreenColumn(index));
+      rawScreen.push(reel.getScreenColumn(this.index));
     }
     return new Screen(rawScreen);
   }
