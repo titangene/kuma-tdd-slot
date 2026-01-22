@@ -1,5 +1,16 @@
 class Screen {
-  constructor(public rawScreen: string[][]) {}
+  constructor(private rawScreen: string[][]) {}
+
+  isScreenRowHit(screen: Screen, row: number): boolean {
+    const uniqueElements = new Set<string>();
+
+    for (let i = 0; i < screen.rawScreen.length; i++) {
+      const screenReel: string[] = screen.rawScreen[i];
+      uniqueElements.add(screenReel[row]);
+    }
+
+    return uniqueElements.size === 1;
+  }
 }
 
 export class Reels {
@@ -16,7 +27,7 @@ export class Reels {
 
   isRowHit(row: number): boolean {
     const screen = this.getScreen();
-    return this.isScreenRowHit(screen, row);
+    return screen.isScreenRowHit(screen, row);
   }
 
   private getScreen(): Screen {
@@ -26,17 +37,6 @@ export class Reels {
       rawScreen.push(this.reels[i].slice(this.index, this.index + 3));
     }
     return new Screen(rawScreen);
-  }
-
-  private isScreenRowHit(screen: Screen, row: number): boolean {
-    const uniqueElements = new Set<string>();
-
-    for (let i = 0; i < screen.rawScreen.length; i++) {
-      const screenReel: string[] = screen.rawScreen[i];
-      uniqueElements.add(screenReel[row]);
-    }
-
-    return uniqueElements.size === 1;
   }
 
   static create(nextIndex: number, rawReels: string[][]): Reels {
