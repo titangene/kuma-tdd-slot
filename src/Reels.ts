@@ -1,15 +1,18 @@
 import { Screen } from './Screen.ts';
 import { Reel } from './Reel.ts';
+import { RandomNumberGenerator } from './RandomNumberGenerator.ts';
 
 export class Reels {
-  private index: number = 0;
   private reels: Reel[];
+  private index: number = 0;
+  private nextIndex: number;
 
   private constructor(
     reels: string[][],
-    private nextIndex: number
+    randomNumberGenerator: RandomNumberGenerator
   ) {
     this.reels = reels.map(reel => Reel.from(reel));
+    this.nextIndex = randomNumberGenerator.nextInteger();
   }
 
   spin() {
@@ -28,7 +31,10 @@ export class Reels {
     return Screen.from(rawScreen);
   }
 
-  static create(nextIndex: number, rawReels: string[][]): Reels {
-    return new Reels(rawReels, nextIndex);
+  static create(
+    randomNumberGenerator: RandomNumberGenerator,
+    rawReels: string[][]
+  ): Reels {
+    return new Reels(rawReels, randomNumberGenerator);
   }
 }

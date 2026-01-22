@@ -1,11 +1,12 @@
 import { describe, expect, test } from 'vitest';
 import { ProbabilitySystem } from '@/ProbabilitySystem.ts';
 import { Reels } from '@/Reels.ts';
+import { RandomNumberGenerator } from '@/RandomNumberGenerator.ts';
 
 describe('probability system', () => {
   test('Row1 hit, bet L2 -> 0', () => {
     const sut = ProbabilitySystem.create(
-      Reels.create(0, [
+      Reels.create(new RandomNumberGenerator(0), [
         ['A', 'Q', 'K'],
         ['A', 'Q', 'K'],
         ['A', 'Q', 'K'],
@@ -18,7 +19,7 @@ describe('probability system', () => {
 
   test('Row1 hit, bet L1 -> 20', () => {
     const sut = ProbabilitySystem.create(
-      Reels.create(0, [
+      Reels.create(new RandomNumberGenerator(0), [
         ['A', 'Q', 'K'],
         ['A', 'Q', 'K'],
         ['A', 'Q', 'K'],
@@ -31,7 +32,7 @@ describe('probability system', () => {
 
   test('Row2 hit, bet L2 -> 0', () => {
     const sut = ProbabilitySystem.create(
-      Reels.create(0, [
+      Reels.create(new RandomNumberGenerator(0), [
         ['A', 'Q', 'K'],
         ['A', 'Q', 'K'],
         ['A', 'Q', 'K'],
@@ -44,7 +45,7 @@ describe('probability system', () => {
 
   test('Row3 hit, bet L3 -> 20', () => {
     const sut = ProbabilitySystem.create(
-      Reels.create(0, [
+      Reels.create(new RandomNumberGenerator(0), [
         ['A', 'Q', 'K'],
         ['A', 'Q', 'K'],
         ['A', 'Q', 'K'],
@@ -57,7 +58,7 @@ describe('probability system', () => {
 
   test('Roll then Row3 hit, bet L3 -> 20', () => {
     const sut = ProbabilitySystem.create(
-      Reels.create(1, [
+      Reels.create(new RandomNumberGenerator(1), [
         ['9', 'A', 'Q', 'K'],
         ['9', 'A', 'Q', 'K'],
         ['9', 'A', 'Q', 'K'],
