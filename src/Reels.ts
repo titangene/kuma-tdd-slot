@@ -2,7 +2,7 @@ export class Reels {
   private index: number = 0;
 
   private constructor(
-    private reels: Array<Array<string>>,
+    private reels: string[][],
     private nextIndex: number
   ) {}
 
@@ -23,7 +23,7 @@ export class Reels {
     return uniqueElements.size === 1;
   }
 
-  static create(nextIndex: number, rawReels: Array<Array<string>>): Reels {
+  static create(nextIndex: number, rawReels: string[][]): Reels {
     return new Reels(rawReels, nextIndex);
   }
 }
