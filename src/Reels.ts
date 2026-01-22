@@ -25,7 +25,7 @@ export class Reels {
     const rawScreen: string[][] = this.reels.map(reel =>
       reel.getScreenColumn(this.index)
     );
-    return new Screen(rawScreen);
+    return Screen.from(rawScreen);
   }
 
   static create(nextIndex: number, rawReels: string[][]): Reels {
