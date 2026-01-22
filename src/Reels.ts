@@ -2,13 +2,11 @@ export class Reels {
   constructor(private reels: Array<Array<string>>) {}
 
   isRow1Hit() {
-    const row = 0;
-    return this.isRowHit(row);
+    return this.isRowHit(0);
   }
 
   isRow2Hit() {
-    const row = 1;
-    return this.isRowHit(row);
+    return this.isRowHit(1);
   }
 
   isRowHit(row: number): boolean {
