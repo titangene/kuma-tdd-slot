@@ -4,6 +4,8 @@ export class ProbabilitySystem {
   private constructor(private reels: Reels) {}
 
   spin(betLine: string): number {
+    this.reels.spin();
+
     if (this.reels.isRowHit(0) && betLine === 'L1') {
       return 20;
     }
