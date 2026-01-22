@@ -11,4 +11,9 @@ describe('probability system', () => {
     const sut = new ProbabilitySystem();
     expect(sut.spin('L1')).toBe(20);
   });
+
+  // test('Row2 hit, bet L2 -> 0', () => {
+  //   const sut = new ProbabilitySystem();
+  //   expect(sut.spin('L2')).toBe(20);
+  // });
 });
