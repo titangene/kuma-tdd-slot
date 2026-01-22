@@ -3,15 +3,13 @@ class Reels {
 }
 
 export class ProbabilitySystem {
-  oldReels: Array<Array<string>> = [
+  reels: Reels = new Reels([
     ['A', 'Q', 'K'],
     ['A', 'Q', 'K'],
     ['A', 'Q', 'K'],
     ['A', 'Q', 'K'],
     ['A', '10', 'J']
-  ];
-
-  reels: Reels = new Reels(this.oldReels);
+  ]);
 
   spin(betLine: string): number {
     const firstElementsSet = new Set<string>();
