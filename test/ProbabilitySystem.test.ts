@@ -1,10 +1,5 @@
 import { describe, expect, test } from 'vitest';
-
-class ProbabilitySystem {
-  spin(): number {
-    return 0;
-  }
-}
+import { ProbabilitySystem } from '@/ProbabilitySystem.ts';
 
 describe('probability system', () => {
   test('lose', () => {
