@@ -1,12 +1,5 @@
 import { Screen } from './Screen.ts';
-
-class Reel {
-  constructor(private symbols: string[]) {}
-
-  getScreenColumn(index: number) {
-    return this.symbols.slice(index, index + 3);
-  }
-}
+import { Reel } from './Reel.ts';
 
 export class Reels {
   private index: number = 0;
