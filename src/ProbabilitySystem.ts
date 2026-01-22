@@ -17,7 +17,8 @@ export class ProbabilitySystem {
       firstElementsSet.add(reel[0]);
     }
 
-    if (firstElementsSet.size === 1 && betLine === 'L1') {
+    const isRow1Hit = firstElementsSet.size === 1;
+    if (isRow1Hit && betLine === 'L1') {
       return 20;
     }
     return 0;
