@@ -1,5 +1,5 @@
 export class Reels {
-  constructor(private reels: Array<Array<string>>) {}
+  private constructor(private reels: Array<Array<string>>) {}
 
   isRowHit(row: number): boolean {
     const uniqueElements = new Set<string>();
@@ -10,5 +10,9 @@ export class Reels {
     }
 
     return uniqueElements.size === 1;
+  }
+
+  static create(rawReels: Array<Array<string>>): Reels {
+    return new Reels(rawReels);
   }
 }
