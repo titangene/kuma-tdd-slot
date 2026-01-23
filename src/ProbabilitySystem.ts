@@ -10,7 +10,8 @@ export class ProbabilitySystem {
 
   spin(bet: Bet): number {
     this.reels.spin();
-    return this.payTable.getOdd(this.reels.getScreen(), bet);
+    const screen = this.reels.getScreen();
+    return this.payTable.getOdd(screen, bet);
   }
 
   static create(reels: Reels, payTable: PayTable): ProbabilitySystem {
