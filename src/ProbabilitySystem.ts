@@ -5,19 +5,19 @@ export class ProbabilitySystem {
 
   spin(...betLines: string[]): number {
     this.reels.spin();
-    return this.getOdd(betLines);
+    return this.getOdd(betLines, this.reels);
   }
 
-  private getOdd(betLines: string[]) {
-    if (this.reels.isRowHit(0) && this.isHit(betLines, 'L1')) {
+  private getOdd(betLines: string[], reels: Reels): number {
+    if (reels.isRowHit(0) && this.isHit(betLines, 'L1')) {
       return 20;
     }
 
-    if (this.reels.isRowHit(1) && this.isHit(betLines, 'L2')) {
+    if (reels.isRowHit(1) && this.isHit(betLines, 'L2')) {
       return 20;
     }
 
-    if (this.reels.isRowHit(2) && this.isHit(betLines, 'L3')) {
+    if (reels.isRowHit(2) && this.isHit(betLines, 'L3')) {
       return 20;
     }
 
