@@ -4,14 +4,12 @@ import { RandomNumberGenerator } from './RandomNumberGenerator.ts';
 
 export class Reels {
   private reels: Reel[];
-  private indices: number[];
 
   private constructor(
     reels: string[][],
     randomNumberGenerator: RandomNumberGenerator
   ) {
     this.reels = reels.map(reel => Reel.from(reel, randomNumberGenerator));
-    this.indices = [0, 0, 0, 0, 0];
   }
 
   spin() {
