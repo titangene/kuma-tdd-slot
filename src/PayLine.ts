@@ -16,8 +16,8 @@ export class PayLine {
     const odds: Odd[] = [new Odd(5, 20), new Odd(4, 15), new Odd(3, 10)];
 
     return (
-      odds.find(odd => odd.hitLength === screen.getHitLength(this.rows))?.odd ??
-      0
+      odds.find(odd => odd.hitLength === screen.getHit(this.rows).length)
+        ?.odd ?? 0
     );
   }
 

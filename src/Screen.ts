@@ -1,7 +1,9 @@
+import { Hit } from './Hit.ts';
+
 export class Screen {
   private constructor(private rawScreen: string[][]) {}
 
-  getHitLength(rows: number[]): number {
+  getHit(rows: number[]): Hit {
     if (rows.length !== this.rawScreen.length) {
       throw new Error('Invalid row number');
     }
@@ -17,7 +19,7 @@ export class Screen {
       longestHit++;
     }
 
-    return longestHit;
+    return new Hit(firstSymbol, longestHit);
   }
 
   static from(rawScreen: Array<Array<string>>) {
