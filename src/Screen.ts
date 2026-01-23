@@ -5,8 +5,9 @@ export class Screen {
     const uniqueElements = new Set<string>();
 
     for (let i = 0; i < this.rawScreen.length; i++) {
-      const screenReel: string[] = this.rawScreen[i];
-      uniqueElements.add(screenReel[row]);
+      const column: string[] = this.rawScreen[i];
+      const symbol = column[row];
+      uniqueElements.add(symbol);
     }
 
     return uniqueElements.size === 1;
