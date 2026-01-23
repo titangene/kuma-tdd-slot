@@ -1,7 +1,6 @@
 import { Screen } from './Screen.ts';
 import { Bet } from './Bet.ts';
 import { Odd } from './Odd.ts';
-import type { Hit } from './Hit.ts';
 
 export class PayLine {
   private constructor(
@@ -24,11 +23,7 @@ export class PayLine {
     ];
 
     const hit = screen.getHit(this.rows);
-    return odds.find(odd => this.matches(odd, hit))?.odd ?? 0;
-  }
-
-  private matches(odd: Odd, hit: Hit) {
-    return odd.symbol === hit.symbol && odd.hitLength === hit.length;
+    return odds.find(odd => odd.matches(hit))?.odd ?? 0;
   }
 
   static from(name: string, rows: number[]): PayLine {
