@@ -35,7 +35,14 @@ describe('probability system', () => {
           new Odd('K', 4, 10),
           new Odd('K', 3, 8)
         ])
-      )
+      ),
+      Reels.create(new DesignatedNumberGenerator(0, 0, 0, 0, 0), [
+        ['K', 'J', 'Q', 'A'],
+        ['K', 'Q', 'K', 'A'],
+        ['Q', 'K', '10', 'K'],
+        ['10', 'K', 'Q', 'A'],
+        ['J', 'Q', 'K', 'A']
+      ])
     );
     expect(sut.spin(new Bet('L2'))).toStrictEqual(
       SpinResult.of(
@@ -76,7 +83,14 @@ describe('probability system', () => {
           new Odd('K', 4, 10),
           new Odd('K', 3, 8)
         ])
-      )
+      ),
+      Reels.create(new DesignatedNumberGenerator(0, 0, 0, 0, 0), [
+        ['K', 'J', 'Q', 'A'],
+        ['K', 'Q', 'K', 'A'],
+        ['Q', 'K', '10', 'K'],
+        ['10', 'K', 'Q', 'A'],
+        ['J', 'Q', 'K', 'A']
+      ])
     );
     expect(sut.spin(new Bet('L1'))).toStrictEqual(
       SpinResult.of(
@@ -117,7 +131,14 @@ describe('probability system', () => {
           new Odd('K', 4, 10),
           new Odd('K', 3, 8)
         ])
-      )
+      ),
+      Reels.create(new DesignatedNumberGenerator(0, 0, 0, 0, 0), [
+        ['K', 'J', 'Q', 'A'],
+        ['K', 'Q', 'K', 'A'],
+        ['Q', 'K', '10', 'K'],
+        ['10', 'K', 'Q', 'A'],
+        ['J', 'Q', 'K', 'A']
+      ])
     );
     expect(sut.spin(new Bet('L2'))).toStrictEqual(
       SpinResult.of(
@@ -157,7 +178,14 @@ describe('probability system', () => {
           new Odd('K', 4, 10),
           new Odd('K', 3, 8)
         ])
-      )
+      ),
+      Reels.create(new DesignatedNumberGenerator(0, 0, 0, 0, 0), [
+        ['K', 'J', 'Q', 'A'],
+        ['K', 'Q', 'K', 'A'],
+        ['Q', 'K', '10', 'K'],
+        ['10', 'K', 'Q', 'A'],
+        ['J', 'Q', 'K', 'A']
+      ])
     );
     expect(sut.spin(new Bet('L3'))).toStrictEqual(
       SpinResult.of(
@@ -198,7 +226,14 @@ describe('probability system', () => {
           new Odd('K', 4, 10),
           new Odd('K', 3, 8)
         ])
-      )
+      ),
+      Reels.create(new DesignatedNumberGenerator(0, 0, 0, 0, 0), [
+        ['K', 'J', 'Q', 'A'],
+        ['K', 'Q', 'K', 'A'],
+        ['Q', 'K', '10', 'K'],
+        ['10', 'K', 'Q', 'A'],
+        ['J', 'Q', 'K', 'A']
+      ])
     );
     expect(sut.spin(new Bet('L3'))).toStrictEqual(
       SpinResult.of(
@@ -239,7 +274,14 @@ describe('probability system', () => {
           new Odd('K', 4, 10),
           new Odd('K', 3, 8)
         ])
-      )
+      ),
+      Reels.create(new DesignatedNumberGenerator(0, 0, 0, 0, 0), [
+        ['K', 'J', 'Q', 'A'],
+        ['K', 'Q', 'K', 'A'],
+        ['Q', 'K', '10', 'K'],
+        ['10', 'K', 'Q', 'A'],
+        ['J', 'Q', 'K', 'A']
+      ])
     );
     expect(sut.spin(new Bet('L1'))).toStrictEqual(
       SpinResult.of(
@@ -280,7 +322,14 @@ describe('probability system', () => {
           new Odd('K', 4, 10),
           new Odd('K', 3, 8)
         ])
-      )
+      ),
+      Reels.create(new DesignatedNumberGenerator(0, 0, 0, 0, 0), [
+        ['K', 'J', 'Q', 'A'],
+        ['K', 'Q', 'K', 'A'],
+        ['Q', 'K', '10', 'K'],
+        ['10', 'K', 'Q', 'A'],
+        ['J', 'Q', 'K', 'A']
+      ])
     );
     expect(sut.spin(new Bet('L3'))).toStrictEqual(
       SpinResult.of(
@@ -321,7 +370,14 @@ describe('probability system', () => {
           new Odd('K', 4, 10),
           new Odd('K', 3, 8)
         ])
-      )
+      ),
+      Reels.create(new DesignatedNumberGenerator(0, 0, 0, 0, 0), [
+        ['K', 'J', 'Q', 'A'],
+        ['K', 'Q', 'K', 'A'],
+        ['Q', 'K', '10', 'K'],
+        ['10', 'K', 'Q', 'A'],
+        ['J', 'Q', 'K', 'A']
+      ])
     );
     expect(sut.spin(new Bet('L1', 'L2', 'L3'))).toStrictEqual(
       SpinResult.of(
@@ -362,7 +418,14 @@ describe('probability system', () => {
           new Odd('K', 4, 10),
           new Odd('K', 3, 8)
         ])
-      )
+      ),
+      Reels.create(new DesignatedNumberGenerator(0, 0, 0, 0, 0), [
+        ['K', 'J', 'Q', 'A'],
+        ['K', 'Q', 'K', 'A'],
+        ['Q', 'K', '10', 'K'],
+        ['10', 'K', 'Q', 'A'],
+        ['J', 'Q', 'K', 'A']
+      ])
     );
     expect(sut.spin(new Bet('L1', 'L2', 'L3'))).toStrictEqual(
       SpinResult.of(
@@ -403,7 +466,14 @@ describe('probability system', () => {
           new Odd('K', 4, 10),
           new Odd('K', 3, 8)
         ])
-      )
+      ),
+      Reels.create(new DesignatedNumberGenerator(0, 0, 0, 0, 0), [
+        ['K', 'J', 'Q', 'A'],
+        ['K', 'Q', 'K', 'A'],
+        ['Q', 'K', '10', 'K'],
+        ['10', 'K', 'Q', 'A'],
+        ['J', 'Q', 'K', 'A']
+      ])
     );
     expect(sut.spin(new Bet('L4'))).toStrictEqual(
       SpinResult.of(
@@ -444,7 +514,14 @@ describe('probability system', () => {
           new Odd('K', 4, 10),
           new Odd('K', 3, 8)
         ])
-      )
+      ),
+      Reels.create(new DesignatedNumberGenerator(0, 0, 0, 0, 0), [
+        ['K', 'J', 'Q', 'A'],
+        ['K', 'Q', 'K', 'A'],
+        ['Q', 'K', '10', 'K'],
+        ['10', 'K', 'Q', 'A'],
+        ['J', 'Q', 'K', 'A']
+      ])
     );
     expect(sut.spin(new Bet('L1'))).toStrictEqual(
       SpinResult.of(
@@ -485,7 +562,14 @@ describe('probability system', () => {
           new Odd('K', 4, 10),
           new Odd('K', 3, 8)
         ])
-      )
+      ),
+      Reels.create(new DesignatedNumberGenerator(0, 0, 0, 0, 0), [
+        ['K', 'J', 'Q', 'A'],
+        ['K', 'Q', 'K', 'A'],
+        ['Q', 'K', '10', 'K'],
+        ['10', 'K', 'Q', 'A'],
+        ['J', 'Q', 'K', 'A']
+      ])
     );
     expect(sut.spin(new Bet('L1'))).toStrictEqual(
       SpinResult.of(
@@ -526,7 +610,14 @@ describe('probability system', () => {
           new Odd('K', 4, 10),
           new Odd('K', 3, 8)
         ])
-      )
+      ),
+      Reels.create(new DesignatedNumberGenerator(0, 0, 0, 0, 0), [
+        ['K', 'J', 'Q', 'A'],
+        ['K', 'Q', 'K', 'A'],
+        ['Q', 'K', '10', 'K'],
+        ['10', 'K', 'Q', 'A'],
+        ['J', 'Q', 'K', 'A']
+      ])
     );
     expect(sut.spin(new Bet('L1'))).toStrictEqual(
       SpinResult.of(
@@ -555,7 +646,14 @@ describe('probability system', () => {
       new PayTable(
         [PayLine.from('L1', [0, 0, 0, 0, 0])],
         new Odds([new Odd('A', 5, 20)])
-      )
+      ),
+      Reels.create(new DesignatedNumberGenerator(0, 0, 0, 0, 0), [
+        ['K', 'J', 'Q', 'A'],
+        ['K', 'Q', 'K', 'A'],
+        ['Q', 'K', '10', 'K'],
+        ['10', 'K', 'Q', 'A'],
+        ['J', 'Q', 'K', 'A']
+      ])
     );
     expect(sut.spin(new Bet('L1'))).toStrictEqual(
       SpinResult.of(
@@ -585,7 +683,6 @@ describe('probability system', () => {
         [PayLine.from('L1', [0, 0, 0, 0, 0])],
         new Odds([new Odd('A', 5, 20)])
       ),
-
       Reels.create(new DesignatedNumberGenerator(0, 0, 0, 0, 0), [
         ['K', 'J', 'Q', 'A'],
         ['K', 'Q', 'K', 'A'],
