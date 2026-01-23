@@ -2,7 +2,7 @@ import type { Reels } from './Reels.ts';
 import { Bet } from './Bet.ts';
 
 export class PayTable {
-  getOdd(betLines: string[], reels: Reels, bet: Bet): number {
+  getOdd(bet: Bet, reels: Reels): number {
     if (reels.isRowHit(0) && this.isHit(bet, 'L1')) {
       return 20;
     }
