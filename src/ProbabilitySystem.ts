@@ -47,12 +47,13 @@ export class ProbabilitySystem {
 
     const screen = theReels.getScreen();
 
-    this.nextGameType = getNext(screen);
+    const nextGameType = getNext(screen);
+    this.nextGameType = nextGameType;
 
     return SpinResult.of(
       thePayTable.getOdd(screen, bet),
       screen.getRawScreenClone(),
-      this.nextGameType
+      nextGameType
     );
   }
 
