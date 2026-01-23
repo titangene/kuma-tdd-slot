@@ -4,19 +4,24 @@ import { RandomNumberGenerator } from './RandomNumberGenerator.ts';
 
 export class Reels {
   private reels: Reel[];
-  private index: number = 0;
-  private nextIndex: number;
+  private indices: number[];
+  // private index: number = 0;
+  // private nextIndex: number;
 
   private constructor(
     reels: string[][],
-    randomNumberGenerator: RandomNumberGenerator
+    private randomNumberGenerator: RandomNumberGenerator
   ) {
     this.reels = reels.map(reel => Reel.from(reel));
-    this.nextIndex = randomNumberGenerator.nextInteger();
+    // this.nextIndex = randomNumberGenerator.nextInteger();
+    this.indices = [0, 0, 0, 0, 0];
   }
 
   spin() {
-    this.index = this.nextIndex;
+    for (let i = 0; i < this.indices.length; ++i) {
+      this.indices[i] = this.randomNumberGenerator.nextInteger();
+    }
+    // this.index = this.nextIndex;
   }
 
   isRowHit(row: number): boolean {
@@ -25,10 +30,18 @@ export class Reels {
   }
 
   private getScreen(): Screen {
-    const rawScreen: string[][] = this.reels.map(reel =>
-      reel.getScreenColumn(this.index)
-    );
+    const rawScreen: string[][] = [];
+    for (let i = 0; i < this.reels.length; i++) {
+      rawScreen.push(this.reels[i].getScreenColumn(this.indices[i]));
+    }
     return Screen.from(rawScreen);
+
+    // const rawScreen = [];
+    // for (let i = 0; i < this.reels.length; i++){
+    //   const reel = this.reels[i];
+    //   rawScreen.push(reel.getScreenColumn(this.index));
+    // }
+    // return Screen.from(rawScreen);
   }
 
   static create(
