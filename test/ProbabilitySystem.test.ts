@@ -383,6 +383,25 @@ describe('probability system', () => {
         ])
       )
     );
-    expect(sut.spin(new Bet('L1'))).toBe(15);
+    expect(sut.spin(new Bet('L1'))).toStrictEqual(
+      SpinResult.of(15, [
+        ['K', 'Q', 'A'],
+        ['K', '10', 'J'],
+        ['K', 'Q', 'A'],
+        ['K', 'Q', 'A'],
+        ['K', '10', 'J']
+      ])
+    );
   });
 });
+
+class SpinResult {
+  private constructor(
+    public odd: number,
+    public screen: string[][]
+  ) {}
+
+  static of(odd: number, screen: string[][]): SpinResult {
+    return new SpinResult(odd, screen);
+  }
+}
