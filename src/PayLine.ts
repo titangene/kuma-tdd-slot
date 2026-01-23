@@ -16,7 +16,8 @@ export class PayLine {
     const odds: Odd[] = [
       new Odd('A', 5, 20),
       new Odd('A', 4, 15),
-      new Odd('A', 3, 10)
+      new Odd('A', 3, 10),
+      new Odd('K', 5, 15)
     ];
 
     return (
