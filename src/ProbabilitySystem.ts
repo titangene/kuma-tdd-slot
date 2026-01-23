@@ -29,6 +29,16 @@ export class ProbabilitySystem {
     );
   }
 
+  spinFree() {
+    this.freeGameReels.spin();
+
+    const screen: Screen = this.freeGameReels.getScreen();
+
+    this.nextGameType = 'FREE_GAME';
+
+    return SpinResult.of(0, screen.getRawScreenClone(), this.nextGameType);
+  }
+
   static create(
     reels: Reels,
     payTable: PayTable,
