@@ -14,9 +14,10 @@ export class ProbabilitySystem {
 
     const screen = this.reels.getScreen();
 
+    const target = 'S';
     let count = 0;
     for (const row of screen.rawScreen) {
-      row.filter(symbol => symbol === 'S').length > 0
+      row.filter(symbol => symbol === target).length > 0
         ? count++
         : (count = count);
     }
