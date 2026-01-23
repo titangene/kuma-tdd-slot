@@ -1,7 +1,7 @@
 export class Screen {
   private constructor(private rawScreen: string[][]) {}
 
-  isHit(...rows: number[]) {
+  isHit(rows: number[]) {
     if (rows.length !== this.rawScreen.length) {
       throw new Error('Invalid row number');
     }
