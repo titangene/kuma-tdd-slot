@@ -704,4 +704,36 @@ describe('probability system', () => {
       ])
     );
   });
+
+  test('Get Screen in Base Game', () => {
+    const sut = ProbabilitySystem.create(
+      Reels.create(new DesignatedNumberGenerator(0, 0, 0, 0, 0), [
+        ['A', 'K', 'A', '10', 'J', 'Q'],
+        ['A', 'K', 'S', 'J', 'Q', 'K'],
+        ['A', 'S', 'A', 'Q', 'K', '10'],
+        ['A', 'S', 'K', '10', 'J', 'Q'],
+        ['A', '10', 'J', 'J', 'Q', 'K']
+      ]),
+      new PayTable(
+        [PayLine.from('L1', [0, 0, 0, 0, 0])],
+        new Odds([new Odd('A', 5, 20)])
+      ),
+      Reels.create(new DesignatedNumberGenerator(0, 0, 0, 0, 0), [
+        ['K', 'J', 'Q', 'A'],
+        ['K', 'Q', 'K', 'A'],
+        ['Q', 'K', '10', 'K'],
+        ['10', 'K', 'Q', 'A'],
+        ['J', 'Q', 'K', 'A']
+      ])
+    );
+    expect(sut.getScreen()).toStrictEqual(
+      Screen.from([
+        ['A', 'K', 'A'],
+        ['A', 'K', 'S'],
+        ['A', 'S', 'A'],
+        ['A', 'S', 'K'],
+        ['A', '10', 'J']
+      ])
+    );
+  });
 });
