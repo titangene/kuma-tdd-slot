@@ -15,7 +15,8 @@ export class ProbabilitySystem {
 
     return SpinResult.of(
       this.payTable.getOdd(screen, bet),
-      screen.getRawScreenClone()
+      screen.getRawScreenClone(),
+      'BASE_GAME'
     );
   }
 

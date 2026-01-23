@@ -37,13 +37,17 @@ describe('probability system', () => {
       )
     );
     expect(sut.spin(new Bet('L2'))).toStrictEqual(
-      SpinResult.of(0, [
-        ['A', 'Q', 'K'],
-        ['A', '10', 'J'],
-        ['A', 'Q', 'K'],
-        ['A', 'Q', 'K'],
-        ['A', '10', 'J']
-      ])
+      SpinResult.of(
+        0,
+        [
+          ['A', 'Q', 'K'],
+          ['A', '10', 'J'],
+          ['A', 'Q', 'K'],
+          ['A', 'Q', 'K'],
+          ['A', '10', 'J']
+        ],
+        'BASE_GAME'
+      )
     );
   });
 
@@ -74,13 +78,17 @@ describe('probability system', () => {
       )
     );
     expect(sut.spin(new Bet('L1'))).toStrictEqual(
-      SpinResult.of(20, [
-        ['A', 'Q', 'K'],
-        ['A', '10', 'J'],
-        ['A', 'Q', 'K'],
-        ['A', 'Q', 'K'],
-        ['A', '10', 'J']
-      ])
+      SpinResult.of(
+        20,
+        [
+          ['A', 'Q', 'K'],
+          ['A', '10', 'J'],
+          ['A', 'Q', 'K'],
+          ['A', 'Q', 'K'],
+          ['A', '10', 'J']
+        ],
+        'BASE_GAME'
+      )
     );
   });
 
@@ -111,13 +119,17 @@ describe('probability system', () => {
       )
     );
     expect(sut.spin(new Bet('L2'))).toStrictEqual(
-      SpinResult.of(20, [
-        ['Q', 'A', 'K'],
-        ['10', 'A', 'J'],
-        ['Q', 'A', 'K'],
-        ['A', 'A', 'K'],
-        ['10', 'A', 'J']
-      ])
+      SpinResult.of(
+        20,
+        [
+          ['Q', 'A', 'K'],
+          ['10', 'A', 'J'],
+          ['Q', 'A', 'K'],
+          ['A', 'A', 'K'],
+          ['10', 'A', 'J']
+        ],
+        'BASE_GAME'
+      )
     );
   });
   test('Row3 hit, bet L3 -> 20', () => {
@@ -147,13 +159,17 @@ describe('probability system', () => {
       )
     );
     expect(sut.spin(new Bet('L3'))).toStrictEqual(
-      SpinResult.of(20, [
-        ['A', 'Q', 'A'],
-        ['10', 'J', 'A'],
-        ['A', 'Q', 'A'],
-        ['A', 'Q', 'A'],
-        ['10', 'J', 'A']
-      ])
+      SpinResult.of(
+        20,
+        [
+          ['A', 'Q', 'A'],
+          ['10', 'J', 'A'],
+          ['A', 'Q', 'A'],
+          ['A', 'Q', 'A'],
+          ['10', 'J', 'A']
+        ],
+        'BASE_GAME'
+      )
     );
   });
 
@@ -184,13 +200,17 @@ describe('probability system', () => {
       )
     );
     expect(sut.spin(new Bet('L3'))).toStrictEqual(
-      SpinResult.of(20, [
-        ['K', 'Q', 'A'],
-        ['10', 'J', 'A'],
-        ['K', 'Q', 'A'],
-        ['K', 'Q', 'A'],
-        ['10', 'J', 'A']
-      ])
+      SpinResult.of(
+        20,
+        [
+          ['K', 'Q', 'A'],
+          ['10', 'J', 'A'],
+          ['K', 'Q', 'A'],
+          ['K', 'Q', 'A'],
+          ['10', 'J', 'A']
+        ],
+        'BASE_GAME'
+      )
     );
   });
 
@@ -221,13 +241,17 @@ describe('probability system', () => {
       )
     );
     expect(sut.spin(new Bet('L1'))).toStrictEqual(
-      SpinResult.of(20, [
-        ['A', 'Q', 'K'],
-        ['A', '10', 'J'],
-        ['A', 'Q', 'K'],
-        ['A', 'Q', 'K'],
-        ['A', '10', 'J']
-      ])
+      SpinResult.of(
+        20,
+        [
+          ['A', 'Q', 'K'],
+          ['A', '10', 'J'],
+          ['A', 'Q', 'K'],
+          ['A', 'Q', 'K'],
+          ['A', '10', 'J']
+        ],
+        'BASE_GAME'
+      )
     );
   });
 
@@ -258,13 +282,17 @@ describe('probability system', () => {
       )
     );
     expect(sut.spin(new Bet('L3'))).toStrictEqual(
-      SpinResult.of(20, [
-        ['K', 'Q', 'A'],
-        ['10', 'J', 'A'],
-        ['K', 'Q', 'A'],
-        ['K', 'Q', 'A'],
-        ['10', 'J', 'A']
-      ])
+      SpinResult.of(
+        20,
+        [
+          ['K', 'Q', 'A'],
+          ['10', 'J', 'A'],
+          ['K', 'Q', 'A'],
+          ['K', 'Q', 'A'],
+          ['10', 'J', 'A']
+        ],
+        'BASE_GAME'
+      )
     );
   });
 
@@ -295,13 +323,17 @@ describe('probability system', () => {
       )
     );
     expect(sut.spin(new Bet('L1', 'L2', 'L3'))).toStrictEqual(
-      SpinResult.of(20, [
-        ['Q', 'A', 'K'],
-        ['J', 'A', '10'],
-        ['Q', 'A', 'K'],
-        ['Q', 'A', 'K'],
-        ['J', 'A', '10']
-      ])
+      SpinResult.of(
+        20,
+        [
+          ['Q', 'A', 'K'],
+          ['J', 'A', '10'],
+          ['Q', 'A', 'K'],
+          ['Q', 'A', 'K'],
+          ['J', 'A', '10']
+        ],
+        'BASE_GAME'
+      )
     );
   });
 
@@ -332,13 +364,17 @@ describe('probability system', () => {
       )
     );
     expect(sut.spin(new Bet('L1', 'L2', 'L3'))).toStrictEqual(
-      SpinResult.of(40, [
-        ['A', 'Q', 'A'],
-        ['A', '10', 'A'],
-        ['A', 'Q', 'A'],
-        ['A', 'Q', 'A'],
-        ['A', '10', 'A']
-      ])
+      SpinResult.of(
+        40,
+        [
+          ['A', 'Q', 'A'],
+          ['A', '10', 'A'],
+          ['A', 'Q', 'A'],
+          ['A', 'Q', 'A'],
+          ['A', '10', 'A']
+        ],
+        'BASE_GAME'
+      )
     );
   });
 
@@ -369,13 +405,17 @@ describe('probability system', () => {
       )
     );
     expect(sut.spin(new Bet('L4'))).toStrictEqual(
-      SpinResult.of(20, [
-        ['A', 'J', 'J'],
-        ['J', 'A', 'Q'],
-        ['Q', 'Q', 'A'],
-        ['K', 'A', 'K'],
-        ['A', 'K', 'J']
-      ])
+      SpinResult.of(
+        20,
+        [
+          ['A', 'J', 'J'],
+          ['J', 'A', 'Q'],
+          ['Q', 'Q', 'A'],
+          ['K', 'A', 'K'],
+          ['A', 'K', 'J']
+        ],
+        'BASE_GAME'
+      )
     );
   });
 
@@ -406,13 +446,17 @@ describe('probability system', () => {
       )
     );
     expect(sut.spin(new Bet('L1'))).toStrictEqual(
-      SpinResult.of(15, [
-        ['A', 'Q', 'K'],
-        ['A', '10', 'J'],
-        ['A', 'Q', 'K'],
-        ['A', 'Q', 'K'],
-        ['K', '10', 'J']
-      ])
+      SpinResult.of(
+        15,
+        [
+          ['A', 'Q', 'K'],
+          ['A', '10', 'J'],
+          ['A', 'Q', 'K'],
+          ['A', 'Q', 'K'],
+          ['K', '10', 'J']
+        ],
+        'BASE_GAME'
+      )
     );
   });
 
@@ -443,13 +487,17 @@ describe('probability system', () => {
       )
     );
     expect(sut.spin(new Bet('L1'))).toStrictEqual(
-      SpinResult.of(10, [
-        ['A', 'Q', 'K'],
-        ['A', '10', 'J'],
-        ['A', 'Q', 'K'],
-        ['J', 'Q', 'K'],
-        ['K', '10', 'J']
-      ])
+      SpinResult.of(
+        10,
+        [
+          ['A', 'Q', 'K'],
+          ['A', '10', 'J'],
+          ['A', 'Q', 'K'],
+          ['J', 'Q', 'K'],
+          ['K', '10', 'J']
+        ],
+        'BASE_GAME'
+      )
     );
   });
 
@@ -480,13 +528,17 @@ describe('probability system', () => {
       )
     );
     expect(sut.spin(new Bet('L1'))).toStrictEqual(
-      SpinResult.of(15, [
-        ['K', 'Q', 'A'],
-        ['K', '10', 'J'],
-        ['K', 'Q', 'A'],
-        ['K', 'Q', 'A'],
-        ['K', '10', 'J']
-      ])
+      SpinResult.of(
+        15,
+        [
+          ['K', 'Q', 'A'],
+          ['K', '10', 'J'],
+          ['K', 'Q', 'A'],
+          ['K', 'Q', 'A'],
+          ['K', '10', 'J']
+        ],
+        'BASE_GAME'
+      )
     );
   });
 });

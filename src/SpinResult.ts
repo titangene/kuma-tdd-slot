@@ -5,7 +5,7 @@ export class SpinResult {
     public nextGameType: string
   ) {}
 
-  static of(odd: number, screen: string[][]): SpinResult {
-    return new SpinResult(odd, screen, 'BASE_GAME');
+  static of(odd: number, screen: string[][], nextGameType: string): SpinResult {
+    return new SpinResult(odd, screen, nextGameType);
   }
 }
