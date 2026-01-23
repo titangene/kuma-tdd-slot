@@ -12,6 +12,10 @@ export class Screen {
     return uniqueElements.size === 1;
   }
 
+  getRawScreen(): string[][] {
+    return this.rawScreen;
+  }
+
   static from(rawScreen: Array<Array<string>>) {
     return new Screen(rawScreen);
   }
