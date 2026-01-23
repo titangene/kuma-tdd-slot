@@ -8,6 +8,7 @@ import { PayLine } from '@/PayLine.ts';
 import { Odd } from '@/Odd.ts';
 import { Odds } from '@/Odds.ts';
 import { SpinResult } from '@/SpinResult.ts';
+import { Screen } from '@/Screen.ts';
 
 describe('probability system', () => {
   test('Row1 hit, bet L2 -> 0', () => {
@@ -583,11 +584,27 @@ describe('probability system', () => {
       new PayTable(
         [PayLine.from('L1', [0, 0, 0, 0, 0])],
         new Odds([new Odd('A', 5, 20)])
-      )
+      ),
+
+      Reels.create(new DesignatedNumberGenerator(0, 0, 0, 0, 0), [
+        ['K', 'J', 'Q', 'A'],
+        ['K', 'Q', 'K', 'A'],
+        ['Q', 'K', '10', 'K'],
+        ['10', 'K', 'Q', 'A'],
+        ['J', 'Q', 'K', 'A']
+      ])
     );
 
     sut.spin(new Bet('L1'));
 
-    expect(sut.getScreen()).toBeDefined();
+    expect(sut.getScreen()).toStrictEqual(
+      Screen.from([
+        ['K', 'J', 'Q'],
+        ['K', 'Q', 'K'],
+        ['Q', 'K', '10'],
+        ['10', 'K', 'Q'],
+        ['J', 'Q', 'K']
+      ])
+    );
   });
 });
