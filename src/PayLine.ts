@@ -1,6 +1,5 @@
 import { Screen } from './Screen.ts';
 import { Bet } from './Bet.ts';
-import { Odd } from './Odd.ts';
 import { Odds } from './Odds.ts';
 
 export class PayLine {
@@ -9,19 +8,10 @@ export class PayLine {
     private rows: number[]
   ) {}
 
-  getOdd(screen: Screen, bet: Bet): number {
+  getOdd(screen: Screen, bet: Bet, odds: Odds): number {
     if (!bet.includes(this.name)) {
       return 0;
     }
-
-    const odds = new Odds([
-      new Odd('A', 5, 20),
-      new Odd('A', 4, 15),
-      new Odd('A', 3, 10),
-      new Odd('K', 5, 15),
-      new Odd('K', 4, 10),
-      new Odd('K', 3, 8)
-    ]);
 
     const hit = screen.getHit(this.rows);
     return odds.rawOdds.find(odd => odd.matches(hit))?.odd ?? 0;
