@@ -1,4 +1,5 @@
 import type { Reels } from './Reels.ts';
+import { Bet } from './Bet.ts';
 
 export class PayTable {
   getOdd(betLines: string[], reels: Reels): number {
@@ -18,6 +19,7 @@ export class PayTable {
   }
 
   private isHit(betLines: string[], line: string): boolean {
-    return betLines.filter(betLine => betLine === line).length > 0;
+    const bet = new Bet(betLines);
+    return bet.betLines.filter(betLine => betLine === line).length > 0;
   }
 }
