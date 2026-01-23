@@ -31,20 +31,13 @@ export class PayTable {
     let odd = 0;
 
     for (const payLine of this.payLines) {
-      const oddTemp = this.getOddTemp(screen, payLine, bet);
-      odd += oddTemp;
+      odd += this.getOddTemp(screen, payLine, bet);
     }
 
     return odd;
   }
 
-  private getOddTemp(screen: Screen, payLine: PayLine, bet: Bet) {
-    let oddTemp: number = 0;
-
-    if (screen.isHit(payLine.rows) && bet.includes(payLine.name)) {
-      oddTemp = 20;
-    }
-
-    return oddTemp;
+  private getOddTemp(screen: Screen, payLine: PayLine, bet: Bet): number {
+    return screen.isHit(payLine.rows) && bet.includes(payLine.name) ? 20 : 0;
   }
 }
