@@ -31,9 +31,12 @@ export class PayTable {
     let odd = 0;
 
     for (const payLine of this.payLines) {
+      let oddTemp: number = 0;
+
       if (screen.isHit(payLine.rows) && bet.includes(payLine.name)) {
-        odd += 20;
+        oddTemp = 20;
       }
+      odd += oddTemp;
     }
 
     return odd;
