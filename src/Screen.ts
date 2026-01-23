@@ -3,6 +3,16 @@ import { Hit } from './Hit.ts';
 export class Screen {
   private constructor(private rawScreen: string[][]) {}
 
+  countSymbol(target: string) {
+    let count = 0;
+    for (const row of this.rawScreen) {
+      row.filter(symbol => symbol === target).length > 0
+        ? count++
+        : (count = count);
+    }
+    return count;
+  }
+
   getHit(rows: number[]): Hit {
     if (rows.length !== this.rawScreen.length) {
       throw new Error('Invalid row number');

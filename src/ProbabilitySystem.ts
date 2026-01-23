@@ -2,7 +2,6 @@ import { Reels } from './Reels.ts';
 import { PayTable } from './PayTable.ts';
 import { Bet } from './Bet.ts';
 import { SpinResult } from './SpinResult.ts';
-import { Screen } from './Screen.ts';
 
 export class ProbabilitySystem {
   private constructor(
@@ -15,23 +14,13 @@ export class ProbabilitySystem {
 
     const screen = this.reels.getScreen();
 
-    const count = this.countSymbol(screen, 'S');
+    const count = screen.countSymbol('S');
 
     return SpinResult.of(
       this.payTable.getOdd(screen, bet),
       screen.getRawScreenClone(),
       count >= 3 ? 'FREE_GAME' : 'BASE_GAME'
     );
-  }
-
-  private countSymbol(screen: Screen, target: string) {
-    let count = 0;
-    for (const row of screen.rawScreen) {
-      row.filter(symbol => symbol === target).length > 0
-        ? count++
-        : (count = count);
-    }
-    return count;
   }
 
   static create(reels: Reels, payTable: PayTable): ProbabilitySystem {
