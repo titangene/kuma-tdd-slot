@@ -1,12 +1,6 @@
 import { Screen } from './Screen.ts';
 import { Bet } from './Bet.ts';
-
-class Odd {
-  constructor(
-    public hitLength: number,
-    public odd: number
-  ) {}
-}
+import { Odd } from './Odd.ts';
 
 export class PayLine {
   private constructor(
