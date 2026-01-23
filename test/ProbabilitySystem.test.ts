@@ -131,4 +131,18 @@ describe('probability system', () => {
     );
     expect(sut.spin(new Bet('L1', 'L2', 'L3'))).toBe(40);
   });
+
+  test('L4 hit, bet L4 -> 20', () => {
+    const sut = ProbabilitySystem.create(
+      Reels.create(new DesignatedNumberGenerator(0, 0, 0, 0, 0), [
+        ['A', 'J', 'J'],
+        ['J', 'A', 'Q'],
+        ['Q', 'Q', 'A'],
+        ['K', 'A', 'K'],
+        ['A', 'K', 'J']
+      ]),
+      new PayTable()
+    );
+    expect(sut.spin(new Bet('L4'))).toBe(20);
+  });
 });
