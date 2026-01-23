@@ -20,24 +20,20 @@ class PayLine {
 }
 
 export class PayTable {
+  payLines: PayLine[] = [
+    new PayLine('L1', [0, 0, 0, 0, 0]),
+    new PayLine('L2', [1, 1, 1, 1, 1]),
+    new PayLine('L3', [2, 2, 2, 2, 2]),
+    new PayLine('L4', [0, 1, 2, 1, 0])
+  ];
+
   getOdd(screen: Screen, bet: Bet): number {
     let odd = 0;
 
-    const payLine1: PayLine = new PayLine('L1', [0, 0, 0, 0, 0]);
-    if (screen.isHit(payLine1.rows) && bet.includes(payLine1.name)) {
-      odd += 20;
-    }
-    const payLine2: PayLine = new PayLine('L2', [1, 1, 1, 1, 1]);
-    if (screen.isHit(payLine2.rows) && bet.includes(payLine2.name)) {
-      odd += 20;
-    }
-    const payLine3: PayLine = new PayLine('L3', [2, 2, 2, 2, 2]);
-    if (screen.isHit(payLine3.rows) && bet.includes(payLine3.name)) {
-      odd += 20;
-    }
-    const payLine4: PayLine = new PayLine('L4', [0, 1, 2, 1, 0]);
-    if (screen.isHit(payLine4.rows) && bet.includes(payLine4.name)) {
-      odd += 20;
+    for (const payLine of this.payLines) {
+      if (screen.isHit(payLine.rows) && bet.includes(payLine.name)) {
+        odd += 20;
+      }
     }
 
     return odd;
