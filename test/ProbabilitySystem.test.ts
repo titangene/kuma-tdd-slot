@@ -7,6 +7,7 @@ import { Bet } from '@/Bet.ts';
 import { PayLine } from '@/PayLine.ts';
 import { Odd } from '@/Odd.ts';
 import { Odds } from '@/Odds.ts';
+import { SpinResult } from '@/SpinResult.ts';
 
 describe('probability system', () => {
   test('Row1 hit, bet L2 -> 0', () => {
@@ -394,14 +395,3 @@ describe('probability system', () => {
     );
   });
 });
-
-class SpinResult {
-  private constructor(
-    public odd: number,
-    public screen: string[][]
-  ) {}
-
-  static of(odd: number, screen: string[][]): SpinResult {
-    return new SpinResult(odd, screen);
-  }
-}
