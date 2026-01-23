@@ -6,6 +6,7 @@ import type { Screen } from '@/Screen.ts';
 
 export class ProbabilitySystem {
   private nextGameType: string = 'BASE_GAME';
+  private freeGameCount: number = 0;
 
   private constructor(
     private reels: Reels,
@@ -22,6 +23,8 @@ export class ProbabilitySystem {
       (screen: Screen): string =>
         screen.countSymbol('S') >= 3 ? 'FREE_GAME' : 'BASE_GAME'
     );
+
+    this.freeGameCount += this.reels.getScreen().countSymbol('S') >= 3 ? 10 : 0;
     this.nextGameType = spinResult.nextGameType;
     return spinResult;
   }
@@ -37,6 +40,8 @@ export class ProbabilitySystem {
       this.freeGamePayTable,
       (_screen: Screen): string => 'FREE_GAME'
     );
+
+    this.freeGameCount += 0;
     this.nextGameType = spinResult.nextGameType;
     return spinResult;
   }
