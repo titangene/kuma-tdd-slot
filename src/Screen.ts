@@ -6,14 +6,10 @@ export class Screen {
       throw new Error('Invalid row number');
     }
 
-    // const uniqueElements = new Set<string>();
     const firstSymbol = this.rawScreen[0][rows[0]];
     let longestHit = 1; // Start from 1 since the first element is always counted
 
     for (let i = 1; i < rows.length; i++) {
-      // const symbol: string = this.rawScreen[i][rows[i]];
-      // uniqueElements.add(symbol);
-
       if (this.rawScreen[i][rows[i]] !== firstSymbol) {
         break;
       }
