@@ -541,4 +541,33 @@ describe('probability system', () => {
       )
     );
   });
+
+  test('Entering Free Game', () => {
+    const sut = ProbabilitySystem.create(
+      Reels.create(new DesignatedNumberGenerator(0, 0, 0, 0, 0), [
+        ['A', 'K', 'A', '10', 'J', 'Q'],
+        ['A', 'K', 'S', 'J', 'Q', 'K'],
+        ['A', 'S', 'A', 'Q', 'K', '10'],
+        ['A', 'S', 'K', '10', 'J', 'Q'],
+        ['A', '10', 'J', 'J', 'Q', 'K']
+      ]),
+      new PayTable(
+        [PayLine.from('L1', [0, 0, 0, 0, 0])],
+        new Odds([new Odd('A', 5, 20)])
+      )
+    );
+    expect(sut.spin(new Bet('L1'))).toStrictEqual(
+      SpinResult.of(
+        20,
+        [
+          ['A', 'K', 'A'],
+          ['A', 'K', 'S'],
+          ['A', 'S', 'A'],
+          ['A', 'S', 'K'],
+          ['A', '10', 'J']
+        ],
+        'FREE_GAME'
+      )
+    );
+  });
 });
