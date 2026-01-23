@@ -6,7 +6,8 @@ import { SpinResult } from './SpinResult.ts';
 export class ProbabilitySystem {
   private constructor(
     private reels: Reels,
-    private payTable: PayTable
+    private payTable: PayTable,
+    private freeGameReels: Reels
   ) {}
 
   spin(bet: Bet): SpinResult {
@@ -23,12 +24,15 @@ export class ProbabilitySystem {
     );
   }
 
-  static create(reels: Reels, payTable: PayTable): ProbabilitySystem {
-    return new ProbabilitySystem(reels, payTable);
+  static create(
+    reels: Reels,
+    payTable: PayTable,
+    freeGameReels: Reels
+  ): ProbabilitySystem {
+    return new ProbabilitySystem(reels, payTable, freeGameReels);
   }
 
   getScreen() {
-    // 先回傳 not undefined 的值，用於確定新的介面 (即此方法)
-    return [[]];
+    return this.freeGameReels.getScreen();
   }
 }
