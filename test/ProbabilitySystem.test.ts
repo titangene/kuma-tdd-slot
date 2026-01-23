@@ -36,7 +36,15 @@ describe('probability system', () => {
         ])
       )
     );
-    expect(sut.spin(new Bet('L2'))).toBe(0);
+    expect(sut.spin(new Bet('L2'))).toStrictEqual(
+      SpinResult.of(0, [
+        ['A', 'Q', 'K'],
+        ['A', '10', 'J'],
+        ['A', 'Q', 'K'],
+        ['A', 'Q', 'K'],
+        ['A', '10', 'J']
+      ])
+    );
   });
 
   test('Row1 hit, bet L1 -> 20', () => {
@@ -65,7 +73,15 @@ describe('probability system', () => {
         ])
       )
     );
-    expect(sut.spin(new Bet('L1'))).toBe(20);
+    expect(sut.spin(new Bet('L1'))).toStrictEqual(
+      SpinResult.of(20, [
+        ['A', 'Q', 'K'],
+        ['A', '10', 'J'],
+        ['A', 'Q', 'K'],
+        ['A', 'Q', 'K'],
+        ['A', '10', 'J']
+      ])
+    );
   });
 
   test('Row2 hit, bet L2 -> 20', () => {
@@ -94,9 +110,16 @@ describe('probability system', () => {
         ])
       )
     );
-    expect(sut.spin(new Bet('L2'))).toBe(20);
+    expect(sut.spin(new Bet('L2'))).toStrictEqual(
+      SpinResult.of(20, [
+        ['Q', 'A', 'K'],
+        ['10', 'A', 'J'],
+        ['Q', 'A', 'K'],
+        ['A', 'A', 'K'],
+        ['10', 'A', 'J']
+      ])
+    );
   });
-
   test('Row3 hit, bet L3 -> 20', () => {
     const sut = ProbabilitySystem.create(
       Reels.create(new DesignatedNumberGenerator(0, 0, 0, 0, 0), [
@@ -123,7 +146,15 @@ describe('probability system', () => {
         ])
       )
     );
-    expect(sut.spin(new Bet('L3'))).toBe(20);
+    expect(sut.spin(new Bet('L3'))).toStrictEqual(
+      SpinResult.of(20, [
+        ['A', 'Q', 'A'],
+        ['10', 'J', 'A'],
+        ['A', 'Q', 'A'],
+        ['A', 'Q', 'A'],
+        ['10', 'J', 'A']
+      ])
+    );
   });
 
   test('Roll then Row3 hit, bet L3 -> 20', () => {
@@ -152,7 +183,15 @@ describe('probability system', () => {
         ])
       )
     );
-    expect(sut.spin(new Bet('L3'))).toBe(20);
+    expect(sut.spin(new Bet('L3'))).toStrictEqual(
+      SpinResult.of(20, [
+        ['K', 'Q', 'A'],
+        ['10', 'J', 'A'],
+        ['K', 'Q', 'A'],
+        ['K', 'Q', 'A'],
+        ['10', 'J', 'A']
+      ])
+    );
   });
 
   test('Each Reel spins independently', () => {
@@ -181,7 +220,15 @@ describe('probability system', () => {
         ])
       )
     );
-    expect(sut.spin(new Bet('L1'))).toBe(20);
+    expect(sut.spin(new Bet('L1'))).toStrictEqual(
+      SpinResult.of(20, [
+        ['A', 'Q', 'K'],
+        ['A', '10', 'J'],
+        ['A', 'Q', 'K'],
+        ['A', 'Q', 'K'],
+        ['A', '10', 'J']
+      ])
+    );
   });
 
   test('Cyclic Rolling', () => {
@@ -210,7 +257,15 @@ describe('probability system', () => {
         ])
       )
     );
-    expect(sut.spin(new Bet('L3'))).toBe(20);
+    expect(sut.spin(new Bet('L3'))).toStrictEqual(
+      SpinResult.of(20, [
+        ['K', 'Q', 'A'],
+        ['10', 'J', 'A'],
+        ['K', 'Q', 'A'],
+        ['K', 'Q', 'A'],
+        ['10', 'J', 'A']
+      ])
+    );
   });
 
   test('Roll then Row2 hit, bet L1L2L3 -> 20', () => {
@@ -239,7 +294,15 @@ describe('probability system', () => {
         ])
       )
     );
-    expect(sut.spin(new Bet('L1', 'L2', 'L3'))).toBe(20);
+    expect(sut.spin(new Bet('L1', 'L2', 'L3'))).toStrictEqual(
+      SpinResult.of(20, [
+        ['Q', 'A', 'K'],
+        ['J', 'A', '10'],
+        ['Q', 'A', 'K'],
+        ['Q', 'A', 'K'],
+        ['J', 'A', '10']
+      ])
+    );
   });
 
   test('Roll then Row1 Row3 hit, bet L1L2L3 -> 40', () => {
@@ -268,7 +331,15 @@ describe('probability system', () => {
         ])
       )
     );
-    expect(sut.spin(new Bet('L1', 'L2', 'L3'))).toBe(40);
+    expect(sut.spin(new Bet('L1', 'L2', 'L3'))).toStrictEqual(
+      SpinResult.of(40, [
+        ['A', 'Q', 'A'],
+        ['A', '10', 'A'],
+        ['A', 'Q', 'A'],
+        ['A', 'Q', 'A'],
+        ['A', '10', 'A']
+      ])
+    );
   });
 
   test('L4 hit, bet L4 -> 20', () => {
@@ -297,7 +368,15 @@ describe('probability system', () => {
         ])
       )
     );
-    expect(sut.spin(new Bet('L4'))).toBe(20);
+    expect(sut.spin(new Bet('L4'))).toStrictEqual(
+      SpinResult.of(20, [
+        ['A', 'J', 'J'],
+        ['J', 'A', 'Q'],
+        ['Q', 'Q', 'A'],
+        ['K', 'A', 'K'],
+        ['A', 'K', 'J']
+      ])
+    );
   });
 
   test('Row1 hit 4 Symbols, bet L1 => 15', () => {
@@ -326,7 +405,15 @@ describe('probability system', () => {
         ])
       )
     );
-    expect(sut.spin(new Bet('L1'))).toBe(15);
+    expect(sut.spin(new Bet('L1'))).toStrictEqual(
+      SpinResult.of(15, [
+        ['A', 'Q', 'K'],
+        ['A', '10', 'J'],
+        ['A', 'Q', 'K'],
+        ['A', 'Q', 'K'],
+        ['K', '10', 'J']
+      ])
+    );
   });
 
   test('Row1 hit 3 Symbols, bet L1 => 10', () => {
@@ -355,7 +442,15 @@ describe('probability system', () => {
         ])
       )
     );
-    expect(sut.spin(new Bet('L1'))).toBe(10);
+    expect(sut.spin(new Bet('L1'))).toStrictEqual(
+      SpinResult.of(10, [
+        ['A', 'Q', 'K'],
+        ['A', '10', 'J'],
+        ['A', 'Q', 'K'],
+        ['J', 'Q', 'K'],
+        ['K', '10', 'J']
+      ])
+    );
   });
 
   test('Row1 hit as K, bet L1 => 15', () => {

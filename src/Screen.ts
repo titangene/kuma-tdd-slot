@@ -25,4 +25,8 @@ export class Screen {
   static from(rawScreen: Array<Array<string>>) {
     return new Screen(rawScreen);
   }
+
+  getRawScreenClone(): string[][] {
+    return this.rawScreen.map(row => [...row]);
+  }
 }
