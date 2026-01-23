@@ -17,6 +17,10 @@ class PayLine {
     this._name = name;
     this._rows = rows;
   }
+
+  getOdd(screen: Screen, payLine: PayLine, bet: Bet): number {
+    return screen.isHit(payLine.rows) && bet.includes(payLine.name) ? 20 : 0;
+  }
 }
 
 export class PayTable {
@@ -31,13 +35,9 @@ export class PayTable {
     let odd = 0;
 
     for (const payLine of this.payLines) {
-      odd += this.getOddTemp(screen, payLine, bet);
+      odd += payLine.getOdd(screen, payLine, bet);
     }
 
     return odd;
-  }
-
-  private getOddTemp(screen: Screen, payLine: PayLine, bet: Bet): number {
-    return screen.isHit(payLine.rows) && bet.includes(payLine.name) ? 20 : 0;
   }
 }
