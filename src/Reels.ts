@@ -8,15 +8,15 @@ export class Reels {
 
   private constructor(
     reels: string[][],
-    private randomNumberGenerator: RandomNumberGenerator
+    randomNumberGenerator: RandomNumberGenerator
   ) {
-    this.reels = reels.map(reel => Reel.from(reel));
+    this.reels = reels.map(reel => Reel.from(reel, randomNumberGenerator));
     this.indices = [0, 0, 0, 0, 0];
   }
 
   spin() {
-    for (let i = 0; i < this.indices.length; ++i) {
-      this.indices[i] = this.randomNumberGenerator.nextInteger();
+    for (let i = 0; i < this.reels.length; ++i) {
+      this.reels[i].spin();
     }
   }
 
@@ -28,7 +28,7 @@ export class Reels {
   private getScreen(): Screen {
     const rawScreen: string[][] = [];
     for (let i = 0; i < this.reels.length; i++) {
-      rawScreen.push(this.reels[i].getScreenColumn(this.indices[i]));
+      rawScreen.push(this.reels[i].getScreenColumn());
     }
     return Screen.from(rawScreen);
   }

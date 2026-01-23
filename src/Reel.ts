@@ -1,11 +1,27 @@
-export class Reel {
-  private constructor(private symbols: string[]) {}
+import { RandomNumberGenerator } from './RandomNumberGenerator';
 
-  getScreenColumn(index: number) {
-    return this.symbols.slice(index, index + 3);
+export class Reel {
+  private index: number;
+
+  private constructor(
+    private symbols: string[],
+    private randomNumberGenerator: RandomNumberGenerator
+  ) {
+    this.index = 0;
   }
 
-  static from(reel: string[]): Reel {
-    return new Reel(reel);
+  spin() {
+    this.index = this.randomNumberGenerator.nextInteger();
+  }
+
+  getScreenColumn(): string[] {
+    return this.symbols.slice(this.index, this.index + 3);
+  }
+
+  static from(
+    reel: string[],
+    randomNumberGenerator: RandomNumberGenerator
+  ): Reel {
+    return new Reel(reel, randomNumberGenerator);
   }
 }
