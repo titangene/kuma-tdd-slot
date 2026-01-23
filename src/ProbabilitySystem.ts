@@ -16,16 +16,10 @@ export class ProbabilitySystem {
   ) {}
 
   spin(bet: Bet): SpinResult {
-    const spinResult = this.doSpinFlow(
-      bet,
-      this.reels,
-      this.payTable,
-      (screen: Screen): string =>
-        screen.countSymbol('S') >= 3 ? 'FREE_GAME' : 'BASE_GAME'
-    );
+    const spinResult = this.doSpinFlow(bet, this.reels, this.payTable);
 
     this.freeGameCount += this.reels.getScreen().countSymbol('S') >= 3 ? 10 : 0;
-    // this.nextGameType = spinResult.nextGameType;
+    spinResult.nextGameType = this.getNextGameType();
     return spinResult;
   }
 
@@ -37,31 +31,27 @@ export class ProbabilitySystem {
     const spinResult = this.doSpinFlow(
       bet,
       this.freeGameReels,
-      this.freeGamePayTable,
-      (_screen: Screen): string => 'FREE_GAME'
+      this.freeGamePayTable
     );
 
     this.freeGameCount += 0;
-    // this.nextGameType = spinResult.nextGameType;
+    spinResult.nextGameType = this.getNextGameType();
     return spinResult;
   }
 
   private doSpinFlow(
     bet: Bet,
     theReels: Reels,
-    thePayTable: PayTable,
-    getNext: (screen: Screen) => string
+    thePayTable: PayTable
   ): SpinResult {
     theReels.spin();
 
     const screen = theReels.getScreen();
 
-    const nextGameType = getNext(screen);
-
     return SpinResult.of(
       thePayTable.getOdd(screen, bet),
       screen.getRawScreenClone(),
-      nextGameType
+      'DUMMY_VALUE'
     );
   }
 
