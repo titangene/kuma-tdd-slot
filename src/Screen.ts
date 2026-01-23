@@ -4,13 +4,10 @@ export class Screen {
   private constructor(private rawScreen: string[][]) {}
 
   countSymbol(target: string) {
-    let count = 0;
-    for (const row of this.rawScreen) {
-      row.filter(symbol => symbol === target).length > 0
-        ? count++
-        : (count = count);
-    }
-    return count;
+    return this.rawScreen.reduce((totalCount, row) => {
+      const count = row.filter(symbol => symbol === target).length;
+      return totalCount + count;
+    }, 0);
   }
 
   getHit(rows: number[]): Hit {
