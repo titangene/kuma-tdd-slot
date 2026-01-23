@@ -1,9 +1,8 @@
-import type { Reels } from './Reels.ts';
 import { Bet } from './Bet.ts';
 import { Screen } from './Screen.ts';
 
 export class PayTable {
-  getOdd(bet: Bet, reels: Reels, screen: Screen): number {
+  getOdd(screen: Screen, bet: Bet): number {
     if (screen.isScreenRowHit(0) && bet.includes('L1')) {
       return 20;
     }
