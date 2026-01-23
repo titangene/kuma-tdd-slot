@@ -94,4 +94,17 @@ describe('probability system', () => {
     );
     expect(sut.spin('L3')).toBe(20);
   });
+
+  test('Roll then Row2 hit, bet L1L2L3 -> 20', () => {
+    const sut = ProbabilitySystem.create(
+      Reels.create(new DesignatedNumberGenerator(1, 1, 1, 1, 1), [
+        ['A', 'Q', 'K'],
+        ['A', 'Q', 'K'],
+        ['A', 'Q', 'K'],
+        ['A', 'Q', 'K'],
+        ['10', 'J', 'K']
+      ])
+    );
+    expect(sut.spin('L1', 'L2', 'L3')).toBe(20);
+  });
 });
