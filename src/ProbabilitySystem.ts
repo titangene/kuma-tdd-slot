@@ -2,8 +2,11 @@ import { Reels } from './Reels.ts';
 import { PayTable } from './PayTable.ts';
 import { Bet } from './Bet.ts';
 import { SpinResult } from './SpinResult.ts';
+import type { Screen } from '@/Screen.ts';
 
 export class ProbabilitySystem {
+  private nextGameType: string = 'BASE_GAME';
+
   private constructor(
     private reels: Reels,
     private payTable: PayTable,
@@ -17,10 +20,12 @@ export class ProbabilitySystem {
 
     const count = screen.countSymbol('S');
 
+    this.nextGameType = count >= 3 ? 'FREE_GAME' : 'BASE_GAME';
+
     return SpinResult.of(
       this.payTable.getOdd(screen, bet),
       screen.getRawScreenClone(),
-      count >= 3 ? 'FREE_GAME' : 'BASE_GAME'
+      this.nextGameType
     );
   }
 
@@ -32,7 +37,9 @@ export class ProbabilitySystem {
     return new ProbabilitySystem(reels, payTable, freeGameReels);
   }
 
-  getScreen() {
-    return this.freeGameReels.getScreen();
+  getScreen(): Screen {
+    return this.nextGameType === 'BASE_GAME'
+      ? this.reels.getScreen()
+      : this.freeGameReels.getScreen();
   }
 }
