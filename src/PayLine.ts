@@ -20,4 +20,8 @@ export class PayLine {
   static from(name: string, rows: number[]): PayLine {
     return new PayLine(name, rows);
   }
+
+  getName(): string {
+    return this.name;
+  }
 }

@@ -10,7 +10,8 @@ export class ProbabilitySystem {
   private constructor(
     private reels: Reels,
     private payTable: PayTable,
-    private freeGameReels: Reels
+    private freeGameReels: Reels,
+    private freeGamePayTable: PayTable
   ) {}
 
   spin(bet: Bet): SpinResult {
@@ -36,7 +37,16 @@ export class ProbabilitySystem {
 
     this.nextGameType = 'FREE_GAME';
 
-    return SpinResult.of(0, screen.getRawScreenClone(), this.nextGameType);
+    const names: string[] = this.freeGamePayTable.payLines.map(payLine =>
+      payLine.getName()
+    );
+    const bet: Bet = new Bet(...names);
+
+    return SpinResult.of(
+      this.freeGamePayTable.getOdd(screen, bet),
+      screen.getRawScreenClone(),
+      this.nextGameType
+    );
   }
 
   static create(
@@ -45,7 +55,12 @@ export class ProbabilitySystem {
     freeGameReels: Reels,
     freeGamePayTable: PayTable
   ): ProbabilitySystem {
-    return new ProbabilitySystem(reels, payTable, freeGameReels);
+    return new ProbabilitySystem(
+      reels,
+      payTable,
+      freeGameReels,
+      freeGamePayTable
+    );
   }
 
   getScreen(): Screen {
