@@ -20,6 +20,10 @@ export class PayTable {
 
   private isHit(betLines: string[], line: string): boolean {
     const bet = new Bet(betLines);
+    return this.includes(bet, line);
+  }
+
+  private includes(bet: Bet, line: string) {
     return bet.betLines.filter(betLine => betLine === line).length > 0;
   }
 }
