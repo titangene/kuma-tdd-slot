@@ -10,9 +10,7 @@ export class Screen {
     let longestHit: number = 0;
 
     for (let i: number = 0; i < rows.length; i++) {
-      const column: string[] = this.rawScreen[i];
-      const row: number = rows[i];
-      const symbol: string = column[row];
+      const symbol: string = this.rawScreen[i][rows[i]];
       uniqueElements.add(symbol);
 
       if (uniqueElements.size > 1) {
