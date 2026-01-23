@@ -18,12 +18,7 @@ export class Reels {
     }
   }
 
-  isRowHit(row: number): boolean {
-    const screen = this.getScreen();
-    return screen.isScreenRowHit(row);
-  }
-
-  private getScreen(): Screen {
+  getScreen(): Screen {
     const rawScreen: string[][] = [];
     for (let i = 0; i < this.reels.length; i++) {
       rawScreen.push(this.reels[i].getScreenColumn());
