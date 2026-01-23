@@ -15,23 +15,26 @@ export class ProbabilitySystem {
   ) {}
 
   spin(bet: Bet): SpinResult {
-    const theReels = this.reels;
-    const thePayTable = this.payTable;
-    const getNext = (screen: Screen): string =>
-      screen.countSymbol('S') >= 3 ? 'FREE_GAME' : 'BASE_GAME';
-
-    return this.doSpinFlow(bet, theReels, thePayTable, getNext);
+    return this.doSpinFlow(
+      bet,
+      this.reels,
+      this.payTable,
+      (screen: Screen): string =>
+        screen.countSymbol('S') >= 3 ? 'FREE_GAME' : 'BASE_GAME'
+    );
   }
 
   spinFree(): SpinResult {
     const bet: Bet = new Bet(
       ...this.freeGamePayTable.payLines.map(payLine => payLine.getName())
     );
-    const theReels = this.freeGameReels;
-    const thePayTable = this.freeGamePayTable;
-    const getNext = (screen: Screen): string => 'FREE_GAME';
 
-    return this.doSpinFlow(bet, theReels, thePayTable, getNext);
+    return this.doSpinFlow(
+      bet,
+      this.freeGameReels,
+      this.freeGamePayTable,
+      (_screen: Screen): string => 'FREE_GAME'
+    );
   }
 
   private doSpinFlow(
