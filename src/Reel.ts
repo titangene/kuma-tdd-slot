@@ -15,7 +15,13 @@ export class Reel {
   }
 
   getScreenColumn(): string[] {
-    return this.symbols.slice(this.index, this.index + 3);
+    const screenColumn = this.symbols.slice(this.index, this.index + 3);
+
+    if (screenColumn.length !== 3) {
+      throw new Error('Invalid Column size');
+    }
+
+    return screenColumn;
   }
 
   static from(

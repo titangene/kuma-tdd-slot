@@ -82,16 +82,16 @@ describe('probability system', () => {
     expect(sut.spin('L1')).toBe(20);
   });
 
-  // test('Cyclic Rolling', () => {
-  //   const sut = ProbabilitySystem.create(
-  //     Reels.create(new RandomNumberGenerator(1, 1, 1, 1, 1), [
-  //       ['K', 'A', 'Q'],
-  //       ['K', 'A', 'Q'],
-  //       ['K', 'A', 'Q'],
-  //       ['K', 'A', 'Q'],
-  //       ['K', '10', 'J']
-  //     ])
-  //   );
-  //   expect(sut.spin('L3')).toBe(20);
-  // });
+  test('Cyclic Rolling', () => {
+    const sut = ProbabilitySystem.create(
+      Reels.create(new RandomNumberGenerator(1, 1, 1, 1, 1), [
+        ['K', 'A', 'Q'],
+        ['K', 'A', 'Q'],
+        ['K', 'A', 'Q'],
+        ['K', 'A', 'Q'],
+        ['K', '10', 'J']
+      ])
+    );
+    expect(sut.spin('L3')).toBe(20);
+  });
 });
