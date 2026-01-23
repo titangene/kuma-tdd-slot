@@ -48,11 +48,11 @@ describe('probability system', () => {
   test('Row2 hit, bet L2 -> 20', () => {
     const sut = ProbabilitySystem.create(
       Reels.create(new DesignatedNumberGenerator(0, 0, 0, 0, 0), [
-        ['A', 'Q', 'K'],
-        ['10', 'Q', 'J'],
-        ['A', 'Q', 'K'],
-        ['A', 'Q', 'K'],
-        ['10', 'Q', 'J']
+        ['Q', 'A', 'K'],
+        ['10', 'A', 'J'],
+        ['Q', 'A', 'K'],
+        ['A', 'A', 'K'],
+        ['10', 'A', 'J']
       ]),
       new PayTable([
         PayLine.from('L1', [0, 0, 0, 0, 0]),

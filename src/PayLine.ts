@@ -13,11 +13,17 @@ export class PayLine {
       return 0;
     }
 
-    const odds: Odd[] = [new Odd(5, 20), new Odd(4, 15), new Odd(3, 10)];
+    const odds: Odd[] = [
+      new Odd('A', 5, 20),
+      new Odd('A', 4, 15),
+      new Odd('A', 3, 10)
+    ];
 
     return (
-      odds.find(odd => odd.hitLength === screen.getHit(this.rows).length)
-        ?.odd ?? 0
+      odds.find(odd => {
+        const hit = screen.getHit(this.rows);
+        return odd.symbol === hit.symbol && odd.hitLength === hit.length;
+      })?.odd ?? 0
     );
   }
 
