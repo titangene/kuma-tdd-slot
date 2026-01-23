@@ -1,7 +1,11 @@
 import { Reels } from './Reels.ts';
+import { PayTable } from './PayTable.ts';
 
 export class ProbabilitySystem {
-  private constructor(private reels: Reels) {}
+  private constructor(
+    private reels: Reels,
+    private payTable: PayTable
+  ) {}
 
   spin(...betLines: string[]): number {
     this.reels.spin();
@@ -29,6 +33,6 @@ export class ProbabilitySystem {
   }
 
   static create(reels: Reels): ProbabilitySystem {
-    return new ProbabilitySystem(reels);
+    return new ProbabilitySystem(reels, new PayTable());
   }
 }
