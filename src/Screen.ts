@@ -12,8 +12,13 @@ export class Screen {
     return uniqueElements.size === 1;
   }
 
-  getRawScreen(): string[][] {
-    return this.rawScreen;
+  isHit() {
+    return (
+      this.rawScreen[0][0] === this.rawScreen[1][1] &&
+      this.rawScreen[1][1] === this.rawScreen[2][2] &&
+      this.rawScreen[2][2] === this.rawScreen[3][1] &&
+      this.rawScreen[3][1] === this.rawScreen[4][0]
+    );
   }
 
   static from(rawScreen: Array<Array<string>>) {

@@ -15,20 +15,10 @@ export class PayTable {
       odd += 20;
     }
 
-    const rawScreen: string[][] = screen.getRawScreen();
-
-    if (this.isHit(rawScreen) && bet.includes('L4')) {
+    if (screen.isHit() && bet.includes('L4')) {
       odd += 20;
     }
 
     return odd;
-  }
-  private isHit(rawScreen: string[][]) {
-    return (
-      rawScreen[0][0] === rawScreen[1][1] &&
-      rawScreen[1][1] === rawScreen[2][2] &&
-      rawScreen[2][2] === rawScreen[3][1] &&
-      rawScreen[3][1] === rawScreen[4][0]
-    );
   }
 }
