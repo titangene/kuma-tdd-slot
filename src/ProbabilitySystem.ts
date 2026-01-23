@@ -42,7 +42,8 @@ export class ProbabilitySystem {
   static create(
     reels: Reels,
     payTable: PayTable,
-    freeGameReels: Reels
+    freeGameReels: Reels,
+    freeGamePayTable: PayTable
   ): ProbabilitySystem {
     return new ProbabilitySystem(reels, payTable, freeGameReels);
   }
