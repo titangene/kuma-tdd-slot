@@ -1,18 +1,6 @@
 export class Screen {
   private constructor(private rawScreen: string[][]) {}
 
-  isScreenRowHit(row: number): boolean {
-    const uniqueElements = new Set<string>();
-
-    for (let i = 0; i < this.rawScreen.length; i++) {
-      const column: string[] = this.rawScreen[i];
-      const symbol = column[row];
-      uniqueElements.add(symbol);
-    }
-
-    return uniqueElements.size === 1;
-  }
-
   isHit(...rows: number[]) {
     const uniqueElements = new Set<string>();
 
