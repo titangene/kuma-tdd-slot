@@ -5,7 +5,6 @@ import { SpinResult } from './SpinResult.ts';
 import type { Screen } from '@/Screen.ts';
 
 export class ProbabilitySystem {
-  // private nextGameType: string = 'BASE_GAME';
   private freeGameCount: number = 0;
 
   private constructor(
