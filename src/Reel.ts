@@ -1,11 +1,11 @@
-import { DesignatedNumberGenerator } from './DesignatedNumberGenerator.ts';
+import type { RandomNumberGenerator } from './RandomNumberGenerator.ts';
 
 export class Reel {
   private index: number;
 
   private constructor(
     private symbols: string[],
-    private randomNumberGenerator: DesignatedNumberGenerator
+    private randomNumberGenerator: RandomNumberGenerator
   ) {
     this.index = 0;
   }
@@ -29,7 +29,7 @@ export class Reel {
 
   static from(
     reel: string[],
-    randomNumberGenerator: DesignatedNumberGenerator
+    randomNumberGenerator: RandomNumberGenerator
   ): Reel {
     return new Reel(reel, randomNumberGenerator);
   }
