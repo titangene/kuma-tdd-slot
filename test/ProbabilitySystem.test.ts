@@ -196,4 +196,23 @@ describe('probability system', () => {
     );
     expect(sut.spin(new Bet('L4'))).toBe(20);
   });
+
+  test('Row1 hit 4 Symbols, bet L1 => 15', () => {
+    const sut = ProbabilitySystem.create(
+      Reels.create(new DesignatedNumberGenerator(0, 0, 0, 0, 0), [
+        ['A', 'Q', 'K'],
+        ['A', '10', 'J'],
+        ['A', 'Q', 'K'],
+        ['A', 'Q', 'K'],
+        ['K', '10', 'J']
+      ]),
+      new PayTable([
+        PayLine.from('L1', [0, 0, 0, 0, 0]),
+        PayLine.from('L2', [1, 1, 1, 1, 1]),
+        PayLine.from('L3', [2, 2, 2, 2, 2]),
+        PayLine.from('L4', [0, 1, 2, 1, 0])
+      ])
+    );
+    expect(sut.spin(new Bet('L1'))).toBe(15);
+  });
 });
