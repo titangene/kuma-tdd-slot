@@ -1,4 +1,4 @@
-export class RandomNumberGenerator {
+export class DesignatedNumberGenerator {
   private integers: number[];
 
   constructor(...numbers: number[]) {

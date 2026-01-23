@@ -1,13 +1,13 @@
 import { Screen } from './Screen.ts';
 import { Reel } from './Reel.ts';
-import { RandomNumberGenerator } from './RandomNumberGenerator.ts';
+import { DesignatedNumberGenerator } from './DesignatedNumberGenerator.ts';
 
 export class Reels {
   private reels: Reel[];
 
   private constructor(
     reels: string[][],
-    randomNumberGenerator: RandomNumberGenerator
+    randomNumberGenerator: DesignatedNumberGenerator
   ) {
     this.reels = reels.map(reel => Reel.from(reel, randomNumberGenerator));
   }
@@ -32,7 +32,7 @@ export class Reels {
   }
 
   static create(
-    randomNumberGenerator: RandomNumberGenerator,
+    randomNumberGenerator: DesignatedNumberGenerator,
     rawReels: string[][]
   ): Reels {
     return new Reels(rawReels, randomNumberGenerator);
