@@ -5,7 +5,7 @@ import { SpinResult } from './SpinResult.ts';
 import type { Screen } from '@/Screen.ts';
 
 export class ProbabilitySystem {
-  private nextGameType: string = 'BASE_GAME';
+  // private nextGameType: string = 'BASE_GAME';
   private freeGameCount: number = 0;
 
   private constructor(
@@ -25,7 +25,7 @@ export class ProbabilitySystem {
     );
 
     this.freeGameCount += this.reels.getScreen().countSymbol('S') >= 3 ? 10 : 0;
-    this.nextGameType = spinResult.nextGameType;
+    // this.nextGameType = spinResult.nextGameType;
     return spinResult;
   }
 
@@ -42,7 +42,7 @@ export class ProbabilitySystem {
     );
 
     this.freeGameCount += 0;
-    this.nextGameType = spinResult.nextGameType;
+    // this.nextGameType = spinResult.nextGameType;
     return spinResult;
   }
 
@@ -80,8 +80,12 @@ export class ProbabilitySystem {
   }
 
   getScreen(): Screen {
-    return this.nextGameType === 'BASE_GAME'
+    return this.getNextGameType() === 'BASE_GAME'
       ? this.reels.getScreen()
       : this.freeGameReels.getScreen();
+  }
+
+  private getNextGameType(): string {
+    return this.freeGameCount > 0 ? 'FREE_GAME' : 'BASE_GAME';
   }
 }
