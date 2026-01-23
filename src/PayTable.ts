@@ -2,24 +2,13 @@ import { Bet } from './Bet.ts';
 import { Screen } from './Screen.ts';
 
 class PayLine {
-  get rows(): number[] {
-    return this._rows;
-  }
+  constructor(
+    private name: string,
+    private rows: number[]
+  ) {}
 
-  get name(): string {
-    return this._name;
-  }
-
-  private _name: string;
-  private _rows: number[];
-
-  constructor(name: string, rows: number[]) {
-    this._name = name;
-    this._rows = rows;
-  }
-
-  getOdd(screen: Screen, payLine: PayLine, bet: Bet): number {
-    return screen.isHit(payLine.rows) && bet.includes(payLine.name) ? 20 : 0;
+  getOdd(screen: Screen, bet: Bet): number {
+    return screen.isHit(this.rows) && bet.includes(this.name) ? 20 : 0;
   }
 }
 
@@ -35,7 +24,7 @@ export class PayTable {
     let odd = 0;
 
     for (const payLine of this.payLines) {
-      odd += payLine.getOdd(screen, payLine, bet);
+      odd += payLine.getOdd(screen, bet);
     }
 
     return odd;
