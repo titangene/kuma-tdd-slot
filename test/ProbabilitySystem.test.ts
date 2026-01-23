@@ -3,6 +3,7 @@ import { ProbabilitySystem } from '@/ProbabilitySystem.ts';
 import { Reels } from '@/Reels.ts';
 import { DesignatedNumberGenerator } from '@/DesignatedNumberGenerator.ts';
 import { PayTable } from '@/PayTable.ts';
+import { Bet } from '@/Bet.ts';
 
 describe('probability system', () => {
   test('Row1 hit, bet L2 -> 0', () => {
@@ -16,7 +17,7 @@ describe('probability system', () => {
       ]),
       new PayTable()
     );
-    expect(sut.spin('L2')).toBe(0);
+    expect(sut.spin(new Bet('L2'))).toBe(0);
   });
 
   test('Row1 hit, bet L1 -> 20', () => {
@@ -30,7 +31,7 @@ describe('probability system', () => {
       ]),
       new PayTable()
     );
-    expect(sut.spin('L1')).toBe(20);
+    expect(sut.spin(new Bet('L1'))).toBe(20);
   });
 
   test('Row2 hit, bet L2 -> 0', () => {
@@ -44,7 +45,7 @@ describe('probability system', () => {
       ]),
       new PayTable()
     );
-    expect(sut.spin('L2')).toBe(20);
+    expect(sut.spin(new Bet('L2'))).toBe(20);
   });
 
   test('Row3 hit, bet L3 -> 20', () => {
@@ -58,7 +59,7 @@ describe('probability system', () => {
       ]),
       new PayTable()
     );
-    expect(sut.spin('L3')).toBe(20);
+    expect(sut.spin(new Bet('L3'))).toBe(20);
   });
 
   test('Roll then Row3 hit, bet L3 -> 20', () => {
@@ -72,7 +73,7 @@ describe('probability system', () => {
       ]),
       new PayTable()
     );
-    expect(sut.spin('L3')).toBe(20);
+    expect(sut.spin(new Bet('L3'))).toBe(20);
   });
 
   test('Each Reel spins independently', () => {
@@ -86,7 +87,7 @@ describe('probability system', () => {
       ]),
       new PayTable()
     );
-    expect(sut.spin('L1')).toBe(20);
+    expect(sut.spin(new Bet('L1'))).toBe(20);
   });
 
   test('Cyclic Rolling', () => {
@@ -100,7 +101,7 @@ describe('probability system', () => {
       ]),
       new PayTable()
     );
-    expect(sut.spin('L3')).toBe(20);
+    expect(sut.spin(new Bet('L3'))).toBe(20);
   });
 
   test('Roll then Row2 hit, bet L1L2L3 -> 20', () => {
@@ -114,6 +115,6 @@ describe('probability system', () => {
       ]),
       new PayTable()
     );
-    expect(sut.spin('L1', 'L2', 'L3')).toBe(20);
+    expect(sut.spin(new Bet('L1', 'L2', 'L3'))).toBe(20);
   });
 });

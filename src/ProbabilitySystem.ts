@@ -8,9 +8,9 @@ export class ProbabilitySystem {
     private payTable: PayTable
   ) {}
 
-  spin(...betLines: string[]): number {
+  spin(bet: Bet): number {
     this.reels.spin();
-    return this.payTable.getOdd(new Bet(betLines), this.reels);
+    return this.payTable.getOdd(bet, this.reels);
   }
 
   static create(reels: Reels, payTable: PayTable): ProbabilitySystem {

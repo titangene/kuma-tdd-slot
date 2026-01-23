@@ -1,7 +1,11 @@
 export class Bet {
-  constructor(public betLines: string[]) {}
+  private line: string[];
+
+  constructor(...line: string[]) {
+    this.line = line;
+  }
 
   includes(line: string): boolean {
-    return this.betLines.filter(betLine => betLine === line).length > 0;
+    return this.line.filter(betLine => betLine === line).length > 0;
   }
 }
