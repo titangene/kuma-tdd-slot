@@ -1,21 +1,28 @@
 export class Screen {
   private constructor(private rawScreen: string[][]) {}
 
-  isHit(rows: number[]) {
+  getHitLength(rows: number[]): number {
     if (rows.length !== this.rawScreen.length) {
       throw new Error('Invalid row number');
     }
 
     const uniqueElements = new Set<string>();
+    let longestHit: number = 0;
 
     for (let i: number = 0; i < rows.length; i++) {
       const column: string[] = this.rawScreen[i];
       const row: number = rows[i];
       const symbol: string = column[row];
       uniqueElements.add(symbol);
+
+      if (uniqueElements.size > 1) {
+        break;
+      }
+
+      longestHit++;
     }
 
-    return uniqueElements.size === 1;
+    return longestHit;
   }
 
   static from(rawScreen: Array<Array<string>>) {
