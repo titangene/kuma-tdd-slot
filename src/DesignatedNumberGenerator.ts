@@ -1,4 +1,6 @@
-export class DesignatedNumberGenerator {
+import type { RandomNumberGenerator } from './RandomNumberGenerator.ts';
+
+export class DesignatedNumberGenerator implements RandomNumberGenerator {
   private integers: number[];
 
   constructor(...numbers: number[]) {
