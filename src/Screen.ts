@@ -2,6 +2,10 @@ export class Screen {
   private constructor(private rawScreen: string[][]) {}
 
   isHit(...rows: number[]) {
+    if (rows.length !== this.rawScreen.length) {
+      throw new Error('Invalid row number');
+    }
+
     const uniqueElements = new Set<string>();
 
     for (let i: number = 0; i < rows.length; i++) {
