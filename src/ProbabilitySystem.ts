@@ -26,4 +26,9 @@ export class ProbabilitySystem {
   static create(reels: Reels, payTable: PayTable): ProbabilitySystem {
     return new ProbabilitySystem(reels, payTable);
   }
+
+  getScreen() {
+    // 先回傳 not undefined 的值，用於確定新的介面 (即此方法)
+    return [[]];
+  }
 }
