@@ -15,7 +15,7 @@ export class PayTable {
       odd += 20;
     }
 
-    if (screen.isHit() && bet.includes('L4')) {
+    if (screen.isHit(0, 1, 2, 1, 0) && bet.includes('L4')) {
       odd += 20;
     }
 

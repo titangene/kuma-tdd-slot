@@ -12,13 +12,17 @@ export class Screen {
     return uniqueElements.size === 1;
   }
 
-  isHit() {
-    return (
-      this.rawScreen[0][0] === this.rawScreen[1][1] &&
-      this.rawScreen[1][1] === this.rawScreen[2][2] &&
-      this.rawScreen[2][2] === this.rawScreen[3][1] &&
-      this.rawScreen[3][1] === this.rawScreen[4][0]
-    );
+  isHit(...rows: number[]) {
+    const uniqueElements = new Set<string>();
+
+    for (let i: number = 0; i < rows.length; i++) {
+      const column: string[] = this.rawScreen[i];
+      const row: number = rows[i];
+      const symbol: string = column[row];
+      uniqueElements.add(symbol);
+    }
+
+    return uniqueElements.size === 1;
   }
 
   static from(rawScreen: Array<Array<string>>) {
