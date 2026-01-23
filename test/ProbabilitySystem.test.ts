@@ -2,6 +2,7 @@ import { describe, expect, test } from 'vitest';
 import { ProbabilitySystem } from '@/ProbabilitySystem.ts';
 import { Reels } from '@/Reels.ts';
 import { DesignatedNumberGenerator } from '@/DesignatedNumberGenerator.ts';
+import { PayTable } from '@/PayTable.ts';
 
 describe('probability system', () => {
   test('Row1 hit, bet L2 -> 0', () => {
@@ -12,7 +13,8 @@ describe('probability system', () => {
         ['A', 'Q', 'K'],
         ['A', 'Q', 'K'],
         ['A', '10', 'J']
-      ])
+      ]),
+      new PayTable()
     );
     expect(sut.spin('L2')).toBe(0);
   });
@@ -25,7 +27,8 @@ describe('probability system', () => {
         ['A', 'Q', 'K'],
         ['A', 'Q', 'K'],
         ['A', '10', 'J']
-      ])
+      ]),
+      new PayTable()
     );
     expect(sut.spin('L1')).toBe(20);
   });
@@ -38,7 +41,8 @@ describe('probability system', () => {
         ['A', 'Q', 'K'],
         ['A', 'Q', 'K'],
         ['10', 'Q', 'J']
-      ])
+      ]),
+      new PayTable()
     );
     expect(sut.spin('L2')).toBe(20);
   });
@@ -51,7 +55,8 @@ describe('probability system', () => {
         ['A', 'Q', 'K'],
         ['A', 'Q', 'K'],
         ['10', 'J', 'K']
-      ])
+      ]),
+      new PayTable()
     );
     expect(sut.spin('L3')).toBe(20);
   });
@@ -64,7 +69,8 @@ describe('probability system', () => {
         ['9', 'A', 'Q', 'K'],
         ['9', 'A', 'Q', 'K'],
         ['10', '10', 'J', 'K']
-      ])
+      ]),
+      new PayTable()
     );
     expect(sut.spin('L3')).toBe(20);
   });
@@ -77,7 +83,8 @@ describe('probability system', () => {
         ['8', '9', 'A', 'Q', 'K'],
         ['7', '8', '9', 'A', 'Q', 'K'],
         ['6', '7', '8', '9', 'A', '10', 'J']
-      ])
+      ]),
+      new PayTable()
     );
     expect(sut.spin('L1')).toBe(20);
   });
@@ -90,7 +97,8 @@ describe('probability system', () => {
         ['K', 'A', 'Q'],
         ['K', 'A', 'Q'],
         ['K', '10', 'J']
-      ])
+      ]),
+      new PayTable()
     );
     expect(sut.spin('L3')).toBe(20);
   });
@@ -103,7 +111,8 @@ describe('probability system', () => {
         ['A', 'Q', 'K'],
         ['A', 'Q', 'K'],
         ['10', 'J', 'K']
-      ])
+      ]),
+      new PayTable()
     );
     expect(sut.spin('L1', 'L2', 'L3')).toBe(20);
   });

@@ -12,7 +12,7 @@ export class ProbabilitySystem {
     return this.payTable.getOdd(betLines, this.reels);
   }
 
-  static create(reels: Reels): ProbabilitySystem {
-    return new ProbabilitySystem(reels, new PayTable());
+  static create(reels: Reels, payTable: PayTable): ProbabilitySystem {
+    return new ProbabilitySystem(reels, payTable);
   }
 }
