@@ -5,7 +5,10 @@ export class ProbabilitySystem {
 
   spin(...betLines: string[]): number {
     this.reels.spin();
+    return this.getOdd(betLines);
+  }
 
+  private getOdd(betLines: string[]) {
     if (this.reels.isRowHit(0) && this.isHit(betLines, 'L1')) {
       return 20;
     }
