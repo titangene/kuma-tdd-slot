@@ -1086,4 +1086,58 @@ describe('probability system', () => {
       )
     );
   });
+
+  test('Exiting Free Game', () => {
+    const sut = ProbabilitySystem.create(
+      Reels.create(new DesignatedNumberGenerator(0, 0, 0, 0, 0), [
+        ['A', 'K', 'A', '10', 'J', 'Q'],
+        ['A', 'K', 'S', 'J', 'Q', 'K'],
+        ['A', 'S', 'A', 'Q', 'K', '10'],
+        ['A', 'S', 'K', '10', 'J', 'Q'],
+        ['A', '10', 'J', 'J', 'Q', 'K']
+      ]),
+      new PayTable(
+        [PayLine.from('L1', [0, 0, 0, 0, 0])],
+        new Odds([new Odd('A', 5, 20)])
+      ),
+      Reels.create(new DesignatedNumberGenerator(1, 1, 1, 1, 1), [
+        ['9', 'A', 'K', 'J', 'Q'],
+        ['J', 'A', 'K', 'Q', 'K'],
+        ['10', 'A', 'Q', 'K', '10'],
+        ['8', 'A', '10', 'K', 'Q'],
+        ['K', 'A', 'J', 'Q', 'K']
+      ]),
+      new PayTable(
+        [
+          PayLine.from('L1', [0, 0, 0, 0, 0]),
+          PayLine.from('L2', [1, 1, 1, 1, 1]),
+          PayLine.from('L3', [2, 2, 2, 2, 2])
+        ],
+        new Odds([
+          new Odd('A', 5, 2_000),
+          new Odd('A', 4, 1_500),
+          new Odd('A', 3, 1_000),
+          new Odd('K', 5, 1_500),
+          new Odd('K', 4, 1_000),
+          new Odd('K', 3, 800)
+        ])
+      )
+    );
+    sut.spin(new Bet('L1'));
+
+    for (let i = 0; i < 10; i++) {
+      sut.spinFree();
+    }
+
+    expect(sut.getNextGameType()).toBe('BASE_GAME');
+    expect(sut.getScreen()).toStrictEqual(
+      Screen.from([
+        ['A', 'K', 'A'],
+        ['A', 'K', 'S'],
+        ['A', 'S', 'A'],
+        ['A', 'S', 'K'],
+        ['A', '10', 'J']
+      ])
+    );
+  });
 });
