@@ -33,7 +33,7 @@ export class ProbabilitySystem {
       this.freeGamePayTable
     );
 
-    this.freeGameCount += 0;
+    this.freeGameCount--;
 
     return SpinResult.of(odd, screen, this.getNextGameType());
   }
@@ -73,7 +73,7 @@ export class ProbabilitySystem {
       : this.freeGameReels.getScreen();
   }
 
-  private getNextGameType(): string {
+  getNextGameType(): string {
     return this.freeGameCount > 0 ? 'FREE_GAME' : 'BASE_GAME';
   }
 }
