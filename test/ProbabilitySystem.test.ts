@@ -57,7 +57,9 @@ describe('probability system', () => {
           new Odd('K', 4, 1_000),
           new Odd('K', 3, 800)
         ])
-      )
+      ),
+      (screen: Screen): number => (screen.countSymbol('S') >= 3 ? 10 : 0),
+      (screen: Screen): number => (screen.countSymbol('S') >= 5 ? 10 : 0)
     );
     expect(sut.spin(new Bet('L2'))).toStrictEqual(
       SpinResult.of(
@@ -120,7 +122,9 @@ describe('probability system', () => {
           new Odd('K', 4, 1_000),
           new Odd('K', 3, 800)
         ])
-      )
+      ),
+      (screen: Screen): number => (screen.countSymbol('S') >= 3 ? 10 : 0),
+      (screen: Screen): number => (screen.countSymbol('S') >= 5 ? 10 : 0)
     );
     expect(sut.spin(new Bet('L1'))).toStrictEqual(
       SpinResult.of(
@@ -183,7 +187,9 @@ describe('probability system', () => {
           new Odd('K', 4, 1_000),
           new Odd('K', 3, 800)
         ])
-      )
+      ),
+      (screen: Screen): number => (screen.countSymbol('S') >= 3 ? 10 : 0),
+      (screen: Screen): number => (screen.countSymbol('S') >= 5 ? 10 : 0)
     );
     expect(sut.spin(new Bet('L2'))).toStrictEqual(
       SpinResult.of(
@@ -245,7 +251,9 @@ describe('probability system', () => {
           new Odd('K', 4, 1_000),
           new Odd('K', 3, 800)
         ])
-      )
+      ),
+      (screen: Screen): number => (screen.countSymbol('S') >= 3 ? 10 : 0),
+      (screen: Screen): number => (screen.countSymbol('S') >= 5 ? 10 : 0)
     );
     expect(sut.spin(new Bet('L3'))).toStrictEqual(
       SpinResult.of(
@@ -308,7 +316,9 @@ describe('probability system', () => {
           new Odd('K', 4, 1_000),
           new Odd('K', 3, 800)
         ])
-      )
+      ),
+      (screen: Screen): number => (screen.countSymbol('S') >= 3 ? 10 : 0),
+      (screen: Screen): number => (screen.countSymbol('S') >= 5 ? 10 : 0)
     );
     expect(sut.spin(new Bet('L3'))).toStrictEqual(
       SpinResult.of(
@@ -371,7 +381,9 @@ describe('probability system', () => {
           new Odd('K', 4, 1_000),
           new Odd('K', 3, 800)
         ])
-      )
+      ),
+      (screen: Screen): number => (screen.countSymbol('S') >= 3 ? 10 : 0),
+      (screen: Screen): number => (screen.countSymbol('S') >= 5 ? 10 : 0)
     );
     expect(sut.spin(new Bet('L1'))).toStrictEqual(
       SpinResult.of(
@@ -434,7 +446,9 @@ describe('probability system', () => {
           new Odd('K', 4, 1_000),
           new Odd('K', 3, 800)
         ])
-      )
+      ),
+      (screen: Screen): number => (screen.countSymbol('S') >= 3 ? 10 : 0),
+      (screen: Screen): number => (screen.countSymbol('S') >= 5 ? 10 : 0)
     );
     expect(sut.spin(new Bet('L3'))).toStrictEqual(
       SpinResult.of(
@@ -497,7 +511,9 @@ describe('probability system', () => {
           new Odd('K', 4, 1_000),
           new Odd('K', 3, 800)
         ])
-      )
+      ),
+      (screen: Screen): number => (screen.countSymbol('S') >= 3 ? 10 : 0),
+      (screen: Screen): number => (screen.countSymbol('S') >= 5 ? 10 : 0)
     );
     expect(sut.spin(new Bet('L1', 'L2', 'L3'))).toStrictEqual(
       SpinResult.of(
@@ -560,7 +576,9 @@ describe('probability system', () => {
           new Odd('K', 4, 1_000),
           new Odd('K', 3, 800)
         ])
-      )
+      ),
+      (screen: Screen): number => (screen.countSymbol('S') >= 3 ? 10 : 0),
+      (screen: Screen): number => (screen.countSymbol('S') >= 5 ? 10 : 0)
     );
     expect(sut.spin(new Bet('L1', 'L2', 'L3'))).toStrictEqual(
       SpinResult.of(
@@ -623,7 +641,9 @@ describe('probability system', () => {
           new Odd('K', 4, 1_000),
           new Odd('K', 3, 800)
         ])
-      )
+      ),
+      (screen: Screen): number => (screen.countSymbol('S') >= 3 ? 10 : 0),
+      (screen: Screen): number => (screen.countSymbol('S') >= 5 ? 10 : 0)
     );
     expect(sut.spin(new Bet('L4'))).toStrictEqual(
       SpinResult.of(
@@ -686,7 +706,9 @@ describe('probability system', () => {
           new Odd('K', 4, 1_000),
           new Odd('K', 3, 800)
         ])
-      )
+      ),
+      (screen: Screen): number => (screen.countSymbol('S') >= 3 ? 10 : 0),
+      (screen: Screen): number => (screen.countSymbol('S') >= 5 ? 10 : 0)
     );
     expect(sut.spin(new Bet('L1'))).toStrictEqual(
       SpinResult.of(
@@ -749,7 +771,9 @@ describe('probability system', () => {
           new Odd('K', 4, 1_000),
           new Odd('K', 3, 800)
         ])
-      )
+      ),
+      (screen: Screen): number => (screen.countSymbol('S') >= 3 ? 10 : 0),
+      (screen: Screen): number => (screen.countSymbol('S') >= 5 ? 10 : 0)
     );
     expect(sut.spin(new Bet('L1'))).toStrictEqual(
       SpinResult.of(
@@ -812,7 +836,9 @@ describe('probability system', () => {
           new Odd('K', 4, 1_000),
           new Odd('K', 3, 800)
         ])
-      )
+      ),
+      (screen: Screen): number => (screen.countSymbol('S') >= 3 ? 10 : 0),
+      (screen: Screen): number => (screen.countSymbol('S') >= 5 ? 10 : 0)
     );
     expect(sut.spin(new Bet('L1'))).toStrictEqual(
       SpinResult.of(
@@ -863,7 +889,9 @@ describe('probability system', () => {
           new Odd('K', 4, 1_000),
           new Odd('K', 3, 800)
         ])
-      )
+      ),
+      (screen: Screen): number => (screen.countSymbol('S') >= 3 ? 10 : 0),
+      (screen: Screen): number => (screen.countSymbol('S') >= 5 ? 10 : 0)
     );
     expect(sut.spin(new Bet('L1'))).toStrictEqual(
       SpinResult.of(
@@ -914,7 +942,9 @@ describe('probability system', () => {
           new Odd('K', 4, 1_000),
           new Odd('K', 3, 800)
         ])
-      )
+      ),
+      (screen: Screen): number => (screen.countSymbol('S') >= 3 ? 10 : 0),
+      (screen: Screen): number => (screen.countSymbol('S') >= 5 ? 10 : 0)
     );
 
     sut.spin(new Bet('L1'));
@@ -964,7 +994,9 @@ describe('probability system', () => {
           new Odd('K', 4, 1_000),
           new Odd('K', 3, 800)
         ])
-      )
+      ),
+      (screen: Screen): number => (screen.countSymbol('S') >= 3 ? 10 : 0),
+      (screen: Screen): number => (screen.countSymbol('S') >= 5 ? 10 : 0)
     );
     expect(sut.getScreen()).toStrictEqual(
       Screen.from([
@@ -1011,7 +1043,9 @@ describe('probability system', () => {
           new Odd('K', 4, 1_000),
           new Odd('K', 3, 800)
         ])
-      )
+      ),
+      (screen: Screen): number => (screen.countSymbol('S') >= 3 ? 10 : 0),
+      (screen: Screen): number => (screen.countSymbol('S') >= 5 ? 10 : 0)
     );
     sut.spin(new Bet('L1'));
 
@@ -1066,7 +1100,9 @@ describe('probability system', () => {
           new Odd('K', 4, 1_000),
           new Odd('K', 3, 800)
         ])
-      )
+      ),
+      (screen: Screen): number => (screen.countSymbol('S') >= 3 ? 10 : 0),
+      (screen: Screen): number => (screen.countSymbol('S') >= 5 ? 10 : 0)
     );
     sut.spin(new Bet('L1'));
 
@@ -1121,7 +1157,9 @@ describe('probability system', () => {
           new Odd('K', 4, 1_000),
           new Odd('K', 3, 800)
         ])
-      )
+      ),
+      (screen: Screen): number => (screen.countSymbol('S') >= 3 ? 10 : 0),
+      (screen: Screen): number => (screen.countSymbol('S') >= 5 ? 10 : 0)
     );
     sut.spin(new Bet('L1'));
 
@@ -1175,7 +1213,9 @@ describe('probability system', () => {
           new Odd('K', 4, 1_000),
           new Odd('K', 3, 800)
         ])
-      )
+      ),
+      (screen: Screen): number => (screen.countSymbol('S') >= 3 ? 10 : 0),
+      (screen: Screen): number => (screen.countSymbol('S') >= 5 ? 10 : 0)
     );
     sut.spin(new Bet('L1'));
 
