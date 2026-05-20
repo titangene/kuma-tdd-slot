@@ -3,30 +3,7 @@ import { PayTable } from './PayTable.ts';
 import { Bet } from './Bet.ts';
 import { SpinResult } from './SpinResult.ts';
 import type { Screen } from '@/Screen.ts';
-
-class SlotGame {
-  constructor(
-    private reels: Reels,
-    private payTable: PayTable,
-    private calculateFreeGameIncrement: (screen: Screen) => number
-  ) {}
-
-  doSpinFlow(bet: Bet): {
-    odd: number;
-    screen: string[][];
-    freeGameIncrement: number;
-  } {
-    this.reels.spin();
-
-    const screen = this.reels.getScreen();
-
-    return {
-      odd: this.payTable.getOdd(screen, bet),
-      screen: screen.getRawScreenClone(),
-      freeGameIncrement: this.calculateFreeGameIncrement(screen)
-    };
-  }
-}
+import { SlotGame } from './SlotGame';
 
 export class ProbabilitySystem {
   private freeGameCount: number = 0;
