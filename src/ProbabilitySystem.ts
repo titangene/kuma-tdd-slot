@@ -6,8 +6,8 @@ import type { Screen } from '@/Screen.ts';
 
 class SlotGame {
   constructor(
-    private theReels: Reels,
-    private thePayTable: PayTable,
+    private reels: Reels,
+    private payTable: PayTable,
     private calculateFreeGameIncrement: (screen: Screen) => number
   ) {}
 
@@ -16,12 +16,12 @@ class SlotGame {
     screen: string[][];
     freeGameIncrement: number;
   } {
-    this.theReels.spin();
+    this.reels.spin();
 
-    const screen = this.theReels.getScreen();
+    const screen = this.reels.getScreen();
 
     return {
-      odd: this.thePayTable.getOdd(screen, bet),
+      odd: this.payTable.getOdd(screen, bet),
       screen: screen.getRawScreenClone(),
       freeGameIncrement: this.calculateFreeGameIncrement(screen)
     };
