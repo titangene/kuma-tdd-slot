@@ -37,4 +37,10 @@ export class SlotGame {
   getScreen(): Screen {
     return this.reels.getScreen();
   }
+
+  getMaxBet(freeGamePayTable: PayTable): Bet {
+    return new Bet(
+      ...freeGamePayTable.payLines.map(payLine => payLine.getName())
+    );
+  }
 }
