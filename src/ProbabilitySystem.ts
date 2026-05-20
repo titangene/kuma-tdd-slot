@@ -12,10 +12,10 @@ export class ProbabilitySystem {
   private maxBet: Bet;
 
   private constructor(
-    private reels: Reels,
-    private payTable: PayTable,
-    private freeGameReels: Reels,
-    private freeGamePayTable: PayTable
+    reels: Reels,
+    payTable: PayTable,
+    freeGameReels: Reels,
+    freeGamePayTable: PayTable
   ) {
     this.baseGame = new SlotGame(reels, payTable, (screen: Screen): number =>
       screen.countSymbol('S') >= 3 ? 10 : 0
