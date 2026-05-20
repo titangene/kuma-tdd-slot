@@ -30,20 +30,29 @@ class SlotGame {
 
 export class ProbabilitySystem {
   private freeGameCount: number = 0;
+  private baseGame: SlotGame;
+  private freeGame: SlotGame;
 
   private constructor(
     private reels: Reels,
     private payTable: PayTable,
     private freeGameReels: Reels,
     private freeGamePayTable: PayTable
-  ) {}
-
-  spin(bet: Bet): SpinResult {
-    const slotGame = new SlotGame(
+  ) {
+    this.baseGame = new SlotGame(
       this.reels,
       this.payTable,
       (screen: Screen): number => (screen.countSymbol('S') >= 3 ? 10 : 0)
     );
+    this.freeGame = new SlotGame(
+      this.freeGameReels,
+      this.freeGamePayTable,
+      (screen: Screen): number => (screen.countSymbol('S') >= 5 ? 10 : 0)
+    );
+  }
+
+  spin(bet: Bet): SpinResult {
+    const slotGame = this.baseGame;
     const { odd, screen, freeGameIncrement } = slotGame.doSpinFlow(bet);
 
     this.freeGameCount += freeGameIncrement;
@@ -56,11 +65,7 @@ export class ProbabilitySystem {
       ...this.freeGamePayTable.payLines.map(payLine => payLine.getName())
     );
 
-    const slotGame = new SlotGame(
-      this.freeGameReels,
-      this.freeGamePayTable,
-      (screen: Screen): number => (screen.countSymbol('S') >= 5 ? 10 : 0)
-    );
+    const slotGame = this.freeGame;
     const { odd, screen, freeGameIncrement } = slotGame.doSpinFlow(bet);
 
     this.freeGameCount += freeGameIncrement;
