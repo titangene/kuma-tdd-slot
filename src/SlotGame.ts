@@ -17,12 +17,16 @@ export class SlotGame {
   } {
     this.reels.spin();
 
-    const screen = this.reels.getScreen();
+    const screen = this.getScreen();
 
     return {
       odd: this.payTable.getOdd(screen, bet),
       screen: screen.getRawScreenClone(),
       freeGameIncrement: this.calculateFreeGameIncrement(screen)
     };
+  }
+
+  getScreen(): Screen {
+    return this.reels.getScreen();
   }
 }
