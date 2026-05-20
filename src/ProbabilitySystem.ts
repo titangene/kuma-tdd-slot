@@ -76,15 +76,12 @@ export class ProbabilitySystem {
     thePayTable: PayTable,
     calculateFreeGameIncrement: (screen: Screen) => number
   ): { odd: number; screen: string[][]; freeGameIncrement: number } {
-    theReels.spin();
-
-    const screen = theReels.getScreen();
-
-    return {
-      odd: thePayTable.getOdd(screen, bet),
-      screen: screen.getRawScreenClone(),
-      freeGameIncrement: calculateFreeGameIncrement(screen)
-    };
+    const slotGame = new SlotGame(
+      theReels,
+      thePayTable,
+      calculateFreeGameIncrement
+    );
+    return slotGame.doSpinFlow(bet);
   }
 
   static create(
