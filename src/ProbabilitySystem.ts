@@ -10,6 +10,22 @@ class SlotGame {
     private thePayTable: PayTable,
     private calculateFreeGameIncrement: (screen: Screen) => number
   ) {}
+
+  doSpinFlow(bet: Bet): {
+    odd: number;
+    screen: string[][];
+    freeGameIncrement: number;
+  } {
+    this.theReels.spin();
+
+    const screen = this.theReels.getScreen();
+
+    return {
+      odd: this.thePayTable.getOdd(screen, bet),
+      screen: screen.getRawScreenClone(),
+      freeGameIncrement: this.calculateFreeGameIncrement(screen)
+    };
+  }
 }
 
 export class ProbabilitySystem {
