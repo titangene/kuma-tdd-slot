@@ -52,8 +52,7 @@ export class ProbabilitySystem {
   }
 
   spin(bet: Bet): SpinResult {
-    const slotGame = this.baseGame;
-    const { odd, screen, freeGameIncrement } = slotGame.doSpinFlow(bet);
+    const { odd, screen, freeGameIncrement } = this.baseGame.doSpinFlow(bet);
 
     this.freeGameCount += freeGameIncrement;
 
@@ -65,8 +64,7 @@ export class ProbabilitySystem {
       ...this.freeGamePayTable.payLines.map(payLine => payLine.getName())
     );
 
-    const slotGame = this.freeGame;
-    const { odd, screen, freeGameIncrement } = slotGame.doSpinFlow(bet);
+    const { odd, screen, freeGameIncrement } = this.freeGame.doSpinFlow(bet);
 
     this.freeGameCount += freeGameIncrement;
 
