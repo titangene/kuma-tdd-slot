@@ -70,20 +70,6 @@ export class ProbabilitySystem {
     return SpinResult.of(odd, screen, this.getNextGameType());
   }
 
-  private doSpinFlow(
-    bet: Bet,
-    theReels: Reels,
-    thePayTable: PayTable,
-    calculateFreeGameIncrement: (screen: Screen) => number
-  ): { odd: number; screen: string[][]; freeGameIncrement: number } {
-    const slotGame = new SlotGame(
-      theReels,
-      thePayTable,
-      calculateFreeGameIncrement
-    );
-    return slotGame.doSpinFlow(bet);
-  }
-
   static create(
     reels: Reels,
     payTable: PayTable,
