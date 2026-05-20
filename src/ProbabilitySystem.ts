@@ -17,19 +17,17 @@ export class ProbabilitySystem {
     private freeGameReels: Reels,
     private freeGamePayTable: PayTable
   ) {
-    this.baseGame = new SlotGame(
-      this.reels,
-      this.payTable,
-      (screen: Screen): number => (screen.countSymbol('S') >= 3 ? 10 : 0)
+    this.baseGame = new SlotGame(reels, payTable, (screen: Screen): number =>
+      screen.countSymbol('S') >= 3 ? 10 : 0
     );
     this.freeGame = new SlotGame(
-      this.freeGameReels,
-      this.freeGamePayTable,
+      freeGameReels,
+      freeGamePayTable,
       (screen: Screen): number => (screen.countSymbol('S') >= 5 ? 10 : 0)
     );
 
     this.maxBet = new Bet(
-      ...this.freeGamePayTable.payLines.map(payLine => payLine.getName())
+      ...freeGamePayTable.payLines.map(payLine => payLine.getName())
     );
   }
 
