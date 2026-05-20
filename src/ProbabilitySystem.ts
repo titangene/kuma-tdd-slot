@@ -4,6 +4,14 @@ import { Bet } from './Bet.ts';
 import { SpinResult } from './SpinResult.ts';
 import type { Screen } from '@/Screen.ts';
 
+class SlotGame {
+  constructor(
+    theReels: Reels,
+    thePayTable: PayTable,
+    calculateFreeGameIncrement: (screen: Screen) => number
+  ) {}
+}
+
 export class ProbabilitySystem {
   private freeGameCount: number = 0;
 
