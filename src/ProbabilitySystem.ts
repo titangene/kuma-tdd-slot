@@ -33,6 +33,9 @@ export class ProbabilitySystem {
       this.freeGamePayTable
     );
 
+    this.freeGameCount +=
+      this.freeGameReels.getScreen().countSymbol('S') >= 5 ? 10 : 0;
+
     this.freeGameCount--;
 
     return SpinResult.of(odd, screen, this.getNextGameType());

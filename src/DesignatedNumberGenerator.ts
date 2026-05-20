@@ -8,6 +8,10 @@ export class DesignatedNumberGenerator implements RandomNumberGenerator {
   }
 
   nextInteger(): number {
-    return this.integers.shift() as number;
+    const shift: number = <number>this.integers.shift();
+
+    this.integers.push(shift); // to make a circular queue
+
+    return shift;
   }
 }
