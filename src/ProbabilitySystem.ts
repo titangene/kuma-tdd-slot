@@ -41,9 +41,9 @@ export class ProbabilitySystem {
   }
 
   spinFree(): SpinResult {
-    const bet: Bet = this.maxBet;
-
-    const { odd, screen, freeGameIncrement } = this.freeGame.doSpinFlow(bet);
+    const { odd, screen, freeGameIncrement } = this.freeGame.doSpinFlow(
+      this.maxBet
+    );
 
     this.freeGameCount += freeGameIncrement;
 
