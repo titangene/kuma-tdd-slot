@@ -27,7 +27,7 @@ export class ProbabilitySystem {
       (screen: Screen): number => (screen.countSymbol('S') >= 5 ? 10 : 0)
     );
 
-    this.maxBet = this.freeGame.getMaxBet(freeGamePayTable);
+    this.maxBet = this.freeGame.getMaxBet();
   }
 
   spin(bet: Bet): SpinResult {
