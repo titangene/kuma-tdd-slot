@@ -4,7 +4,15 @@ import type { Screen } from './Screen';
 import { Bet } from './Bet';
 
 export class SlotGame {
-  constructor(
+  static of(
+    reels: Reels,
+    payTable: PayTable,
+    calculateFreeGameIncrement: (screen: Screen) => number
+  ) {
+    return new SlotGame(reels, payTable, calculateFreeGameIncrement);
+  }
+
+  private constructor(
     private reels: Reels,
     private payTable: PayTable,
     private calculateFreeGameIncrement: (screen: Screen) => number

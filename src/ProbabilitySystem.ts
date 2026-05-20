@@ -18,10 +18,10 @@ export class ProbabilitySystem {
     freeGameReels: Reels,
     freeGamePayTable: PayTable
   ) {
-    this.baseGame = new SlotGame(reels, payTable, (screen: Screen): number =>
+    this.baseGame = SlotGame.of(reels, payTable, (screen: Screen): number =>
       screen.countSymbol('S') >= 3 ? 10 : 0
     );
-    this.freeGame = new SlotGame(
+    this.freeGame = SlotGame.of(
       freeGameReels,
       freeGamePayTable,
       (screen: Screen): number => (screen.countSymbol('S') >= 5 ? 10 : 0)
