@@ -66,8 +66,8 @@ export class ProbabilitySystem {
 
   getScreen(): Screen {
     return this.getNextGameType() === 'BASE_GAME'
-      ? this.reels.getScreen()
-      : this.freeGameReels.getScreen();
+      ? this.baseGame.getScreen()
+      : this.freeGame.getScreen();
   }
 
   getNextGameType(): string {
