@@ -6,9 +6,9 @@ import type { Screen } from '@/Screen.ts';
 
 class SlotGame {
   constructor(
-    theReels: Reels,
-    thePayTable: PayTable,
-    calculateFreeGameIncrement: (screen: Screen) => number
+    private theReels: Reels,
+    private thePayTable: PayTable,
+    private calculateFreeGameIncrement: (screen: Screen) => number
   ) {}
 }
 
