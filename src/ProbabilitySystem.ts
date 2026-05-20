@@ -6,9 +6,10 @@ import type { Screen } from '@/Screen.ts';
 import { SlotGame } from './SlotGame';
 
 export class ProbabilitySystem {
-  private freeGameCount: number = 0;
   private baseGame: SlotGame;
   private freeGame: SlotGame;
+
+  private freeGameCount: number = 0;
   private maxBet: Bet;
 
   private constructor(
