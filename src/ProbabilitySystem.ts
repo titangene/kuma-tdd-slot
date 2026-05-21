@@ -1,5 +1,3 @@
-import { Reels } from './Reels.ts';
-import { PayTable } from './PayTable.ts';
 import { Bet } from './Bet.ts';
 import { SpinResult } from './SpinResult.ts';
 import type { Screen } from '@/Screen.ts';
@@ -39,22 +37,8 @@ export class ProbabilitySystem {
     return SpinResult.of(odd, screen, this.getNextGameType());
   }
 
-  static create(
-    reels: Reels,
-    payTable: PayTable,
-    freeGameReels: Reels,
-    freeGamePayTable: PayTable,
-    calculateFreeGameIncrement: (screen: Screen) => number,
-    calculateFreeGameIncrementForFreeGame: (screen: Screen) => number
-  ): ProbabilitySystem {
-    return new ProbabilitySystem(
-      SlotGame.of(reels, payTable, calculateFreeGameIncrement),
-      SlotGame.of(
-        freeGameReels,
-        freeGamePayTable,
-        calculateFreeGameIncrementForFreeGame
-      )
-    );
+  static create(baseGame: SlotGame, freeGame: SlotGame): ProbabilitySystem {
+    return new ProbabilitySystem(baseGame, freeGame);
   }
 
   getScreen(): Screen {

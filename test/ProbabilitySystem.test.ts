@@ -9,10 +9,11 @@ import { Odd } from '@/Odd.ts';
 import { Odds } from '@/Odds.ts';
 import { SpinResult } from '@/SpinResult.ts';
 import { Screen } from '@/Screen.ts';
+import { SlotGame } from '@/SlotGame.ts';
 
 describe('probability system', () => {
   test('Row1 hit, bet L2 -> 0', () => {
-    const sut = ProbabilitySystem.create(
+    const baseGame = SlotGame.of(
       Reels.create(new DesignatedNumberGenerator(0, 0, 0, 0, 0), [
         ['A', 'Q', 'K'],
         ['A', '10', 'J'],
@@ -36,6 +37,9 @@ describe('probability system', () => {
           new Odd('K', 3, 8)
         ])
       ),
+      (screen: Screen): number => (screen.countSymbol('S') >= 3 ? 10 : 0)
+    );
+    const freeGame = SlotGame.of(
       Reels.create(new DesignatedNumberGenerator(0, 0, 0, 0, 0), [
         ['K', 'J', 'Q', 'A'],
         ['K', 'Q', 'K', 'A'],
@@ -58,9 +62,9 @@ describe('probability system', () => {
           new Odd('K', 3, 800)
         ])
       ),
-      (screen: Screen): number => (screen.countSymbol('S') >= 3 ? 10 : 0),
       (screen: Screen): number => (screen.countSymbol('S') >= 5 ? 10 : 0)
     );
+    const sut = ProbabilitySystem.create(baseGame, freeGame);
     expect(sut.spin(new Bet('L2'))).toStrictEqual(
       SpinResult.of(
         0,
@@ -77,7 +81,7 @@ describe('probability system', () => {
   });
 
   test('Row1 hit, bet L1 -> 20', () => {
-    const sut = ProbabilitySystem.create(
+    const baseGame = SlotGame.of(
       Reels.create(new DesignatedNumberGenerator(0, 0, 0, 0, 0), [
         ['A', 'Q', 'K'],
         ['A', '10', 'J'],
@@ -101,6 +105,9 @@ describe('probability system', () => {
           new Odd('K', 3, 8)
         ])
       ),
+      (screen: Screen): number => (screen.countSymbol('S') >= 3 ? 10 : 0)
+    );
+    const freeGame = SlotGame.of(
       Reels.create(new DesignatedNumberGenerator(0, 0, 0, 0, 0), [
         ['K', 'J', 'Q', 'A'],
         ['K', 'Q', 'K', 'A'],
@@ -123,9 +130,9 @@ describe('probability system', () => {
           new Odd('K', 3, 800)
         ])
       ),
-      (screen: Screen): number => (screen.countSymbol('S') >= 3 ? 10 : 0),
       (screen: Screen): number => (screen.countSymbol('S') >= 5 ? 10 : 0)
     );
+    const sut = ProbabilitySystem.create(baseGame, freeGame);
     expect(sut.spin(new Bet('L1'))).toStrictEqual(
       SpinResult.of(
         20,
@@ -142,7 +149,7 @@ describe('probability system', () => {
   });
 
   test('Row2 hit, bet L2 -> 20', () => {
-    const sut = ProbabilitySystem.create(
+    const baseGame = SlotGame.of(
       Reels.create(new DesignatedNumberGenerator(0, 0, 0, 0, 0), [
         ['Q', 'A', 'K'],
         ['10', 'A', 'J'],
@@ -166,6 +173,9 @@ describe('probability system', () => {
           new Odd('K', 3, 8)
         ])
       ),
+      (screen: Screen): number => (screen.countSymbol('S') >= 3 ? 10 : 0)
+    );
+    const freeGame = SlotGame.of(
       Reels.create(new DesignatedNumberGenerator(0, 0, 0, 0, 0), [
         ['K', 'J', 'Q', 'A'],
         ['K', 'Q', 'K', 'A'],
@@ -188,9 +198,9 @@ describe('probability system', () => {
           new Odd('K', 3, 800)
         ])
       ),
-      (screen: Screen): number => (screen.countSymbol('S') >= 3 ? 10 : 0),
       (screen: Screen): number => (screen.countSymbol('S') >= 5 ? 10 : 0)
     );
+    const sut = ProbabilitySystem.create(baseGame, freeGame);
     expect(sut.spin(new Bet('L2'))).toStrictEqual(
       SpinResult.of(
         20,
@@ -206,7 +216,7 @@ describe('probability system', () => {
     );
   });
   test('Row3 hit, bet L3 -> 20', () => {
-    const sut = ProbabilitySystem.create(
+    const baseGame = SlotGame.of(
       Reels.create(new DesignatedNumberGenerator(0, 0, 0, 0, 0), [
         ['A', 'Q', 'A'],
         ['10', 'J', 'A'],
@@ -230,6 +240,9 @@ describe('probability system', () => {
           new Odd('K', 3, 8)
         ])
       ),
+      (screen: Screen): number => (screen.countSymbol('S') >= 3 ? 10 : 0)
+    );
+    const freeGame = SlotGame.of(
       Reels.create(new DesignatedNumberGenerator(0, 0, 0, 0, 0), [
         ['K', 'J', 'Q', 'A'],
         ['K', 'Q', 'K', 'A'],
@@ -252,9 +265,9 @@ describe('probability system', () => {
           new Odd('K', 3, 800)
         ])
       ),
-      (screen: Screen): number => (screen.countSymbol('S') >= 3 ? 10 : 0),
       (screen: Screen): number => (screen.countSymbol('S') >= 5 ? 10 : 0)
     );
+    const sut = ProbabilitySystem.create(baseGame, freeGame);
     expect(sut.spin(new Bet('L3'))).toStrictEqual(
       SpinResult.of(
         20,
@@ -271,7 +284,7 @@ describe('probability system', () => {
   });
 
   test('Roll then Row3 hit, bet L3 -> 20', () => {
-    const sut = ProbabilitySystem.create(
+    const baseGame = SlotGame.of(
       Reels.create(new DesignatedNumberGenerator(1, 1, 1, 1, 1), [
         ['9', 'K', 'Q', 'A'],
         ['10', '10', 'J', 'A'],
@@ -295,6 +308,9 @@ describe('probability system', () => {
           new Odd('K', 3, 8)
         ])
       ),
+      (screen: Screen): number => (screen.countSymbol('S') >= 3 ? 10 : 0)
+    );
+    const freeGame = SlotGame.of(
       Reels.create(new DesignatedNumberGenerator(0, 0, 0, 0, 0), [
         ['K', 'J', 'Q', 'A'],
         ['K', 'Q', 'K', 'A'],
@@ -317,9 +333,9 @@ describe('probability system', () => {
           new Odd('K', 3, 800)
         ])
       ),
-      (screen: Screen): number => (screen.countSymbol('S') >= 3 ? 10 : 0),
       (screen: Screen): number => (screen.countSymbol('S') >= 5 ? 10 : 0)
     );
+    const sut = ProbabilitySystem.create(baseGame, freeGame);
     expect(sut.spin(new Bet('L3'))).toStrictEqual(
       SpinResult.of(
         20,
@@ -336,7 +352,7 @@ describe('probability system', () => {
   });
 
   test('Each Reel spins independently', () => {
-    const sut = ProbabilitySystem.create(
+    const baseGame = SlotGame.of(
       Reels.create(new DesignatedNumberGenerator(0, 1, 2, 3, 4), [
         ['A', 'Q', 'K'],
         ['9', 'A', '10', 'J'],
@@ -360,6 +376,9 @@ describe('probability system', () => {
           new Odd('K', 3, 8)
         ])
       ),
+      (screen: Screen): number => (screen.countSymbol('S') >= 3 ? 10 : 0)
+    );
+    const freeGame = SlotGame.of(
       Reels.create(new DesignatedNumberGenerator(0, 0, 0, 0, 0), [
         ['K', 'J', 'Q', 'A'],
         ['K', 'Q', 'K', 'A'],
@@ -382,9 +401,9 @@ describe('probability system', () => {
           new Odd('K', 3, 800)
         ])
       ),
-      (screen: Screen): number => (screen.countSymbol('S') >= 3 ? 10 : 0),
       (screen: Screen): number => (screen.countSymbol('S') >= 5 ? 10 : 0)
     );
+    const sut = ProbabilitySystem.create(baseGame, freeGame);
     expect(sut.spin(new Bet('L1'))).toStrictEqual(
       SpinResult.of(
         20,
@@ -401,7 +420,7 @@ describe('probability system', () => {
   });
 
   test('Cyclic Rolling', () => {
-    const sut = ProbabilitySystem.create(
+    const baseGame = SlotGame.of(
       Reels.create(new DesignatedNumberGenerator(1, 1, 1, 1, 1), [
         ['A', 'K', 'Q'],
         ['A', '10', 'J'],
@@ -425,6 +444,9 @@ describe('probability system', () => {
           new Odd('K', 3, 8)
         ])
       ),
+      (screen: Screen): number => (screen.countSymbol('S') >= 3 ? 10 : 0)
+    );
+    const freeGame = SlotGame.of(
       Reels.create(new DesignatedNumberGenerator(0, 0, 0, 0, 0), [
         ['K', 'J', 'Q', 'A'],
         ['K', 'Q', 'K', 'A'],
@@ -447,9 +469,9 @@ describe('probability system', () => {
           new Odd('K', 3, 800)
         ])
       ),
-      (screen: Screen): number => (screen.countSymbol('S') >= 3 ? 10 : 0),
       (screen: Screen): number => (screen.countSymbol('S') >= 5 ? 10 : 0)
     );
+    const sut = ProbabilitySystem.create(baseGame, freeGame);
     expect(sut.spin(new Bet('L3'))).toStrictEqual(
       SpinResult.of(
         20,
@@ -466,7 +488,7 @@ describe('probability system', () => {
   });
 
   test('Roll then Row2 hit, bet L1L2L3 -> 20', () => {
-    const sut = ProbabilitySystem.create(
+    const baseGame = SlotGame.of(
       Reels.create(new DesignatedNumberGenerator(1, 1, 1, 1, 1), [
         ['K', 'Q', 'A'],
         ['10', 'J', 'A'],
@@ -490,6 +512,9 @@ describe('probability system', () => {
           new Odd('K', 3, 8)
         ])
       ),
+      (screen: Screen): number => (screen.countSymbol('S') >= 3 ? 10 : 0)
+    );
+    const freeGame = SlotGame.of(
       Reels.create(new DesignatedNumberGenerator(0, 0, 0, 0, 0), [
         ['K', 'J', 'Q', 'A'],
         ['K', 'Q', 'K', 'A'],
@@ -512,9 +537,9 @@ describe('probability system', () => {
           new Odd('K', 3, 800)
         ])
       ),
-      (screen: Screen): number => (screen.countSymbol('S') >= 3 ? 10 : 0),
       (screen: Screen): number => (screen.countSymbol('S') >= 5 ? 10 : 0)
     );
+    const sut = ProbabilitySystem.create(baseGame, freeGame);
     expect(sut.spin(new Bet('L1', 'L2', 'L3'))).toStrictEqual(
       SpinResult.of(
         20,
@@ -531,7 +556,7 @@ describe('probability system', () => {
   });
 
   test('Roll then Row1 Row3 hit, bet L1L2L3 -> 40', () => {
-    const sut = ProbabilitySystem.create(
+    const baseGame = SlotGame.of(
       Reels.create(new DesignatedNumberGenerator(0, 0, 0, 0, 0), [
         ['A', 'Q', 'A'],
         ['A', '10', 'A'],
@@ -555,6 +580,9 @@ describe('probability system', () => {
           new Odd('K', 3, 8)
         ])
       ),
+      (screen: Screen): number => (screen.countSymbol('S') >= 3 ? 10 : 0)
+    );
+    const freeGame = SlotGame.of(
       Reels.create(new DesignatedNumberGenerator(0, 0, 0, 0, 0), [
         ['K', 'J', 'Q', 'A'],
         ['K', 'Q', 'K', 'A'],
@@ -577,9 +605,9 @@ describe('probability system', () => {
           new Odd('K', 3, 800)
         ])
       ),
-      (screen: Screen): number => (screen.countSymbol('S') >= 3 ? 10 : 0),
       (screen: Screen): number => (screen.countSymbol('S') >= 5 ? 10 : 0)
     );
+    const sut = ProbabilitySystem.create(baseGame, freeGame);
     expect(sut.spin(new Bet('L1', 'L2', 'L3'))).toStrictEqual(
       SpinResult.of(
         40,
@@ -596,7 +624,7 @@ describe('probability system', () => {
   });
 
   test('L4 hit, bet L4 -> 20', () => {
-    const sut = ProbabilitySystem.create(
+    const baseGame = SlotGame.of(
       Reels.create(new DesignatedNumberGenerator(0, 0, 0, 0, 0), [
         ['A', 'J', 'J'],
         ['J', 'A', 'Q'],
@@ -620,6 +648,9 @@ describe('probability system', () => {
           new Odd('K', 3, 8)
         ])
       ),
+      (screen: Screen): number => (screen.countSymbol('S') >= 3 ? 10 : 0)
+    );
+    const freeGame = SlotGame.of(
       Reels.create(new DesignatedNumberGenerator(0, 0, 0, 0, 0), [
         ['K', 'J', 'Q', 'A'],
         ['K', 'Q', 'K', 'A'],
@@ -642,9 +673,9 @@ describe('probability system', () => {
           new Odd('K', 3, 800)
         ])
       ),
-      (screen: Screen): number => (screen.countSymbol('S') >= 3 ? 10 : 0),
       (screen: Screen): number => (screen.countSymbol('S') >= 5 ? 10 : 0)
     );
+    const sut = ProbabilitySystem.create(baseGame, freeGame);
     expect(sut.spin(new Bet('L4'))).toStrictEqual(
       SpinResult.of(
         20,
@@ -661,7 +692,7 @@ describe('probability system', () => {
   });
 
   test('Row1 hit 4 Symbols, bet L1 => 15', () => {
-    const sut = ProbabilitySystem.create(
+    const baseGame = SlotGame.of(
       Reels.create(new DesignatedNumberGenerator(0, 0, 0, 0, 0), [
         ['A', 'Q', 'K'],
         ['A', '10', 'J'],
@@ -685,6 +716,9 @@ describe('probability system', () => {
           new Odd('K', 3, 8)
         ])
       ),
+      (screen: Screen): number => (screen.countSymbol('S') >= 3 ? 10 : 0)
+    );
+    const freeGame = SlotGame.of(
       Reels.create(new DesignatedNumberGenerator(0, 0, 0, 0, 0), [
         ['K', 'J', 'Q', 'A'],
         ['K', 'Q', 'K', 'A'],
@@ -707,9 +741,9 @@ describe('probability system', () => {
           new Odd('K', 3, 800)
         ])
       ),
-      (screen: Screen): number => (screen.countSymbol('S') >= 3 ? 10 : 0),
       (screen: Screen): number => (screen.countSymbol('S') >= 5 ? 10 : 0)
     );
+    const sut = ProbabilitySystem.create(baseGame, freeGame);
     expect(sut.spin(new Bet('L1'))).toStrictEqual(
       SpinResult.of(
         15,
@@ -726,7 +760,7 @@ describe('probability system', () => {
   });
 
   test('Row1 hit 3 Symbols, bet L1 => 10', () => {
-    const sut = ProbabilitySystem.create(
+    const baseGame = SlotGame.of(
       Reels.create(new DesignatedNumberGenerator(0, 0, 0, 0, 0), [
         ['A', 'Q', 'K'],
         ['A', '10', 'J'],
@@ -750,6 +784,9 @@ describe('probability system', () => {
           new Odd('K', 3, 8)
         ])
       ),
+      (screen: Screen): number => (screen.countSymbol('S') >= 3 ? 10 : 0)
+    );
+    const freeGame = SlotGame.of(
       Reels.create(new DesignatedNumberGenerator(0, 0, 0, 0, 0), [
         ['K', 'J', 'Q', 'A'],
         ['K', 'Q', 'K', 'A'],
@@ -772,9 +809,9 @@ describe('probability system', () => {
           new Odd('K', 3, 800)
         ])
       ),
-      (screen: Screen): number => (screen.countSymbol('S') >= 3 ? 10 : 0),
       (screen: Screen): number => (screen.countSymbol('S') >= 5 ? 10 : 0)
     );
+    const sut = ProbabilitySystem.create(baseGame, freeGame);
     expect(sut.spin(new Bet('L1'))).toStrictEqual(
       SpinResult.of(
         10,
@@ -791,7 +828,7 @@ describe('probability system', () => {
   });
 
   test('Row1 hit as K, bet L1 => 15', () => {
-    const sut = ProbabilitySystem.create(
+    const baseGame = SlotGame.of(
       Reels.create(new DesignatedNumberGenerator(0, 0, 0, 0, 0), [
         ['K', 'Q', 'A'],
         ['K', '10', 'J'],
@@ -815,6 +852,9 @@ describe('probability system', () => {
           new Odd('K', 3, 8)
         ])
       ),
+      (screen: Screen): number => (screen.countSymbol('S') >= 3 ? 10 : 0)
+    );
+    const freeGame = SlotGame.of(
       Reels.create(new DesignatedNumberGenerator(0, 0, 0, 0, 0), [
         ['K', 'J', 'Q', 'A'],
         ['K', 'Q', 'K', 'A'],
@@ -837,9 +877,9 @@ describe('probability system', () => {
           new Odd('K', 3, 800)
         ])
       ),
-      (screen: Screen): number => (screen.countSymbol('S') >= 3 ? 10 : 0),
       (screen: Screen): number => (screen.countSymbol('S') >= 5 ? 10 : 0)
     );
+    const sut = ProbabilitySystem.create(baseGame, freeGame);
     expect(sut.spin(new Bet('L1'))).toStrictEqual(
       SpinResult.of(
         15,
@@ -856,7 +896,7 @@ describe('probability system', () => {
   });
 
   test('Entering Free Game', () => {
-    const sut = ProbabilitySystem.create(
+    const baseGame = SlotGame.of(
       Reels.create(new DesignatedNumberGenerator(0, 0, 0, 0, 0), [
         ['A', 'K', 'A', '10', 'J', 'Q'],
         ['A', 'K', 'S', 'J', 'Q', 'K'],
@@ -868,6 +908,9 @@ describe('probability system', () => {
         [PayLine.from('L1', [0, 0, 0, 0, 0])],
         new Odds([new Odd('A', 5, 20)])
       ),
+      (screen: Screen): number => (screen.countSymbol('S') >= 3 ? 10 : 0)
+    );
+    const freeGame = SlotGame.of(
       Reels.create(new DesignatedNumberGenerator(0, 0, 0, 0, 0), [
         ['K', 'J', 'Q', 'A'],
         ['K', 'Q', 'K', 'A'],
@@ -890,9 +933,9 @@ describe('probability system', () => {
           new Odd('K', 3, 800)
         ])
       ),
-      (screen: Screen): number => (screen.countSymbol('S') >= 3 ? 10 : 0),
       (screen: Screen): number => (screen.countSymbol('S') >= 5 ? 10 : 0)
     );
+    const sut = ProbabilitySystem.create(baseGame, freeGame);
     expect(sut.spin(new Bet('L1'))).toStrictEqual(
       SpinResult.of(
         20,
@@ -909,7 +952,7 @@ describe('probability system', () => {
   });
 
   test('Get Screen in Free Game', () => {
-    const sut = ProbabilitySystem.create(
+    const baseGame = SlotGame.of(
       Reels.create(new DesignatedNumberGenerator(0, 0, 0, 0, 0), [
         ['A', 'K', 'A', '10', 'J', 'Q'],
         ['A', 'K', 'S', 'J', 'Q', 'K'],
@@ -921,6 +964,9 @@ describe('probability system', () => {
         [PayLine.from('L1', [0, 0, 0, 0, 0])],
         new Odds([new Odd('A', 5, 20)])
       ),
+      (screen: Screen): number => (screen.countSymbol('S') >= 3 ? 10 : 0)
+    );
+    const freeGame = SlotGame.of(
       Reels.create(new DesignatedNumberGenerator(0, 0, 0, 0, 0), [
         ['K', 'J', 'Q', 'A'],
         ['K', 'Q', 'K', 'A'],
@@ -943,9 +989,9 @@ describe('probability system', () => {
           new Odd('K', 3, 800)
         ])
       ),
-      (screen: Screen): number => (screen.countSymbol('S') >= 3 ? 10 : 0),
       (screen: Screen): number => (screen.countSymbol('S') >= 5 ? 10 : 0)
     );
+    const sut = ProbabilitySystem.create(baseGame, freeGame);
 
     sut.spin(new Bet('L1'));
 
@@ -961,7 +1007,7 @@ describe('probability system', () => {
   });
 
   test('Get Screen in Base Game', () => {
-    const sut = ProbabilitySystem.create(
+    const baseGame = SlotGame.of(
       Reels.create(new DesignatedNumberGenerator(0, 0, 0, 0, 0), [
         ['A', 'K', 'A', '10', 'J', 'Q'],
         ['A', 'K', 'S', 'J', 'Q', 'K'],
@@ -973,6 +1019,9 @@ describe('probability system', () => {
         [PayLine.from('L1', [0, 0, 0, 0, 0])],
         new Odds([new Odd('A', 5, 20)])
       ),
+      (screen: Screen): number => (screen.countSymbol('S') >= 3 ? 10 : 0)
+    );
+    const freeGame = SlotGame.of(
       Reels.create(new DesignatedNumberGenerator(0, 0, 0, 0, 0), [
         ['K', 'J', 'Q', 'A'],
         ['K', 'Q', 'K', 'A'],
@@ -995,9 +1044,9 @@ describe('probability system', () => {
           new Odd('K', 3, 800)
         ])
       ),
-      (screen: Screen): number => (screen.countSymbol('S') >= 3 ? 10 : 0),
       (screen: Screen): number => (screen.countSymbol('S') >= 5 ? 10 : 0)
     );
+    const sut = ProbabilitySystem.create(baseGame, freeGame);
     expect(sut.getScreen()).toStrictEqual(
       Screen.from([
         ['A', 'K', 'A'],
@@ -1010,7 +1059,7 @@ describe('probability system', () => {
   });
 
   test('Entering Free Game, spin, win 0', () => {
-    const sut = ProbabilitySystem.create(
+    const baseGame = SlotGame.of(
       Reels.create(new DesignatedNumberGenerator(0, 0, 0, 0, 0), [
         ['A', 'K', 'A', '10', 'J', 'Q'],
         ['A', 'K', 'S', 'J', 'Q', 'K'],
@@ -1022,6 +1071,9 @@ describe('probability system', () => {
         [PayLine.from('L1', [0, 0, 0, 0, 0])],
         new Odds([new Odd('A', 5, 20)])
       ),
+      (screen: Screen): number => (screen.countSymbol('S') >= 3 ? 10 : 0)
+    );
+    const freeGame = SlotGame.of(
       Reels.create(new DesignatedNumberGenerator(0, 0, 0, 0, 0), [
         ['K', 'J', 'Q', 'A'],
         ['K', 'Q', 'K', 'A'],
@@ -1044,9 +1096,9 @@ describe('probability system', () => {
           new Odd('K', 3, 800)
         ])
       ),
-      (screen: Screen): number => (screen.countSymbol('S') >= 3 ? 10 : 0),
       (screen: Screen): number => (screen.countSymbol('S') >= 5 ? 10 : 0)
     );
+    const sut = ProbabilitySystem.create(baseGame, freeGame);
     sut.spin(new Bet('L1'));
 
     const actual: SpinResult = sut.spinFree();
@@ -1067,7 +1119,7 @@ describe('probability system', () => {
   });
 
   test('Entering Free Game, spin, A x 5 hits, win 2000', () => {
-    const sut = ProbabilitySystem.create(
+    const baseGame = SlotGame.of(
       Reels.create(new DesignatedNumberGenerator(0, 0, 0, 0, 0), [
         ['A', 'K', 'A', '10', 'J', 'Q'],
         ['A', 'K', 'S', 'J', 'Q', 'K'],
@@ -1079,6 +1131,9 @@ describe('probability system', () => {
         [PayLine.from('L1', [0, 0, 0, 0, 0])],
         new Odds([new Odd('A', 5, 20)])
       ),
+      (screen: Screen): number => (screen.countSymbol('S') >= 3 ? 10 : 0)
+    );
+    const freeGame = SlotGame.of(
       Reels.create(new DesignatedNumberGenerator(1, 1, 1, 1, 1), [
         ['9', 'A', 'K', 'J', 'Q'],
         ['J', 'A', 'K', 'Q', 'K'],
@@ -1101,9 +1156,9 @@ describe('probability system', () => {
           new Odd('K', 3, 800)
         ])
       ),
-      (screen: Screen): number => (screen.countSymbol('S') >= 3 ? 10 : 0),
       (screen: Screen): number => (screen.countSymbol('S') >= 5 ? 10 : 0)
     );
+    const sut = ProbabilitySystem.create(baseGame, freeGame);
     sut.spin(new Bet('L1'));
 
     const actual: SpinResult = sut.spinFree();
@@ -1124,7 +1179,7 @@ describe('probability system', () => {
   });
 
   test('Exiting Free Game', () => {
-    const sut = ProbabilitySystem.create(
+    const baseGame = SlotGame.of(
       Reels.create(new DesignatedNumberGenerator(0, 0, 0, 0, 0), [
         ['A', 'K', 'A', '10', 'J', 'Q'],
         ['A', 'K', 'S', 'J', 'Q', 'K'],
@@ -1136,6 +1191,9 @@ describe('probability system', () => {
         [PayLine.from('L1', [0, 0, 0, 0, 0])],
         new Odds([new Odd('A', 5, 20)])
       ),
+      (screen: Screen): number => (screen.countSymbol('S') >= 3 ? 10 : 0)
+    );
+    const freeGame = SlotGame.of(
       Reels.create(new DesignatedNumberGenerator(1, 1, 1, 1, 1), [
         ['9', 'A', 'K', 'J', 'Q'],
         ['J', 'A', 'K', 'Q', 'K'],
@@ -1158,9 +1216,9 @@ describe('probability system', () => {
           new Odd('K', 3, 800)
         ])
       ),
-      (screen: Screen): number => (screen.countSymbol('S') >= 3 ? 10 : 0),
       (screen: Screen): number => (screen.countSymbol('S') >= 5 ? 10 : 0)
     );
+    const sut = ProbabilitySystem.create(baseGame, freeGame);
     sut.spin(new Bet('L1'));
 
     for (let i = 0; i < 10; i++) {
@@ -1180,7 +1238,7 @@ describe('probability system', () => {
   });
 
   test('Retrigger Free Game: 1 more spin when 5 special symbols appears', () => {
-    const sut = ProbabilitySystem.create(
+    const baseGame = SlotGame.of(
       Reels.create(new DesignatedNumberGenerator(0, 0, 0, 0, 0), [
         ['A', 'K', 'A', '10', 'J', 'Q'],
         ['A', 'K', 'S', 'J', 'Q', 'K'],
@@ -1192,6 +1250,9 @@ describe('probability system', () => {
         [PayLine.from('L1', [0, 0, 0, 0, 0])],
         new Odds([new Odd('A', 5, 20)])
       ),
+      (screen: Screen): number => (screen.countSymbol('S') >= 3 ? 10 : 0)
+    );
+    const freeGame = SlotGame.of(
       Reels.create(new DesignatedNumberGenerator(5, 5, 5, 5, 5), [
         ['9', 'A', 'K', 'J', 'Q', 'S', 'J', 'S'],
         ['J', 'A', 'K', 'Q', 'K', 'A', 'K', 'Q'],
@@ -1214,9 +1275,9 @@ describe('probability system', () => {
           new Odd('K', 3, 800)
         ])
       ),
-      (screen: Screen): number => (screen.countSymbol('S') >= 3 ? 10 : 0),
       (screen: Screen): number => (screen.countSymbol('S') >= 5 ? 10 : 0)
     );
+    const sut = ProbabilitySystem.create(baseGame, freeGame);
     sut.spin(new Bet('L1'));
 
     for (let i = 0; i < 10; i++) {
