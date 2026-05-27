@@ -32,4 +32,12 @@ export class Reel {
   ): Reel {
     return new Reel(reel, randomNumberGenerator);
   }
+
+  getIndex(): number {
+    return this.index;
+  }
+
+  setIndex(index: number) {
+    this.index = index;
+  }
 }

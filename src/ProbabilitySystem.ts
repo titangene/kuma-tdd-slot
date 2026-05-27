@@ -59,7 +59,7 @@ export class ProbabilitySystem {
   }
 
   getCharacteristic(): Characteristic {
-    return new Characteristic();
+    return new Characteristic(this.baseGame.getReelsIndexes());
   }
 
   restore(characteristic: Characteristic) {
