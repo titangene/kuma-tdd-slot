@@ -59,10 +59,13 @@ export class ProbabilitySystem {
   }
 
   getCharacteristic(): Characteristic {
-    return undefined;
+    return new Characteristic();
   }
 
   static restore(characteristic: Characteristic): ProbabilitySystem {
-    return undefined;
+    const baseGame = null;
+    const freeGame = null;
+
+    return ProbabilitySystem.create(baseGame, freeGame);
   }
 }
