@@ -3,6 +3,14 @@ import { SpinResult } from './SpinResult.ts';
 import type { Screen } from '@/Screen.ts';
 import { SlotGame } from './SlotGame';
 
+class DbcTool {
+  static require(checkCondition: () => boolean, message: string) {
+    if (!checkCondition()) {
+      throw new Error(message);
+    }
+  }
+}
+
 export class ProbabilitySystem {
   private baseGame: SlotGame;
   private freeGame: SlotGame;
@@ -18,7 +26,7 @@ export class ProbabilitySystem {
   }
 
   spin(bet: Bet): SpinResult {
-    this.require(
+    DbcTool.require(
       () => this.getNextGameType() === 'BASE_GAME',
       'Invalid game mode.'
     );
@@ -28,12 +36,6 @@ export class ProbabilitySystem {
     this.freeGameCount += freeGameIncrement;
 
     return SpinResult.of(odd, screen, this.getNextGameType());
-  }
-
-  private require(checkCondition: () => boolean, message: string) {
-    if (!checkCondition()) {
-      throw new Error(message);
-    }
   }
 
   spinFree(): SpinResult {
