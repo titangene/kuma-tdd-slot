@@ -4,4 +4,10 @@ export class DbcTool {
       throw new Error(message);
     }
   }
+
+  static ensure(checkCondition: () => boolean, message: string) {
+    if (!checkCondition()) {
+      throw new Error(message);
+    }
+  }
 }

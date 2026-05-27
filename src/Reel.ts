@@ -1,4 +1,5 @@
 import type { RandomNumberGenerator } from './RandomNumberGenerator.ts';
+import { DbcTool } from '@/DbcTool.ts';
 
 export class Reel {
   private index: number;
@@ -20,9 +21,7 @@ export class Reel {
       (_, k) => this.symbols[(this.index + k) % this.symbols.length]
     );
 
-    if (screenColumn.length !== 3) {
-      throw new Error('Invalid Column size');
-    }
+    DbcTool.ensure(() => screenColumn.length === 3, 'Invalid Column size');
 
     return screenColumn;
   }
