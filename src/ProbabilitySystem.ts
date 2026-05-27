@@ -59,7 +59,10 @@ export class ProbabilitySystem {
   }
 
   getCharacteristic(): Characteristic {
-    return new Characteristic(this.baseGame.getReelsIndexes());
+    return new Characteristic(
+      this.baseGame.getReelsIndexes(),
+      this.freeGameCount
+    );
   }
 
   restore(characteristic: Characteristic) {
@@ -67,6 +70,6 @@ export class ProbabilitySystem {
 
     // 未來才會開始實作 Free Game 的部分
     // this.freeGame.rollReels(characteristic.getFreeGameReelsIndexes());
-    // this.freeGameCount = characteristic.getFreeGameCount();
+    this.freeGameCount = characteristic.getFreeGameCount();
   }
 }
