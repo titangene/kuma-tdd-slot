@@ -28,8 +28,6 @@ export class ProbabilitySystem {
   }
 
   private require(checkCondition: () => boolean) {
-    // const checkCondition = checkCondition;
-
     if (!checkCondition()) {
       throw new Error('Invalid game mode.');
     }
