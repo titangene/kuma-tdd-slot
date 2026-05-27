@@ -2,14 +2,7 @@ import { Bet } from './Bet.ts';
 import { SpinResult } from './SpinResult.ts';
 import type { Screen } from '@/Screen.ts';
 import { SlotGame } from './SlotGame';
-
-class DbcTool {
-  static require(checkCondition: () => boolean, message: string) {
-    if (!checkCondition()) {
-      throw new Error(message);
-    }
-  }
-}
+import { DbcTool } from '@/DbcTool.ts';
 
 export class ProbabilitySystem {
   private baseGame: SlotGame;
