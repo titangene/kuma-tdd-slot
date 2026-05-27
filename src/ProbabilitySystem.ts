@@ -17,9 +17,9 @@ export class ProbabilitySystem {
   spin(bet: Bet): SpinResult {
     const { odd, screen } = this.doSpinFlow(bet, this.reels, this.payTable);
 
-    const calculateFreeGameIncrement = () => {
-      return this.reels.getScreen().countSymbol('S') >= 3 ? 10 : 0;
-    };
+    const calculateFreeGameIncrement = () =>
+      this.reels.getScreen().countSymbol('S') >= 3 ? 10 : 0;
+
     this.freeGameCount += calculateFreeGameIncrement.call(this);
 
     return SpinResult.of(odd, screen, this.getNextGameType());
@@ -36,9 +36,9 @@ export class ProbabilitySystem {
       this.freeGamePayTable
     );
 
-    const calculateFreeGameIncrement = () => {
-      return this.freeGameReels.getScreen().countSymbol('S') >= 5 ? 10 : 0;
-    };
+    const calculateFreeGameIncrement = () =>
+      this.freeGameReels.getScreen().countSymbol('S') >= 5 ? 10 : 0;
+
     this.freeGameCount += calculateFreeGameIncrement.call(this);
 
     this.freeGameCount--;
