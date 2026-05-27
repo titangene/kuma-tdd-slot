@@ -63,14 +63,15 @@ export class ProbabilitySystem {
     theReels: Reels,
     thePayTable: PayTable,
     calculateFreeGameIncrement: (screen: Screen) => number
-  ): { odd: number; screen: string[][] } {
+  ): { odd: number; screen: string[][]; freeGameIncrement: number } {
     theReels.spin();
 
     const screen = theReels.getScreen();
 
     return {
       odd: thePayTable.getOdd(screen, bet),
-      screen: screen.getRawScreenClone()
+      screen: screen.getRawScreenClone(),
+      freeGameIncrement: 0
     };
   }
 
