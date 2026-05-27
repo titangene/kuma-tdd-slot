@@ -20,7 +20,7 @@ export class ProbabilitySystem {
     const calculateFreeGameIncrement = () =>
       this.reels.getScreen().countSymbol('S') >= 3 ? 10 : 0;
 
-    this.freeGameCount += calculateFreeGameIncrement.call(this);
+    this.freeGameCount += calculateFreeGameIncrement();
 
     return SpinResult.of(odd, screen, this.getNextGameType());
   }
@@ -39,7 +39,7 @@ export class ProbabilitySystem {
     const calculateFreeGameIncrement = () =>
       this.freeGameReels.getScreen().countSymbol('S') >= 5 ? 10 : 0;
 
-    this.freeGameCount += calculateFreeGameIncrement.call(this);
+    this.freeGameCount += calculateFreeGameIncrement();
 
     this.freeGameCount--;
 
