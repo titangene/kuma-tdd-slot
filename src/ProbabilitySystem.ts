@@ -18,7 +18,10 @@ export class ProbabilitySystem {
   }
 
   spin(bet: Bet): SpinResult {
-    this.require(() => this.getNextGameType() === 'BASE_GAME');
+    this.require(
+      () => this.getNextGameType() === 'BASE_GAME',
+      'Invalid game mode.'
+    );
 
     const { odd, screen, freeGameIncrement } = this.baseGame.doSpinFlow(bet);
 
@@ -27,9 +30,9 @@ export class ProbabilitySystem {
     return SpinResult.of(odd, screen, this.getNextGameType());
   }
 
-  private require(checkCondition: () => boolean) {
+  private require(checkCondition: () => boolean, message: string) {
     if (!checkCondition()) {
-      throw new Error('Invalid game mode.');
+      throw new Error(message);
     }
   }
 
