@@ -18,15 +18,19 @@ export class ProbabilitySystem {
   }
 
   spin(bet: Bet): SpinResult {
-    if (this.getNextGameType() !== 'BASE_GAME') {
-      throw new Error('Invalid game mode.');
-    }
+    this.require();
 
     const { odd, screen, freeGameIncrement } = this.baseGame.doSpinFlow(bet);
 
     this.freeGameCount += freeGameIncrement;
 
     return SpinResult.of(odd, screen, this.getNextGameType());
+  }
+
+  private require() {
+    if (this.getNextGameType() !== 'BASE_GAME') {
+      throw new Error('Invalid game mode.');
+    }
   }
 
   spinFree(): SpinResult {
