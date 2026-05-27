@@ -1,4 +1,5 @@
 import { Hit } from './Hit.ts';
+import { DbcTool } from './DbcTool.ts';
 
 export class Screen {
   private constructor(private rawScreen: string[][]) {}
@@ -11,9 +12,10 @@ export class Screen {
   }
 
   getHit(rows: number[]): Hit {
-    if (rows.length !== this.rawScreen.length) {
-      throw new Error('Invalid row number');
-    }
+    DbcTool.require(
+      () => this.rawScreen.length === rows.length,
+      'Invalid row number'
+    );
 
     const firstSymbol = this.rawScreen[0][rows[0]];
     let longestHit = 1; // Start from 1 since the first element is always counted
