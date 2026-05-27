@@ -10,6 +10,7 @@ import { Odds } from '@/Odds.ts';
 import { SpinResult } from '@/SpinResult.ts';
 import { Screen } from '@/Screen.ts';
 import { SlotGame } from '@/SlotGame.ts';
+import { Characteristic } from '@/Characteristic.ts';
 
 describe('probability system', () => {
   test('Row1 hit, bet L2 -> 0', () => {

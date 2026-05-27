@@ -3,6 +3,7 @@ import { SpinResult } from './SpinResult.ts';
 import type { Screen } from '@/Screen.ts';
 import { SlotGame } from './SlotGame';
 import { DbcTool } from '@/DbcTool.ts';
+import { Characteristic } from '@/Characteristic.ts';
 
 export class ProbabilitySystem {
   private baseGame: SlotGame;
@@ -55,5 +56,13 @@ export class ProbabilitySystem {
 
   getNextGameType(): string {
     return this.freeGameCount > 0 ? 'FREE_GAME' : 'BASE_GAME';
+  }
+
+  getCharacteristic(): Characteristic {
+    return undefined;
+  }
+
+  static restore(characteristic: Characteristic): ProbabilitySystem {
+    return undefined;
   }
 }
