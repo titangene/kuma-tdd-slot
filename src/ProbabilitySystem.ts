@@ -28,7 +28,7 @@ export class ProbabilitySystem {
   }
 
   private require() {
-    if (this.getNextGameType() !== 'BASE_GAME') {
+    if (!(this.getNextGameType() === 'BASE_GAME')) {
       throw new Error('Invalid game mode.');
     }
   }
