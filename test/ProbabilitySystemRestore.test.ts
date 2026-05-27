@@ -11,9 +11,11 @@ import { Screen } from '@/Screen.ts';
 import { Bet } from '@/Bet.ts';
 import type { Characteristic } from '@/Characteristic.ts';
 
-export function create_probability_system(): ProbabilitySystem {
+export function create_probability_system(
+  baseGameRandoms: number[]
+): ProbabilitySystem {
   const baseGame = SlotGame.of(
-    Reels.create(new DesignatedNumberGenerator(1, 1, 1, 1, 1), [
+    Reels.create(new DesignatedNumberGenerator(...baseGameRandoms), [
       ['K', 'Q', 'A', 'A'],
       ['K', '10', 'J', 'A'],
       ['K', 'Q', 'A', 'J'],
@@ -46,13 +48,15 @@ export function create_probability_system(): ProbabilitySystem {
 
 describe('probability system restores', () => {
   test('Recovery BaseGame', () => {
-    const original = create_probability_system();
+    const original = create_probability_system([1, 1, 1, 1, 1]);
 
     original.spin(new Bet('L1'));
 
     const characteristic: Characteristic = original.getCharacteristic();
 
-    const restored: ProbabilitySystem = create_probability_system();
+    const restored: ProbabilitySystem = create_probability_system([
+      1, 1, 1, 1, 1
+    ]);
 
     restored.restore(characteristic);
 
