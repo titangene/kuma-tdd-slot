@@ -16,11 +16,11 @@ export function create_probability_system(
 ): ProbabilitySystem {
   const baseGame = SlotGame.of(
     Reels.create(new DesignatedNumberGenerator(...baseGameRandoms), [
-      ['K', 'Q', 'A', 'A'],
-      ['K', '10', 'J', 'A'],
-      ['K', 'Q', 'A', 'J'],
-      ['K', 'Q', 'A', 'K'],
-      ['K', '10', 'J', 'Q']
+      ['K', 'Q', 'A', 'A', 'S'],
+      ['K', '10', 'J', 'A', 'S'],
+      ['K', 'Q', 'A', 'J', 'Q'],
+      ['K', 'Q', 'A', 'K', 'S'],
+      ['K', '10', 'J', 'Q', 'J']
     ]),
     new PayTable(
       [PayLine.from('L1', [0, 0, 0, 0, 0])],
@@ -68,6 +68,47 @@ describe('probability system restores', () => {
         ['Q', 'A', 'J'],
         ['Q', 'A', 'K'],
         ['10', 'J', 'Q']
+      ])
+    );
+  });
+
+  test('Recovery Free Game Count', () => {
+    const original: ProbabilitySystem = create_probability_system([
+      2, 2, 2, 2, 2
+    ]);
+
+    original.spin(new Bet('L1'));
+
+    const characteristic: Characteristic = original.getCharacteristic();
+
+    const restored: ProbabilitySystem = create_probability_system([
+      2, 2, 2, 2, 2
+    ]);
+    restored.restore(characteristic);
+
+    expect(restored.getNextGameType()).toBe('FREE_GAME');
+    expect(restored.getScreen()).toStrictEqual(
+      Screen.from([
+        ['K', 'J', 'Q'],
+        ['K', 'Q', 'K'],
+        ['Q', 'K', '10'],
+        ['10', 'K', 'Q'],
+        ['J', 'Q', 'K']
+      ])
+    );
+
+    for (let i = 0; i < 10; i++) {
+      restored.spinFree();
+    }
+
+    expect(restored.getNextGameType()).toBe('BASE_GAME');
+    expect(restored.getScreen()).toStrictEqual(
+      Screen.from([
+        ['A', 'A', 'S'],
+        ['J', 'A', 'S'],
+        ['A', 'J', 'Q'],
+        ['A', 'K', 'S'],
+        ['J', 'Q', 'J']
       ])
     );
   });
