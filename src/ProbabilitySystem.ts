@@ -3,7 +3,7 @@ import { SpinResult } from './SpinResult.ts';
 import type { Screen } from '@/Screen.ts';
 import { SlotGame } from './SlotGame';
 import { DbcTool } from '@/DbcTool.ts';
-import { Characteristic } from '@/Characteristic.ts';
+import { Memento } from '@/Memento.ts';
 
 export class ProbabilitySystem {
   private baseGame: SlotGame;
@@ -58,18 +58,18 @@ export class ProbabilitySystem {
     return this.freeGameCount > 0 ? 'FREE_GAME' : 'BASE_GAME';
   }
 
-  getCharacteristic(): Characteristic {
-    return new Characteristic(
+  createMemento(): Memento {
+    return new Memento(
       this.baseGame.getReelsIndexes(),
       this.freeGame.getReelsIndexes(),
       this.freeGameCount
     );
   }
 
-  restore(characteristic: Characteristic) {
-    this.baseGame.rollReels(characteristic.getBaseGameReelsIndexes());
+  restore(memento: Memento) {
+    this.baseGame.rollReels(memento.getBaseGameReelsIndexes());
 
-    this.freeGame.rollReels(characteristic.getFreeGameReelsIndexes());
-    this.freeGameCount = characteristic.getFreeGameCount();
+    this.freeGame.rollReels(memento.getFreeGameReelsIndexes());
+    this.freeGameCount = memento.getFreeGameCount();
   }
 }

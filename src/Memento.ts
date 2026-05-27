@@ -1,4 +1,4 @@
-export class Characteristic {
+export class Memento {
   constructor(
     private baseGameReelsIndexes: number[],
     private freeGameReelsIndexes: number[],
