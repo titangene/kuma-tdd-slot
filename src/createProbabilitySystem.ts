@@ -52,6 +52,5 @@ export function createProbabilitySystem(
         : 0
   );
 
-  const sut = ProbabilitySystem.create(baseGame, freeGame);
-  return sut;
+  return ProbabilitySystem.create(baseGame, freeGame);
 }
