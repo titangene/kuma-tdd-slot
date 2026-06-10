@@ -96,7 +96,8 @@ export class ProbabilitySystemFactory {
   ]);
 
   createProbabilitySystem(): ProbabilitySystem {
-    const settings = this.settings;
+    const settings = this.gameIdToSettings.get('JinInManWu')!;
+
     const baseGameSettings = settings.baseGameSettings;
     const baseGame: SlotGame = SlotGame.of(
       Reels.create(new NativeRandomNumberGenerator(), baseGameSettings.reels),
