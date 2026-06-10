@@ -11,10 +11,13 @@ import { NativeRandomNumberGenerator } from '@/NativeRandomNumberGenerator.ts';
 import { Bet } from '@/Bet.ts';
 import type { SlotGameSettings } from '@/SlotGameSettings.ts';
 
-function createProbabilitySystem(
-  baseGameSettings: SlotGameSettings,
-  freeGameSettings: SlotGameSettings
-): ProbabilitySystem {
+function createProbabilitySystem({
+  baseGameSettings,
+  freeGameSettings
+}: {
+  baseGameSettings: SlotGameSettings;
+  freeGameSettings: SlotGameSettings;
+}): ProbabilitySystem {
   const baseGame: SlotGame = SlotGame.of(
     Reels.create(new NativeRandomNumberGenerator(), baseGameSettings.reels),
     new PayTable(
@@ -139,7 +142,10 @@ describe('probability system simulator', () => {
       freeGameIncrementParameters: { symbol: 'S', count: 5, increment: 10 }
     };
 
-    const sut = createProbabilitySystem(baseGameSettings, freeGameSettings);
+    const sut = createProbabilitySystem({
+      baseGameSettings: baseGameSettings,
+      freeGameSettings: freeGameSettings
+    });
 
     let nextGameType = sut.getNextGameType();
     const rounds = 1_000_000;
