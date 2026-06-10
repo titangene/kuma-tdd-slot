@@ -51,7 +51,8 @@ describe('probability system simulator', () => {
         { symbol: '9', count: 5, odd: 10 },
         { symbol: '9', count: 4, odd: 8 },
         { symbol: '9', count: 3, odd: 5 }
-      ]
+      ],
+      freeGameIncrementParameters: { symbol: 'S', count: 3, increment: 10 }
     };
 
     const baseGame: SlotGame = SlotGame.of(
@@ -66,9 +67,14 @@ describe('probability system simulator', () => {
           )
         )
       ),
-      (screen: Screen): number => (screen.countSymbol('S') >= 3 ? 10 : 0)
+      (screen: Screen): number =>
+        screen.countSymbol(
+          baseGameSettings.freeGameIncrementParameters.symbol
+        ) >= baseGameSettings.freeGameIncrementParameters.count
+          ? baseGameSettings.freeGameIncrementParameters.increment
+          : 0
     );
-    
+
     const freeGame: SlotGame = SlotGame.of(
       Reels.create(
         new NativeRandomNumberGenerator(),
