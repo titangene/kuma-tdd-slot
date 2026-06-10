@@ -1,6 +1,6 @@
 import { describe, test } from 'vitest';
 import { Bet } from '@/Bet.ts';
-import { createProbabilitySystem } from '@/createProbabilitySystem.ts';
+import { ProbabilitySystemFactory } from '@/ProbabilitySystemFactory.ts';
 
 describe('probability system simulator', () => {
   test('RTP Simulator', () => {
@@ -84,7 +84,9 @@ describe('probability system simulator', () => {
         freeGameIncrementParameters: { symbol: 'S', count: 5, increment: 10 }
       }
     };
-    const sut = createProbabilitySystem(settings);
+    const sut = new ProbabilitySystemFactory().createProbabilitySystem(
+      settings
+    );
 
     let nextGameType = sut.getNextGameType();
     const rounds = 1_000_000;
