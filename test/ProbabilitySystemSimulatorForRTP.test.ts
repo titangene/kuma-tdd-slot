@@ -11,48 +11,53 @@ import { NativeRandomNumberGenerator } from '@/NativeRandomNumberGenerator.ts';
 import { Bet } from '@/Bet.ts';
 import type { SlotGameSettings } from '@/SlotGameSettings.ts';
 
-function createProbabilitySystem({
-  baseGameSettings,
-  freeGameSettings
-}: {
+function createProbabilitySystem(settings: {
   baseGameSettings: SlotGameSettings;
   freeGameSettings: SlotGameSettings;
 }): ProbabilitySystem {
   const baseGame: SlotGame = SlotGame.of(
-    Reels.create(new NativeRandomNumberGenerator(), baseGameSettings.reels),
+    Reels.create(
+      new NativeRandomNumberGenerator(),
+      settings.baseGameSettings.reels
+    ),
     new PayTable(
-      baseGameSettings.payLines.map(payLine =>
+      settings.baseGameSettings.payLines.map(payLine =>
         PayLine.from(payLine.name, payLine.indexes)
       ),
       new Odds(
-        baseGameSettings.odds.map(
+        settings.baseGameSettings.odds.map(
           odd => new Odd(odd.symbol, odd.count, odd.odd)
         )
       )
     ),
     (screen: Screen): number =>
-      screen.countSymbol(baseGameSettings.freeGameIncrementParameters.symbol) >=
-      baseGameSettings.freeGameIncrementParameters.count
-        ? baseGameSettings.freeGameIncrementParameters.increment
+      screen.countSymbol(
+        settings.baseGameSettings.freeGameIncrementParameters.symbol
+      ) >= settings.baseGameSettings.freeGameIncrementParameters.count
+        ? settings.baseGameSettings.freeGameIncrementParameters.increment
         : 0
   );
 
   const freeGame: SlotGame = SlotGame.of(
-    Reels.create(new NativeRandomNumberGenerator(), freeGameSettings.reels),
+    Reels.create(
+      new NativeRandomNumberGenerator(),
+      settings.freeGameSettings.reels
+    ),
     new PayTable(
-      freeGameSettings.payLines.map(payLine =>
+      settings.freeGameSettings.payLines.map(payLine =>
         PayLine.from(payLine.name, payLine.indexes)
       ),
       new Odds(
-        freeGameSettings.odds.map(
+        settings.freeGameSettings.odds.map(
           odd => new Odd(odd.symbol, odd.count, odd.odd)
         )
       )
     ),
     (screen: Screen): number =>
-      screen.countSymbol(freeGameSettings.freeGameIncrementParameters.symbol) >=
-      freeGameSettings.freeGameIncrementParameters.count
-        ? freeGameSettings.freeGameIncrementParameters.increment
+      screen.countSymbol(
+        settings.freeGameSettings.freeGameIncrementParameters.symbol
+      ) >= settings.freeGameSettings.freeGameIncrementParameters.count
+        ? settings.freeGameSettings.freeGameIncrementParameters.increment
         : 0
   );
 
