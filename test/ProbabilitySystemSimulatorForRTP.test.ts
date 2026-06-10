@@ -9,42 +9,11 @@ import { Screen } from '@/Screen.ts';
 import { ProbabilitySystem } from '@/ProbabilitySystem.ts';
 import { NativeRandomNumberGenerator } from '@/NativeRandomNumberGenerator.ts';
 import { Bet } from '@/Bet.ts';
+import type { SlotGameSettings } from '@/SlotGameSettings.ts';
 
 function createProbabilitySystem(
-  baseGameSettings: {
-    reels: string[][];
-    payLines: {
-      name: string;
-      indexes: number[];
-    }[];
-    odds: {
-      symbol: string;
-      count: number;
-      odd: number;
-    }[];
-    freeGameIncrementParameters: {
-      symbol: string;
-      count: number;
-      increment: number;
-    };
-  },
-  freeGameSettings: {
-    reels: string[][];
-    payLines: {
-      name: string;
-      indexes: number[];
-    }[];
-    odds: {
-      symbol: string;
-      count: number;
-      odd: number;
-    }[];
-    freeGameIncrementParameters: {
-      symbol: string;
-      count: number;
-      increment: number;
-    };
-  }
+  baseGameSettings: SlotGameSettings,
+  freeGameSettings: SlotGameSettings
 ): ProbabilitySystem {
   const baseGame: SlotGame = SlotGame.of(
     Reels.create(new NativeRandomNumberGenerator(), baseGameSettings.reels),
