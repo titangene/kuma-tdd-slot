@@ -9,12 +9,11 @@ import { Screen } from '@/Screen.ts';
 import { ProbabilitySystem } from '@/ProbabilitySystem.ts';
 import { NativeRandomNumberGenerator } from '@/NativeRandomNumberGenerator.ts';
 import { Bet } from '@/Bet.ts';
-import type { SlotGameSettings } from '@/SlotGameSettings.ts';
+import type { ProbabilitySystemSettings } from '@/ProbabilitySystemSettings.ts';
 
-function createProbabilitySystem(settings: {
-  baseGameSettings: SlotGameSettings;
-  freeGameSettings: SlotGameSettings;
-}): ProbabilitySystem {
+function createProbabilitySystem(
+  settings: ProbabilitySystemSettings
+): ProbabilitySystem {
   const baseGameSettings = settings.baseGameSettings;
   const baseGame: SlotGame = SlotGame.of(
     Reels.create(new NativeRandomNumberGenerator(), baseGameSettings.reels),
