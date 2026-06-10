@@ -4,7 +4,9 @@ import { ProbabilitySystemFactory } from '@/ProbabilitySystemFactory.ts';
 
 describe('probability system simulator', () => {
   test('RTP Simulator', () => {
-    const sut = new ProbabilitySystemFactory().createProbabilitySystem();
+    const sut = new ProbabilitySystemFactory().createProbabilitySystem(
+      'JinInManWu'
+    );
 
     let nextGameType = sut.getNextGameType();
     const rounds = 1_000_000;

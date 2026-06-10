@@ -95,8 +95,8 @@ export class ProbabilitySystemFactory {
     ['JinInManWu', this.settings]
   ]);
 
-  createProbabilitySystem(): ProbabilitySystem {
-    const settings = this.gameIdToSettings.get('JinInManWu')!;
+  createProbabilitySystem(gameId: string): ProbabilitySystem {
+    const settings = this.gameIdToSettings.get(gameId)!;
 
     const baseGameSettings = settings.baseGameSettings;
     const baseGame: SlotGame = SlotGame.of(
