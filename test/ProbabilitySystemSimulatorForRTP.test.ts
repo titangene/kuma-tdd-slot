@@ -12,53 +12,63 @@ import { Bet } from '@/Bet.ts';
 
 describe('probability system simulator', () => {
   test('RTP Simulator', () => {
+    const baseGameSettings = {
+      // prettier-ignore
+      reels: [
+        ['A', 'Q', 'K', 'A', 'S', 'A', '9', '10', 'K', 'J', 'S', '10', 'J', 'A', 'Q', 'A', '9'],
+        ['A', '10', 'J', 'J', 'Q', '10', 'J', '10', '9', 'A', 'K', '10', '10'],
+        ['A', 'Q', 'K', 'J', 'J', 'A', 'S', 'Q', 'Q', '9', '10', 'S', 'J', '9', '9', '9', 'Q', 'A'],
+        ['A', 'Q', 'K', 'J', 'A', '9', 'J', 'S', 'Q', '9', 'K', '10', 'S', 'A', 'A', 'K', 'J', 'Q', 'K', 'Q', 'Q'],
+        ['A', '10', 'J', 'A', '9', 'J', '10', 'S', 'K', 'Q', '9', '9']
+      ],
+      payLines: [
+        { name: 'L1', indexes: [0, 0, 0, 0, 0] },
+        { name: 'L2', indexes: [1, 1, 1, 1, 1] },
+        { name: 'L3', indexes: [2, 2, 2, 2, 2] },
+        { name: 'L4', indexes: [0, 1, 2, 1, 0] },
+        { name: 'L5', indexes: [2, 1, 0, 1, 2] },
+        { name: 'L6', indexes: [0, 0, 1, 0, 0] },
+        { name: 'L7', indexes: [2, 2, 1, 2, 2] },
+        { name: 'L8', indexes: [1, 2, 2, 2, 1] },
+        { name: 'L9', indexes: [1, 0, 0, 0, 1] }
+      ],
+      odds: [
+        { symbol: 'A', count: 5, odd: 20 },
+        { symbol: 'A', count: 4, odd: 15 },
+        { symbol: 'A', count: 3, odd: 10 },
+        { symbol: 'K', count: 5, odd: 15 },
+        { symbol: 'K', count: 4, odd: 10 },
+        { symbol: 'K', count: 3, odd: 8 },
+        { symbol: 'Q', count: 5, odd: 10 },
+        { symbol: 'Q', count: 4, odd: 8 },
+        { symbol: 'Q', count: 3, odd: 5 },
+        { symbol: 'J', count: 5, odd: 10 },
+        { symbol: 'J', count: 4, odd: 8 },
+        { symbol: 'J', count: 3, odd: 5 },
+        { symbol: '10', count: 5, odd: 10 },
+        { symbol: '10', count: 4, odd: 8 },
+        { symbol: '10', count: 3, odd: 5 },
+        { symbol: '9', count: 5, odd: 10 },
+        { symbol: '9', count: 4, odd: 8 },
+        { symbol: '9', count: 3, odd: 5 }
+      ]
+    };
+
     const baseGame: SlotGame = SlotGame.of(
-      Reels.create(
-        new NativeRandomNumberGenerator(),
-        // prettier-ignore
-        [
-          ['A', 'Q', 'K', 'A', 'S', 'A', '9', '10', 'K', 'J', 'S', '10', 'J', 'A', 'Q', 'A', '9'],
-          ['A', '10', 'J', 'J', 'Q', '10', 'J', '10', '9', 'A', 'K', '10', '10'],
-          ['A', 'Q', 'K', 'J', 'J', 'A', 'S', 'Q', 'Q', '9', '10', 'S', 'J', '9', '9', '9', 'Q', 'A'],
-          ['A', 'Q', 'K', 'J', 'A', '9', 'J', 'S', 'Q', '9', 'K', '10', 'S', 'A', 'A', 'K', 'J', 'Q', 'K', 'Q', 'Q'],
-          ['A', '10', 'J', 'A', '9', 'J', '10', 'S', 'K', 'Q', '9', '9']
-        ]
-      ),
+      Reels.create(new NativeRandomNumberGenerator(), baseGameSettings.reels),
       new PayTable(
-        [
-          PayLine.from('L1', [0, 0, 0, 0, 0]),
-          PayLine.from('L2', [1, 1, 1, 1, 1]),
-          PayLine.from('L3', [2, 2, 2, 2, 2]),
-          PayLine.from('L4', [0, 1, 2, 1, 0]),
-          PayLine.from('L5', [2, 1, 0, 1, 2]),
-          PayLine.from('L6', [0, 0, 1, 0, 0]),
-          PayLine.from('L7', [2, 2, 1, 2, 2]),
-          PayLine.from('L8', [1, 2, 2, 2, 1]),
-          PayLine.from('L9', [1, 0, 0, 0, 1])
-        ],
-        new Odds([
-          new Odd('A', 5, 20),
-          new Odd('A', 4, 15),
-          new Odd('A', 3, 10),
-          new Odd('K', 5, 15),
-          new Odd('K', 4, 10),
-          new Odd('K', 3, 8),
-          new Odd('Q', 5, 10),
-          new Odd('Q', 4, 8),
-          new Odd('Q', 3, 5),
-          new Odd('J', 5, 10),
-          new Odd('J', 4, 8),
-          new Odd('J', 3, 5),
-          new Odd('10', 5, 10),
-          new Odd('10', 4, 8),
-          new Odd('10', 3, 5),
-          new Odd('9', 5, 10),
-          new Odd('9', 4, 8),
-          new Odd('9', 3, 5)
-        ])
+        baseGameSettings.payLines.map(payLine =>
+          PayLine.from(payLine.name, payLine.indexes)
+        ),
+        new Odds(
+          baseGameSettings.odds.map(
+            odd => new Odd(odd.symbol, odd.count, odd.odd)
+          )
+        )
       ),
       (screen: Screen): number => (screen.countSymbol('S') >= 3 ? 10 : 0)
     );
+    
     const freeGame: SlotGame = SlotGame.of(
       Reels.create(
         new NativeRandomNumberGenerator(),
