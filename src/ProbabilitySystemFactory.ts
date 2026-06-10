@@ -7,6 +7,7 @@ import { PayLine } from '@/PayLine.ts';
 import { Odds } from '@/Odds.ts';
 import { Odd } from '@/Odd.ts';
 import { Screen } from '@/Screen.ts';
+import type { ProbabilitySystemSettings } from '@/ProbabilitySystemSettings.ts';
 
 export class ProbabilitySystemFactory {
   settings = {
@@ -89,6 +90,10 @@ export class ProbabilitySystemFactory {
       freeGameIncrementParameters: { symbol: 'S', count: 5, increment: 10 }
     }
   };
+
+  gameIdToSettings: Map<string, ProbabilitySystemSettings> = new Map([
+    ['JinInManWu', this.settings]
+  ]);
 
   createProbabilitySystem(): ProbabilitySystem {
     const baseGameSettings = this.settings.baseGameSettings;
