@@ -142,10 +142,11 @@ describe('probability system simulator', () => {
       freeGameIncrementParameters: { symbol: 'S', count: 5, increment: 10 }
     };
 
-    const sut = createProbabilitySystem({
-      baseGameSettings: baseGameSettings,
-      freeGameSettings: freeGameSettings
-    });
+    const settings = {
+      baseGameSettings,
+      freeGameSettings
+    };
+    const sut = createProbabilitySystem(settings);
 
     let nextGameType = sut.getNextGameType();
     const rounds = 1_000_000;
