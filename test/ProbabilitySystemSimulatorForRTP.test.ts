@@ -10,6 +10,84 @@ import { ProbabilitySystem } from '@/ProbabilitySystem.ts';
 import { NativeRandomNumberGenerator } from '@/NativeRandomNumberGenerator.ts';
 import { Bet } from '@/Bet.ts';
 
+function createProbabilitySystem(
+  baseGameSettings: {
+    reels: string[][];
+    payLines: {
+      name: string;
+      indexes: number[];
+    }[];
+    odds: {
+      symbol: string;
+      count: number;
+      odd: number;
+    }[];
+    freeGameIncrementParameters: {
+      symbol: string;
+      count: number;
+      increment: number;
+    };
+  },
+  freeGameSettings: {
+    reels: string[][];
+    payLines: {
+      name: string;
+      indexes: number[];
+    }[];
+    odds: {
+      symbol: string;
+      count: number;
+      odd: number;
+    }[];
+    freeGameIncrementParameters: {
+      symbol: string;
+      count: number;
+      increment: number;
+    };
+  }
+): ProbabilitySystem {
+  const baseGame: SlotGame = SlotGame.of(
+    Reels.create(new NativeRandomNumberGenerator(), baseGameSettings.reels),
+    new PayTable(
+      baseGameSettings.payLines.map(payLine =>
+        PayLine.from(payLine.name, payLine.indexes)
+      ),
+      new Odds(
+        baseGameSettings.odds.map(
+          odd => new Odd(odd.symbol, odd.count, odd.odd)
+        )
+      )
+    ),
+    (screen: Screen): number =>
+      screen.countSymbol(baseGameSettings.freeGameIncrementParameters.symbol) >=
+      baseGameSettings.freeGameIncrementParameters.count
+        ? baseGameSettings.freeGameIncrementParameters.increment
+        : 0
+  );
+
+  const freeGame: SlotGame = SlotGame.of(
+    Reels.create(new NativeRandomNumberGenerator(), freeGameSettings.reels),
+    new PayTable(
+      freeGameSettings.payLines.map(payLine =>
+        PayLine.from(payLine.name, payLine.indexes)
+      ),
+      new Odds(
+        freeGameSettings.odds.map(
+          odd => new Odd(odd.symbol, odd.count, odd.odd)
+        )
+      )
+    ),
+    (screen: Screen): number =>
+      screen.countSymbol(freeGameSettings.freeGameIncrementParameters.symbol) >=
+      freeGameSettings.freeGameIncrementParameters.count
+        ? freeGameSettings.freeGameIncrementParameters.increment
+        : 0
+  );
+
+  const sut = ProbabilitySystem.create(baseGame, freeGame);
+  return sut;
+}
+
 describe('probability system simulator', () => {
   test('RTP Simulator', () => {
     const baseGameSettings = {
@@ -92,47 +170,7 @@ describe('probability system simulator', () => {
       freeGameIncrementParameters: { symbol: 'S', count: 5, increment: 10 }
     };
 
-    const baseGame: SlotGame = SlotGame.of(
-      Reels.create(new NativeRandomNumberGenerator(), baseGameSettings.reels),
-      new PayTable(
-        baseGameSettings.payLines.map(payLine =>
-          PayLine.from(payLine.name, payLine.indexes)
-        ),
-        new Odds(
-          baseGameSettings.odds.map(
-            odd => new Odd(odd.symbol, odd.count, odd.odd)
-          )
-        )
-      ),
-      (screen: Screen): number =>
-        screen.countSymbol(
-          baseGameSettings.freeGameIncrementParameters.symbol
-        ) >= baseGameSettings.freeGameIncrementParameters.count
-          ? baseGameSettings.freeGameIncrementParameters.increment
-          : 0
-    );
-
-    const freeGame: SlotGame = SlotGame.of(
-      Reels.create(new NativeRandomNumberGenerator(), freeGameSettings.reels),
-      new PayTable(
-        freeGameSettings.payLines.map(payLine =>
-          PayLine.from(payLine.name, payLine.indexes)
-        ),
-        new Odds(
-          freeGameSettings.odds.map(
-            odd => new Odd(odd.symbol, odd.count, odd.odd)
-          )
-        )
-      ),
-      (screen: Screen): number =>
-        screen.countSymbol(
-          freeGameSettings.freeGameIncrementParameters.symbol
-        ) >= freeGameSettings.freeGameIncrementParameters.count
-          ? freeGameSettings.freeGameIncrementParameters.increment
-          : 0
-    );
-
-    const sut = ProbabilitySystem.create(baseGame, freeGame);
+    const sut = createProbabilitySystem(baseGameSettings, freeGameSettings);
 
     let nextGameType = sut.getNextGameType();
     const rounds = 1_000_000;
