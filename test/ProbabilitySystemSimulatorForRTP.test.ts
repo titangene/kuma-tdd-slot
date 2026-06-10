@@ -55,6 +55,43 @@ describe('probability system simulator', () => {
       freeGameIncrementParameters: { symbol: 'S', count: 3, increment: 10 }
     };
 
+    const freeGameSettings = {
+      // prettier-ignore
+      reels: [
+        ['K', 'J', 'Q', 'S', 'S', 'S', 'A', '9', 'Q', 'A', 'J', 'S', 'A', 'K', 'Q', '10'],
+        ['K', 'Q', 'K', 'A', '9', 'K', '9', 'Q', '9', '9', '9', 'S', 'S', 'S', 'S', 'K', '9', 'K', '9', 'Q', '9', '9', '9', 'K'],
+        ['Q', 'K', '10', 'K', 'S', 'K', 'A', 'S', 'Q', 'Q', '10', '10', 'J', 'J'],
+        ['10', 'K', 'Q', 'A', '9', '9', '10', 'S', 'K', 'S', 'J', '10', 'A', 'J', 'J', 'K', 'J', 'A', 'Q', 'J', '9', '9', '9', 'A'],
+        ['J', 'Q', 'S', 'K', 'A', '9', '10', 'Q', 'A', 'S', 'S', 'A', 'S', 'J', 'Q', 'J']
+      ],
+      payLines: [
+        { name: 'L1', indexes: [0, 0, 0, 0, 0] },
+        { name: 'L2', indexes: [1, 1, 1, 1, 1] },
+        { name: 'L3', indexes: [2, 2, 2, 2, 2] }
+      ],
+      odds: [
+        { symbol: 'A', count: 5, odd: 2000 },
+        { symbol: 'A', count: 4, odd: 1500 },
+        { symbol: 'A', count: 3, odd: 1000 },
+        { symbol: 'K', count: 5, odd: 1500 },
+        { symbol: 'K', count: 4, odd: 1000 },
+        { symbol: 'K', count: 3, odd: 800 },
+        { symbol: 'Q', count: 5, odd: 1000 },
+        { symbol: 'Q', count: 4, odd: 800 },
+        { symbol: 'Q', count: 3, odd: 500 },
+        { symbol: 'J', count: 5, odd: 1000 },
+        { symbol: 'J', count: 4, odd: 800 },
+        { symbol: 'J', count: 3, odd: 500 },
+        { symbol: '10', count: 5, odd: 1000 },
+        { symbol: '10', count: 4, odd: 800 },
+        { symbol: '10', count: 3, odd: 500 },
+        { symbol: '9', count: 5, odd: 1000 },
+        { symbol: '9', count: 4, odd: 800 },
+        { symbol: '9', count: 3, odd: 500 }
+      ],
+      freeGameIncrementParameters: { symbol: 'S', count: 5, increment: 10 }
+    };
+
     const baseGame: SlotGame = SlotGame.of(
       Reels.create(new NativeRandomNumberGenerator(), baseGameSettings.reels),
       new PayTable(
@@ -76,45 +113,23 @@ describe('probability system simulator', () => {
     );
 
     const freeGame: SlotGame = SlotGame.of(
-      Reels.create(
-        new NativeRandomNumberGenerator(),
-        // prettier-ignore
-        [
-          ['K', 'J', 'Q', 'S', 'S', 'S', 'A', '9', 'Q', 'A', 'J', 'S', 'A', 'K', 'Q', '10'],
-          ['K', 'Q', 'K', 'A', '9', 'K', '9', 'Q', '9', '9', '9', 'S', 'S', 'S', 'S', 'K', '9', 'K', '9', 'Q', '9', '9', '9', 'K'],
-          ['Q', 'K', '10', 'K', 'S', 'K', 'A', 'S', 'Q', 'Q', '10', '10', 'J', 'J'],
-          ['10', 'K', 'Q', 'A', '9', '9', '10', 'S', 'K', 'S', 'J', '10', 'A', 'J', 'J', 'K', 'J', 'A', 'Q', 'J', '9', '9', '9', 'A'],
-          ['J', 'Q', 'S', 'K', 'A', '9', '10', 'Q', 'A', 'S', 'S', 'A', 'S', 'J', 'Q', 'J'],
-        ]
-      ),
+      Reels.create(new NativeRandomNumberGenerator(), freeGameSettings.reels),
       new PayTable(
-        [
-          PayLine.from('L1', [0, 0, 0, 0, 0]),
-          PayLine.from('L2', [1, 1, 1, 1, 1]),
-          PayLine.from('L3', [2, 2, 2, 2, 2])
-        ],
-        new Odds([
-          new Odd('A', 5, 2_000),
-          new Odd('A', 4, 1_500),
-          new Odd('A', 3, 1_000),
-          new Odd('K', 5, 1_500),
-          new Odd('K', 4, 1_000),
-          new Odd('K', 3, 800),
-          new Odd('Q', 5, 1_000),
-          new Odd('Q', 4, 800),
-          new Odd('Q', 3, 500),
-          new Odd('J', 5, 1_000),
-          new Odd('J', 4, 800),
-          new Odd('J', 3, 500),
-          new Odd('10', 5, 1_000),
-          new Odd('10', 4, 800),
-          new Odd('10', 3, 500),
-          new Odd('9', 5, 1_000),
-          new Odd('9', 4, 800),
-          new Odd('9', 3, 500)
-        ])
+        freeGameSettings.payLines.map(payLine =>
+          PayLine.from(payLine.name, payLine.indexes)
+        ),
+        new Odds(
+          freeGameSettings.odds.map(
+            odd => new Odd(odd.symbol, odd.count, odd.odd)
+          )
+        )
       ),
-      (screen: Screen): number => (screen.countSymbol('S') >= 5 ? 10 : 0)
+      (screen: Screen): number =>
+        screen.countSymbol(
+          freeGameSettings.freeGameIncrementParameters.symbol
+        ) >= freeGameSettings.freeGameIncrementParameters.count
+          ? freeGameSettings.freeGameIncrementParameters.increment
+          : 0
     );
 
     const sut = ProbabilitySystem.create(baseGame, freeGame);
