@@ -96,7 +96,8 @@ export class ProbabilitySystemFactory {
   ]);
 
   createProbabilitySystem(): ProbabilitySystem {
-    const baseGameSettings = this.settings.baseGameSettings;
+    const settings = this.settings;
+    const baseGameSettings = settings.baseGameSettings;
     const baseGame: SlotGame = SlotGame.of(
       Reels.create(new NativeRandomNumberGenerator(), baseGameSettings.reels),
       new PayTable(
@@ -117,7 +118,7 @@ export class ProbabilitySystemFactory {
           : 0
     );
 
-    const freeGameSettings = this.settings.freeGameSettings;
+    const freeGameSettings = settings.freeGameSettings;
     const freeGame: SlotGame = SlotGame.of(
       Reels.create(new NativeRandomNumberGenerator(), freeGameSettings.reels),
       new PayTable(
