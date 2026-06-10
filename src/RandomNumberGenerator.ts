@@ -1,3 +1,3 @@
 export interface RandomNumberGenerator {
-  nextInteger(): number;
+  nextInteger(upperBoundExclusive: number): number;
 }

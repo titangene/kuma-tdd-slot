@@ -13,7 +13,7 @@ describe('probability system simulator', () => {
   test('RTP Simulator', () => {
     const baseGame: SlotGame = SlotGame.of(
       Reels.create(
-        new NativeRandomNumberGenerator(???),
+        new NativeRandomNumberGenerator(),
         // prettier-ignore
         [
           ['A', 'Q', 'K', 'A', 'S', 'A', '9', '10', 'K', 'J', 'S', '10', 'J', 'A', 'Q', 'A', '9'],
@@ -60,7 +60,7 @@ describe('probability system simulator', () => {
     );
     const freeGame: SlotGame = SlotGame.of(
       Reels.create(
-        new NativeRandomNumberGenerator(???),
+        new NativeRandomNumberGenerator(),
         // prettier-ignore
         [
           ['K', 'J', 'Q', 'S', 'S', 'S', 'A', '9', 'Q', 'A', 'J', 'S', 'A', 'K', 'Q', '10'],

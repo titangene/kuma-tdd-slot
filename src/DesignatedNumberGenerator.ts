@@ -7,7 +7,7 @@ export class DesignatedNumberGenerator implements RandomNumberGenerator {
     this.integers = numbers;
   }
 
-  nextInteger(): number {
+  nextInteger(upperBoundExclusive: number): number {
     const shift: number = <number>this.integers.shift();
 
     this.integers.push(shift); // to make a circular queue

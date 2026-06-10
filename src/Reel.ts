@@ -12,7 +12,7 @@ export class Reel {
   }
 
   spin() {
-    this.index = this.randomNumberGenerator.nextInteger();
+    this.index = this.randomNumberGenerator.nextInteger(this.symbols.length);
   }
 
   getScreenColumn(): string[] {
