@@ -15,49 +15,43 @@ function createProbabilitySystem(settings: {
   baseGameSettings: SlotGameSettings;
   freeGameSettings: SlotGameSettings;
 }): ProbabilitySystem {
+  const baseGameSettings = settings.baseGameSettings;
   const baseGame: SlotGame = SlotGame.of(
-    Reels.create(
-      new NativeRandomNumberGenerator(),
-      settings.baseGameSettings.reels
-    ),
+    Reels.create(new NativeRandomNumberGenerator(), baseGameSettings.reels),
     new PayTable(
-      settings.baseGameSettings.payLines.map(payLine =>
+      baseGameSettings.payLines.map(payLine =>
         PayLine.from(payLine.name, payLine.indexes)
       ),
       new Odds(
-        settings.baseGameSettings.odds.map(
+        baseGameSettings.odds.map(
           odd => new Odd(odd.symbol, odd.count, odd.odd)
         )
       )
     ),
     (screen: Screen): number =>
-      screen.countSymbol(
-        settings.baseGameSettings.freeGameIncrementParameters.symbol
-      ) >= settings.baseGameSettings.freeGameIncrementParameters.count
-        ? settings.baseGameSettings.freeGameIncrementParameters.increment
+      screen.countSymbol(baseGameSettings.freeGameIncrementParameters.symbol) >=
+      baseGameSettings.freeGameIncrementParameters.count
+        ? baseGameSettings.freeGameIncrementParameters.increment
         : 0
   );
 
+  const freeGameSettings = settings.freeGameSettings;
   const freeGame: SlotGame = SlotGame.of(
-    Reels.create(
-      new NativeRandomNumberGenerator(),
-      settings.freeGameSettings.reels
-    ),
+    Reels.create(new NativeRandomNumberGenerator(), freeGameSettings.reels),
     new PayTable(
-      settings.freeGameSettings.payLines.map(payLine =>
+      freeGameSettings.payLines.map(payLine =>
         PayLine.from(payLine.name, payLine.indexes)
       ),
       new Odds(
-        settings.freeGameSettings.odds.map(
+        freeGameSettings.odds.map(
           odd => new Odd(odd.symbol, odd.count, odd.odd)
         )
       )
     ),
     (screen: Screen): number =>
-      screen.countSymbol(
-        settings.freeGameSettings.freeGameIncrementParameters.symbol
-      ) >= settings.freeGameSettings.freeGameIncrementParameters.count
-        ? settings.freeGameSettings.freeGameIncrementParameters.increment
+      screen.countSymbol(freeGameSettings.freeGameIncrementParameters.symbol) >=
+      freeGameSettings.freeGameIncrementParameters.count
+        ? freeGameSettings.freeGameIncrementParameters.increment
         : 0
   );
 
